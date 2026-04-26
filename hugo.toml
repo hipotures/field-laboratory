@@ -20,14 +20,15 @@ enableEmoji = true
 
 [params]
   author = "armum"
-  description = "Notatki, fotografia i eksperymenty techniczne."
-  keywords = "blog, fotografia, technologia, hugo"
-  info = ["Field notes", "Photography", "Technical experiments"]
+  description = "Systemy, automatyzacja, AI, dane i narzędzia local-first."
+  keywords = "systemy, automatyzacja, ai, llm, vlm, linux, gcp, data engineering"
+  info = ["Systems", "Automation", "AI"]
   dateFormat = "2006-01-02"
   since = 2026
   colorScheme = "auto"
   hideColorSchemeToggle = false
   maxSeeAlsoItems = 5
+  customSCSS = ["scss/field-home.scss"]
 
 [taxonomies]
   category = "categories"
@@ -52,7 +53,7 @@ enableEmoji = true
     url = "about/"
 
   [[languages.pl.menu.main]]
-    name = "Artykuly"
+    name = "Artykuły"
     weight = 2
     url = "posts/"
 
@@ -62,6 +63,11 @@ enableEmoji = true
     url = "projects/"
 
   [[languages.pl.menu.main]]
-    name = "Kontakt"
+    name = "CV"
     weight = 4
+    url = "https://cv.armum.eu/"
+
+  [[languages.pl.menu.main]]
+    name = "Kontakt"
+    weight = 5
     url = "contact/"
