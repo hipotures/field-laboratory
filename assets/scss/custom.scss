@@ -58,11 +58,40 @@
 .home-field-topics li {
   min-width: 7.6rem;
   padding: 0.45rem 1.6rem;
-  border: 1px solid currentColor;
+  border: 1px solid var(--topic-color);
   border-radius: 999rem;
-  color: inherit;
+  color: var(--topic-color);
+  background: color-mix(in srgb, var(--topic-color) 11%, transparent);
   line-height: 1.5;
-  opacity: 0.78;
+  box-shadow: 0 0 1.8rem color-mix(in srgb, var(--topic-color) 13%, transparent);
+}
+
+.home-field-topics .topic-ai {
+  --topic-color: #e2d9bf;
+}
+
+.home-field-topics .topic-astronomy {
+  --topic-color: #c99d72;
+}
+
+.home-field-topics .topic-photography {
+  --topic-color: #dc846a;
+}
+
+.home-field-topics .topic-poetry {
+  --topic-color: #9ab0bf;
+}
+
+.home-field-topics .topic-systems {
+  --topic-color: #c9bd78;
+}
+
+.home-field-topics .topic-essays {
+  --topic-color: #8798a4;
+}
+
+.home-field-topics .topic-notes {
+  --topic-color: #b5b5a5;
 }
 
 .home-field-sections {
@@ -95,14 +124,16 @@
 }
 
 .home-field-recent li {
+  --recent-color: #b89478;
+
   display: grid;
   grid-template-columns: 2.4rem minmax(0, 1fr) 10rem;
   gap: 1.8rem;
   align-items: baseline;
   padding: 0.9rem 0;
-  border-top: 1px solid currentColor;
+  border-top: 1px solid color-mix(in srgb, var(--recent-color) 38%, transparent);
   text-align: left;
-  opacity: 0.78;
+  opacity: 0.88;
 }
 
 .home-field-recent li:first-child {
@@ -110,8 +141,38 @@
 }
 
 .home-field-recent i {
-  color: #b89478;
+  width: 2.4rem;
+  color: var(--recent-color);
+  font-size: 1.6rem;
   text-align: center;
+  filter: drop-shadow(0 0 0.8rem color-mix(in srgb, var(--recent-color) 24%, transparent));
+}
+
+.home-field-recent a {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-field-recent .recent-ai {
+  --recent-color: #d88a72;
+}
+
+.home-field-recent .recent-code {
+  --recent-color: #8fb8cf;
+}
+
+.home-field-recent .recent-history {
+  --recent-color: #c9ad78;
+}
+
+.home-field-recent .recent-note {
+  --recent-color: #b5b5a5;
+}
+
+.home-field-recent .recent-systems {
+  --recent-color: #c6bd74;
 }
 
 .home-field-recent time {
@@ -135,17 +196,14 @@
   }
 
   .home-field-recent li {
-    grid-template-columns: 1fr;
-    gap: 0.2rem;
-    text-align: center;
-  }
-
-  .home-field-recent i {
-    display: none;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    gap: 0.2rem 1.2rem;
+    text-align: left;
   }
 
   .home-field-recent time {
-    text-align: center;
+    grid-column: 2;
+    text-align: left;
   }
 
   .home-field .about h2,

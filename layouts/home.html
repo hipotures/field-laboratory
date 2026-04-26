@@ -14,13 +14,13 @@
     </p>
 
     <ul class="home-field-topics" aria-label="Tematy">
-      <li>AI / LLM</li>
-      <li>Astronomia</li>
-      <li>Fotografia</li>
-      <li>Poezja</li>
-      <li>Systemy</li>
-      <li>Eseje</li>
-      <li>Notatki</li>
+      <li class="topic-ai">AI / LLM</li>
+      <li class="topic-astronomy">Astronomia</li>
+      <li class="topic-photography">Fotografia</li>
+      <li class="topic-poetry">Poezja</li>
+      <li class="topic-systems">Systemy</li>
+      <li class="topic-essays">Eseje</li>
+      <li class="topic-notes">Notatki</li>
     </ul>
   </div>
 
@@ -29,9 +29,31 @@
       <h2 id="recent-title">Ostatnie obserwacje</h2>
       <ol class="home-field-recent">
         {{ range $recent }}
-        <li>
-          <i class="fa-regular fa-star" aria-hidden="true"></i>
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ $title := lower .Title }}
+        {{ $icon := "fa-solid fa-file-lines" }}
+        {{ $tone := "recent-note" }}
+        {{ if in $title "historia" }}
+          {{ $icon = "fa-solid fa-book-open" }}
+          {{ $tone = "recent-history" }}
+        {{ else if in $title "operator" }}
+          {{ $icon = "fa-solid fa-robot" }}
+          {{ $tone = "recent-ai" }}
+        {{ else if in $title "po roku" }}
+          {{ $icon = "fa-solid fa-diagram-project" }}
+          {{ $tone = "recent-systems" }}
+        {{ else if in $title "disco" }}
+          {{ $icon = "fa-solid fa-terminal" }}
+          {{ $tone = "recent-code" }}
+        {{ end }}
+        <li class="{{ $tone }}">
+          <i class="{{ $icon }}" aria-hidden="true"></i>
+          {{ $title := .Title }}
+          {{ $shortTitle := $title }}
+          {{ if gt (len $title) 62 }}
+            {{ $titleWords := delimit (first 8 (split $title " ")) " " }}
+            {{ $shortTitle = printf "%s..." (strings.TrimRight " ,.;:-" $titleWords) }}
+          {{ end }}
+          <a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $shortTitle }}</a>
           <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
         </li>
         {{ end }}
