@@ -1,115 +1,45 @@
 {{ define "content" }}
 {{ $posts := where .Site.RegularPages "Section" "posts" }}
-{{ $latest := first 4 ($posts.ByDate.Reverse) }}
+{{ $recent := first 5 ($posts.ByDate.Reverse) }}
 
-<section class="home-lab" aria-labelledby="home-title">
-  <div class="lab-shell">
-    <section class="lab-hero" aria-label="Wprowadzenie">
-      <div class="lab-hero-copy">
-        <p class="lab-kicker">FIELD LABORATORY</p>
-        <h1 id="home-title">
-          <span>Systems /</span>
-          <span>Automation /</span>
-          <span>AI</span>
-        </h1>
-        <div class="lab-actions" aria-label="Główne sekcje">
-          <a class="lab-button lab-button-primary" href="/posts/">Artykuły</a>
-          <a class="lab-button" href="/projects/">Projekty</a>
-          <a class="lab-button" href="https://cv.armum.eu/">CV</a>
-        </div>
-      </div>
+<section class="container centered home-field">
+  <div class="about home-field-intro">
+    <h1>armum</h1>
+    <h2>Field Laboratory</h2>
 
-      <aside class="lab-terminal" aria-label="Status laboratorium">
-        <div class="terminal-bar">
-          <span>pipeline.yml</span>
-          <span class="terminal-state">active</span>
-        </div>
-        <pre><code>flow:
-  source: markdown
-  build: hugo
-  ci: github_actions
-  deploy: vps
+    <p class="home-field-line">notes / experiments / images / words</p>
 
-focus:
-  linux: active
-  gcp: active
-  data: running
-  ai_tools: experimental
-  local_first: preferred</code></pre>
-      </aside>
+    <p class="home-field-description">
+      Osobista przestrzeń obserwacji, eksperymentów i powolnego myślenia.
+    </p>
+
+    <ul class="home-field-topics" aria-label="Tematy">
+      <li>AI / LLM</li>
+      <li>Astronomia</li>
+      <li>Fotografia</li>
+      <li>Poezja</li>
+      <li>Systemy</li>
+      <li>Eseje</li>
+      <li>Notatki</li>
+    </ul>
+  </div>
+
+  <div class="home-field-sections">
+    <section id="recent" class="home-field-section" aria-labelledby="recent-title">
+      <h2 id="recent-title">Ostatnie obserwacje</h2>
+      <ol class="home-field-recent">
+        {{ range $recent }}
+        <li>
+          <i class="fa-regular fa-star" aria-hidden="true"></i>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</time>
+        </li>
+        {{ end }}
+      </ol>
     </section>
 
-    <section class="lab-grid" aria-label="Zawartość strony">
-      <article class="lab-panel lab-panel-writing">
-        <div class="panel-header">
-          <p class="panel-kicker">Ostatnie teksty</p>
-          <a href="/posts/" aria-label="Wszystkie artykuły">Wszystkie</a>
-        </div>
-        <div class="writing-list">
-          {{ range $latest }}
-          <a class="writing-item" href="{{ .RelPermalink }}">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-            <span>{{ .Title }}</span>
-          </a>
-          {{ end }}
-        </div>
-      </article>
-
-      <article class="lab-panel lab-panel-projects">
-        <div class="panel-header">
-          <p class="panel-kicker">Indeks projektów</p>
-          <a href="/projects/">Otwórz</a>
-        </div>
-        <div class="project-list">
-          <div>
-            <strong>Sonus</strong>
-            <span>transkrypcja, diarization, Cloud Run</span>
-          </div>
-          <div>
-            <strong>any-item</strong>
-            <span>VLM, desktop app, listing assistant</span>
-          </div>
-          <div>
-            <strong>vbc</strong>
-            <span>batch video compression, AV1, TUI</span>
-          </div>
-          <div>
-            <strong>gitiary</strong>
-            <span>git activity dashboard, static export</span>
-          </div>
-          <div>
-            <strong>command-center</strong>
-            <span>AI usage, token costs, reports</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="lab-panel lab-panel-stack">
-        <p class="panel-kicker">Stack</p>
-        <div class="stack-index" aria-label="Technologie i tematy">
-          <div>
-            <strong>Systems</strong>
-            <span>Linux · Docker · Terraform · GCP</span>
-          </div>
-          <div>
-            <strong>AI</strong>
-            <span>LLM · VLM · prompt pipelines · local-first tools</span>
-          </div>
-          <div>
-            <strong>Data</strong>
-            <span>Python · SQLite · batch processing · data pipelines</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="lab-panel lab-panel-note">
-        <p class="panel-kicker">Notatka robocza</p>
-        <h2>Techniczne notatki zamiast portfolio.</h2>
-        <p>
-          Fotografia zostaje jednym z obszarów obserwacji. Rdzeniem strony są systemy,
-          automatyzacja, infrastruktura i własne eksperymenty z AI.
-        </p>
-      </article>
+    <section id="topics" class="home-field-section" aria-labelledby="topics-title">
+      <h2 id="topics-title">Ciekawość jest podstawowym instrumentem.</h2>
     </section>
   </div>
 </section>

@@ -1,0 +1,156 @@
+.home-field {
+  flex-direction: column;
+  width: 100%;
+  max-width: 88rem;
+  min-height: auto;
+  margin: 0 auto;
+  padding: clamp(6rem, 13vh, 10rem) 2rem 4rem;
+}
+
+.home-field-intro {
+  max-width: 82rem;
+}
+
+.home-field .about h1 {
+  margin-bottom: 0.2rem;
+  font-size: clamp(5.8rem, 10vw, 9.6rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.home-field .about h2 {
+  margin: 0.6rem 0 0;
+  color: #b89478;
+  font-size: clamp(1.8rem, 2.7vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+
+.home-field-line {
+  margin: 2.4rem 0 0;
+  color: inherit;
+  font-size: clamp(1.8rem, 2.4vw, 2.3rem);
+  letter-spacing: 0.22em;
+  opacity: 0.72;
+}
+
+.home-field .home-field-description {
+  max-width: 46rem;
+  margin: 3rem auto 0;
+  color: inherit;
+  text-align: center;
+  font-size: clamp(1.8rem, 2.4vw, 2.3rem);
+  line-height: 1.55;
+  opacity: 0.86;
+}
+
+.home-field-topics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 1.6rem;
+  margin: 3.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-field-topics li {
+  min-width: 7.6rem;
+  padding: 0.45rem 1.6rem;
+  border: 1px solid currentColor;
+  border-radius: 999rem;
+  color: inherit;
+  line-height: 1.5;
+  opacity: 0.78;
+}
+
+.home-field-sections {
+  width: 100%;
+  max-width: 62rem;
+  margin-top: clamp(5rem, 8vh, 7.2rem);
+}
+
+.home-field-section {
+  width: 100%;
+  text-align: center;
+}
+
+.home-field-section + .home-field-section {
+  margin-top: 4.2rem;
+}
+
+.home-field-section h2 {
+  margin: 0 0 1.6rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.home-field-recent {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-field-recent li {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr) 10rem;
+  gap: 1.8rem;
+  align-items: baseline;
+  padding: 0.9rem 0;
+  border-top: 1px solid currentColor;
+  text-align: left;
+  opacity: 0.78;
+}
+
+.home-field-recent li:first-child {
+  border-top: 0;
+}
+
+.home-field-recent i {
+  color: #b89478;
+  text-align: center;
+}
+
+.home-field-recent time {
+  text-align: right;
+  white-space: nowrap;
+  opacity: 0.78;
+}
+
+#topics h2 {
+  margin-top: 1rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  opacity: 0.78;
+}
+
+@media only screen and (max-width: 768px) {
+  .home-field {
+    padding-top: 5rem;
+  }
+
+  .home-field-recent li {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+    text-align: center;
+  }
+
+  .home-field-recent i {
+    display: none;
+  }
+
+  .home-field-recent time {
+    text-align: center;
+  }
+
+  .home-field .about h2,
+  .home-field-line,
+  .home-field-section h2 {
+    letter-spacing: 0.18em;
+  }
+}
