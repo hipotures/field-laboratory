@@ -1,0 +1,9 @@
+baseURL = "https://www.armum.eu/"
+languageCode = "pl-pl"
+title = "field-laboratory"
+
+defaultContentLanguage = "pl"
+enableRobotsTXT = true
+
+[params]
+  description = "Field laboratory: notes, articles, photography and technical experiments."
