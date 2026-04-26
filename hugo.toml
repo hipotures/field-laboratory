@@ -1,4 +1,4 @@
-baseURL = "https://www.armum.eu/"
+baseURL = "https://armum.eu/"
 languageCode = "pl-pl"
 title = "Field Laboratory"
 theme = "hugo-coder"
@@ -39,7 +39,7 @@ enableEmoji = true
   name = "RSS"
   icon = "fa-solid fa-rss fa-2x"
   weight = 1
-  url = "https://www.armum.eu/index.xml"
+  url = "https://armum.eu/index.xml"
   rel = "alternate"
   type = "application/rss+xml"
 
