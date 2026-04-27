@@ -62,6 +62,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--force", action="store_true", help="Regenerate cached summaries.")
     parser.add_argument("--limit", type=int, default=0, help="Limit generated projects for tests.")
+    parser.add_argument(
+        "--only-slugs",
+        default="",
+        help="Comma-separated project slugs to generate, after applying show_in_terminal filtering.",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Print selected projects; do not write files.")
     return parser.parse_args()
 
@@ -114,6 +119,21 @@ def visible_projects(data: dict[str, Any]) -> list[dict[str, Any]]:
             continue
         visible.append(dict(raw))
     return visible
+
+
+def parse_slug_filter(value: str) -> set[str]:
+    return {slugify(item) for item in value.split(",") if item.strip()}
+
+
+def filter_projects_by_slug(projects: list[dict[str, Any]], slugs: set[str]) -> list[dict[str, Any]]:
+    if not slugs:
+        return projects
+    selected = [project for project in projects if project_slug(project) in slugs]
+    selected_slugs = {project_slug(project) for project in selected}
+    missing = sorted(slugs - selected_slugs)
+    if missing:
+        raise ValueError(f"Unknown or hidden project slugs: {', '.join(missing)}")
+    return selected
 
 
 def normalize_topics(value: object) -> list[str]:
@@ -570,7 +590,9 @@ def main() -> int:
     args = parse_args()
     try:
         data = load_yaml(args.cv.expanduser())
+        slug_filter = parse_slug_filter(args.only_slugs)
         projects = visible_projects(data)
+        projects = filter_projects_by_slug(projects, slug_filter)
         if args.refresh_github:
             projects = refresh_projects_from_github(projects)
         if args.limit > 0:
@@ -595,9 +617,10 @@ def main() -> int:
                 if translated:
                     project["about_pl"] = translated
         output = args.output.expanduser()
-        remove_legacy_projects_page(output)
-        prune_stale_generated_projects(output, {project_slug(project) for project in projects})
-        write_index(output)
+        if not slug_filter:
+            remove_legacy_projects_page(output)
+            prune_stale_generated_projects(output, {project_slug(project) for project in projects})
+            write_index(output)
         for index, project in enumerate(projects, start=1):
             readme_path = find_readme(project, args.readme_root.expanduser())
             readme = read_readme(readme_path)
