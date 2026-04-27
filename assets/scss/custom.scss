@@ -1,6 +1,39 @@
+.navigation {
+  .navigation-title {
+    color: color-mix(in srgb, currentColor 88%, #b89478 12%);
+    font-size: 1.48rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .navigation-list {
+    .navigation-item {
+      a,
+      span {
+        margin-left: 1.35rem;
+        margin-right: 1.35rem;
+      }
+    }
+  }
+
+  .navigation-link {
+    font-size: 1.52rem;
+    font-weight: 500;
+    letter-spacing: 0.018em;
+    opacity: 0.82;
+    transition: color 0.18s ease, opacity 0.18s ease;
+  }
+
+  a.navigation-link:hover,
+  a.navigation-link:focus {
+    opacity: 1;
+  }
+}
+
 .navigation-link-disabled {
   cursor: default;
-  opacity: 0.48;
+  opacity: 0.42;
 }
 
 .home-field {
