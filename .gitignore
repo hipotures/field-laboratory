@@ -11,6 +11,9 @@
 Thumbs.db
 *.swp
 *.swo
+__pycache__/
+*.py[cod]
 
 # Local agent/tool state
 .codex
+.cache/

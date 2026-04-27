@@ -197,9 +197,48 @@
     text-align: left;
   }
 
-  .home-field .about h2,
+.home-field .about h2,
   .home-field-line,
   .home-field-section h2 {
     letter-spacing: 0.18em;
   }
+}
+
+.project-index-intro {
+  margin-bottom: 3.2rem;
+}
+
+.project-list {
+  display: grid;
+  gap: 2.6rem;
+  margin-bottom: 3.2rem;
+}
+
+.project-list-item {
+  border-top: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  padding-top: 2rem;
+}
+
+.project-list-item h2 {
+  margin: 0 0 1rem;
+  font-size: 2.4rem;
+}
+
+.project-list-item p {
+  margin: 0 0 1.2rem;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 1rem 0 2rem;
+}
+
+.project-meta span {
+  border: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+  border-radius: 999rem;
+  padding: 0.2rem 0.8rem;
+  font-size: 1.4rem;
+  opacity: 0.78;
 }
