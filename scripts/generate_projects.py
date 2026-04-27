@@ -6,6 +6,8 @@ from datetime import date
 import hashlib
 import json
 import re
+import shutil
+import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -20,6 +22,9 @@ DEFAULT_OUTPUT = Path("content/projects")
 DEFAULT_CACHE = Path(".cache/project-summaries")
 DEFAULT_LLM_URL = "http://127.0.0.1:8877/v1/chat/completions"
 README_NAMES = ("README.md", "Readme.md", "readme.md", "README.MD")
+LOCAL_REPO_ALIASES = {
+    "tklivetracker": ("ttracker", "ttracker-selenium", "ttracker-gemini"),
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -35,6 +40,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-readme-chars", type=int, default=12000)
     parser.add_argument("--max-tokens", type=int, default=1800)
     parser.add_argument("--timeout", type=int, default=240)
+    parser.add_argument(
+        "--refresh-github",
+        action="store_true",
+        help="Refresh visible project metadata from GitHub before generating pages.",
+    )
+    parser.add_argument(
+        "--translate-abouts",
+        action="store_true",
+        help="Translate all project about fields to Polish in one LLM request.",
+    )
+    parser.add_argument(
+        "--no-summary-llm",
+        action="store_true",
+        help="Do not call the LLM for per-project README summaries; use only matching cache.",
+    )
     parser.add_argument(
         "--no-llm",
         action="store_true",
@@ -96,11 +116,67 @@ def visible_projects(data: dict[str, Any]) -> list[dict[str, Any]]:
     return visible
 
 
+def normalize_topics(value: object) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    topics: list[str] = []
+    for item in value:
+        if isinstance(item, dict):
+            name = str(item.get("name") or item.get("topic", {}).get("name") or "").strip()
+        else:
+            name = str(item).strip()
+        if name:
+            topics.append(name)
+    return topics
+
+
+def gh_repo_metadata(repo: str) -> dict[str, Any]:
+    result = subprocess.run(
+        [
+            "gh",
+            "repo",
+            "view",
+            repo,
+            "--json",
+            "name,description,homepageUrl,repositoryTopics,url",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    payload = json.loads(result.stdout)
+    if not isinstance(payload, dict):
+        raise ValueError(f"GitHub metadata for {repo} is not an object")
+    return payload
+
+
+def refresh_projects_from_github(projects: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    refreshed: list[dict[str, Any]] = []
+    for project in projects:
+        repo = str(project.get("repo") or "").strip()
+        if not repo:
+            continue
+        fresh = gh_repo_metadata(repo)
+        merged = dict(project)
+        merged.update(
+            {
+                "title": str(fresh.get("name") or project.get("title") or project_slug(project)).strip(),
+                "about": str(fresh.get("description") or "").strip(),
+                "homepage": str(fresh.get("homepageUrl") or "").strip(),
+                "url": str(fresh.get("url") or f"https://github.com/{repo}").strip(),
+                "topics": normalize_topics(fresh.get("repositoryTopics")),
+            }
+        )
+        refreshed.append(merged)
+    return refreshed
+
+
 def find_readme(project: dict[str, Any], readme_root: Path) -> Path | None:
     candidates: list[Path] = []
     slug = str(project.get("slug") or "").strip()
     repo_name = str(project.get("repo") or "").rsplit("/", 1)[-1].strip()
-    for name in dict.fromkeys([slug, repo_name, project_slug(project)]):
+    aliases = LOCAL_REPO_ALIASES.get(project_slug(project), ())
+    for name in dict.fromkeys([slug, repo_name, project_slug(project), *aliases]):
         if not name:
             continue
         for readme_name in README_NAMES:
@@ -164,6 +240,7 @@ def summarize_with_llm(
 
 Schema:
 {{
+  "about_pl": "Polish translation of project about, max 1 sentence",
   "summary_pl": "Polish summary, max 10 sentences",
   "summary_en": "English summary, max 10 sentences",
   "topics": ["3-8 short tags"],
@@ -173,14 +250,19 @@ Schema:
 Rules:
 - Be concrete.
 - Do not invent features.
-- Use README as primary source and about as fallback.
+- Use README as the only source for summary_pl, summary_en, topics, and project_type.
+- Use project about only to produce about_pl.
+- Translate project about into Polish for about_pl.
+- Preserve technical terms, product names, library names, protocols, and acronyms in their original form.
+- If project about is already Polish, keep it Polish and only clean wording lightly.
+- If project about is empty, return an empty string for about_pl.
 - No markdown outside JSON.
 
 Project title: {title}
 Project about: {about}
 
 README:
-{readme[:max_readme_chars] if readme.strip() else "(no README available; use project about as source)"}
+{readme[:max_readme_chars]}
 """
     payload = {
         "model": model,
@@ -207,17 +289,135 @@ README:
     return extract_json_object(content)
 
 
-def fallback_summary(project: dict[str, Any]) -> dict[str, Any]:
-    about = str(project.get("about") or "").strip()
-    title = str(project.get("title") or project_slug(project)).strip()
-    text = about or title
-    topics = project.get("topics") if isinstance(project.get("topics"), list) else []
-    return {
-        "summary_pl": text,
-        "summary_en": "",
-        "topics": [str(topic) for topic in topics if str(topic).strip()],
-        "project_type": "",
+def request_llm_json(
+    *,
+    llm_url: str,
+    model: str,
+    prompt: str,
+    max_tokens: int,
+    timeout: int,
+) -> dict[str, Any]:
+    payload = {
+        "model": model,
+        "temperature": 0,
+        "max_tokens": max_tokens,
+        "messages": [{"role": "user", "content": prompt}],
     }
+    request = urllib.request.Request(
+        llm_url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        data = json.loads(response.read().decode("utf-8"))
+    message = data["choices"][0]["message"]
+    content = str(message.get("content") or "").strip()
+    if not content:
+        reason = data["choices"][0].get("finish_reason", "unknown")
+        raise ValueError(f"LLM response had empty message.content; finish_reason={reason}")
+    return extract_json_object(content)
+
+
+def translate_abouts_with_llm(
+    *,
+    projects: list[dict[str, Any]],
+    llm_url: str,
+    model: str,
+    max_tokens: int,
+    timeout: int,
+) -> dict[str, str]:
+    payload = [
+        {
+            "slug": project_slug(project),
+            "title": str(project.get("title") or project_slug(project)).strip(),
+            "about": " ".join(str(project.get("about") or "").split()),
+        }
+        for project in projects
+        if str(project.get("about") or "").strip()
+    ]
+    if not payload:
+        return {}
+    prompt = f"""Translate project descriptions to Polish. Return STRICT JSON only.
+
+Schema:
+{{
+  "translations": {{
+    "project-slug": "Polish translation"
+  }}
+}}
+
+Rules:
+- Translate only the "about" field.
+- Keep the translation short: one sentence if possible.
+- Preserve technical terms, product names, library names, protocols, and acronyms in their original form.
+- Do not invent features.
+- If text is already Polish, keep it Polish and only clean wording lightly.
+- Return every input slug exactly once.
+
+Projects:
+{json.dumps(payload, ensure_ascii=False, indent=2)}
+"""
+    parsed = request_llm_json(
+        llm_url=llm_url,
+        model=model,
+        prompt=prompt,
+        max_tokens=max_tokens,
+        timeout=timeout,
+    )
+    translations = parsed.get("translations")
+    if not isinstance(translations, dict):
+        raise ValueError('LLM response must contain object field "translations"')
+    return {
+        str(slug): " ".join(str(text).split())
+        for slug, text in translations.items()
+        if str(slug).strip() and str(text).strip()
+    }
+
+
+def short_lead(text: str, max_sentences: int = 2, max_chars: int = 260) -> str:
+    text = " ".join(str(text).split())
+    if not text:
+        return ""
+    sentences = re.split(r"(?<=[.!?])\s+", text)
+    lead = " ".join(sentence for sentence in sentences[:max_sentences] if sentence).strip()
+    if not lead:
+        lead = text
+    if len(lead) <= max_chars:
+        return lead
+    truncated = lead[: max_chars + 1].rsplit(" ", 1)[0].rstrip(".,;:")
+    return f"{truncated}..."
+
+
+def project_name_variants(project: dict[str, Any]) -> list[str]:
+    raw_values = [
+        str(project.get("title") or ""),
+        str(project.get("slug") or ""),
+        str(project.get("repo") or "").rsplit("/", 1)[-1],
+        project_slug(project),
+    ]
+    variants: set[str] = set()
+    for raw in raw_values:
+        raw = raw.strip()
+        if not raw:
+            continue
+        variants.add(raw)
+        parts = [part for part in re.split(r"[-_\s]+", raw) if part]
+        if len(parts) > 1:
+            variants.add(" ".join(parts))
+            variants.add("".join(parts))
+            variants.add("".join(part[:1].upper() + part[1:] for part in parts))
+    return sorted(variants, key=len, reverse=True)
+
+
+def highlight_project_names(text: str, project: dict[str, Any]) -> str:
+    highlighted = text
+    for name in project_name_variants(project):
+        if len(name) < 3:
+            continue
+        pattern = re.compile(rf"(?<![\w*])({re.escape(name)})(?![\w*])", flags=re.IGNORECASE)
+        highlighted = pattern.sub(lambda match: f"**{match.group(1)}**", highlighted)
+    return highlighted
 
 
 def cached_summary(
@@ -232,18 +432,34 @@ def cached_summary(
     max_readme_chars: int,
     max_tokens: int,
     timeout: int,
+    no_summary_llm: bool,
 ) -> dict[str, Any]:
     repo = str(project.get("repo") or "").strip()
     about = str(project.get("about") or "").strip()
     title = str(project.get("title") or project_slug(project)).strip()
+    empty_summary: dict[str, Any] = {
+        "about_pl": "",
+        "summary_pl": "",
+        "summary_en": "",
+        "topics": [],
+        "project_type": "",
+    }
+    if not readme.strip():
+        return empty_summary
     digest = sha256_text("\n".join([repo, title, about, readme, model]))
     cache_path = cache_dir / f"{project_slug(project)}.json"
     if not no_llm and cache_path.exists() and not force:
         cached = json.loads(cache_path.read_text(encoding="utf-8"))
         if cached.get("digest") == digest and isinstance(cached.get("summary"), dict):
             return dict(cached["summary"])
+    if no_summary_llm and cache_path.exists():
+        cached = json.loads(cache_path.read_text(encoding="utf-8"))
+        if cached.get("digest") == digest and isinstance(cached.get("summary"), dict):
+            return dict(cached["summary"])
     if no_llm:
-        summary = fallback_summary(project)
+        return empty_summary
+    elif no_summary_llm:
+        return empty_summary
     else:
         summary = summarize_with_llm(
             llm_url=llm_url,
@@ -268,16 +484,19 @@ def project_markdown(project: dict[str, Any], summary: dict[str, Any], index: in
     repo = str(project.get("repo") or "").strip()
     url = str(project.get("url") or f"https://github.com/{repo}").strip()
     homepage = str(project.get("homepage") or "").strip()
+    translated_about = " ".join(str(project.get("about_pl") or "").split())
     topics = summary.get("topics") if isinstance(summary.get("topics"), list) else []
     topics = [str(topic).strip() for topic in topics if str(topic).strip()]
-    summary_pl = str(summary.get("summary_pl") or project.get("about") or "").strip()
+    summary_pl = str(summary.get("summary_pl") or "").strip()
     summary_en = str(summary.get("summary_en") or "").strip()
+    about_pl = translated_about or " ".join(str(summary.get("about_pl") or "").split())
     project_type = str(summary.get("project_type") or "").strip()
     if project_type == "other":
         project_type = ""
     front = {
         "title": title,
-        "description": summary_pl,
+        "description": about_pl,
+        "full_description": summary_pl,
         "date": date.today().isoformat(),
         "repo": repo,
         "repo_url": url,
@@ -286,15 +505,17 @@ def project_markdown(project: dict[str, Any], summary: dict[str, Any], index: in
         "project_type": project_type,
         "summary_en": summary_en,
         "generated": True,
-        "draft": draft,
+        "listed": bool(about_pl),
+        "draft": draft or not bool(summary_pl),
         "weight": index * 10,
     }
     links = [f"- [GitHub]({url})"]
     if homepage:
         links.append(f"- [Strona projektu]({homepage})")
+    body_summary = highlight_project_names(summary_pl, project)
     body_parts = [f"""## Opis
 
-{summary_pl}
+{body_summary}
 """]
 
     body_parts.append(f"""## Linki
@@ -331,11 +552,27 @@ def remove_legacy_projects_page(output: Path) -> None:
         legacy.unlink()
 
 
+def prune_stale_generated_projects(output: Path, active_slugs: set[str]) -> None:
+    if not output.exists():
+        return
+    for child in output.iterdir():
+        if not child.is_dir() or child.name in active_slugs:
+            continue
+        index = child / "index.md"
+        if not index.exists():
+            continue
+        content = index.read_text(encoding="utf-8", errors="replace")
+        if "generated: true" in content:
+            shutil.rmtree(child)
+
+
 def main() -> int:
     args = parse_args()
     try:
         data = load_yaml(args.cv.expanduser())
         projects = visible_projects(data)
+        if args.refresh_github:
+            projects = refresh_projects_from_github(projects)
         if args.limit > 0:
             projects = projects[: args.limit]
         if args.dry_run:
@@ -345,8 +582,21 @@ def main() -> int:
         model = args.model
         if not args.no_llm and model == "auto":
             model = get_auto_model(args.llm_url)
+        if args.translate_abouts:
+            translations = translate_abouts_with_llm(
+                projects=projects,
+                llm_url=args.llm_url,
+                model=model,
+                max_tokens=args.max_tokens,
+                timeout=args.timeout,
+            )
+            for project in projects:
+                translated = translations.get(project_slug(project), "")
+                if translated:
+                    project["about_pl"] = translated
         output = args.output.expanduser()
         remove_legacy_projects_page(output)
+        prune_stale_generated_projects(output, {project_slug(project) for project in projects})
         write_index(output)
         for index, project in enumerate(projects, start=1):
             readme_path = find_readme(project, args.readme_root.expanduser())
@@ -362,10 +612,18 @@ def main() -> int:
                 max_readme_chars=args.max_readme_chars,
                 max_tokens=args.max_tokens,
                 timeout=args.timeout,
+                no_summary_llm=args.no_summary_llm,
             )
             write_project(output, project_slug(project), project_markdown(project, summary, index, draft=args.no_llm))
             print(f"generated {project_slug(project)}")
-    except (OSError, ValueError, yaml.YAMLError, urllib.error.URLError, json.JSONDecodeError) as exc:
+    except (
+        OSError,
+        subprocess.CalledProcessError,
+        ValueError,
+        yaml.YAMLError,
+        urllib.error.URLError,
+        json.JSONDecodeError,
+    ) as exc:
         print(str(exc), file=sys.stderr)
         return 1
     return 0

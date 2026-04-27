@@ -242,3 +242,34 @@
   font-size: 1.4rem;
   opacity: 0.78;
 }
+
+.post-index-intro {
+  margin-bottom: 3.2rem;
+}
+
+.post-list {
+  display: grid;
+  gap: 2.6rem;
+  margin-bottom: 3.2rem;
+}
+
+.post-list-item {
+  border-top: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  padding-top: 2rem;
+}
+
+.post-list-item time {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-size: 1.5rem;
+  opacity: 0.72;
+}
+
+.post-list-item h2 {
+  margin: 0 0 1rem;
+  font-size: 2.4rem;
+}
+
+.post-list-item p {
+  margin: 0;
+}

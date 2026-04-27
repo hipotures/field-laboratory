@@ -1,10 +1,9 @@
 ---
 title: "Kontakt"
-description: "Testowa strona kontaktowa"
+description: "Dane kontaktowe"
 date: 2026-04-26
 ---
 
-To jest tymczasowa strona kontaktowa do sprawdzenia nawigacji w motywie.
+Dane kontaktowe sa dostepne w CV:
 
-Docelowe dane kontaktowe mozna uzupelnic pozniej.
-
+[https://cv.armum.eu](https://cv.armum.eu)

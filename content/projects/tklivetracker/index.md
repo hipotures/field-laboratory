@@ -1,6 +1,7 @@
 ---
 title: tklivetracker
-description: tklivetracker to aplikacja napisana w Pythonie służąca do monitorowania wybranych użytkowników TikToka. Narzędzie automatycznie rejestruje ich transmisje na żywo. Zapewnia zarządzanie procesami oraz monitorowanie ich stanu zdrowia. Użytkownicy mogą korzystać z interfejsu sieciowego do kontroli systemu. Aplikacja umożliwia śledzenie aktywności na żywo w czasie rzeczywistym. Rejestrowane są nagrania z transmisji dla późniejszego wykorzystania. System zawiera mechanizmy sprawdzania poprawności działania usług. Interfejs webowy ułatwia zarządzanie całym procesem monitorowania. Projekt jest skierowany do osób potrzebujących automatyzacji nagrywania treści z TikToka. Całość działa jako samodzielna aplikacja Python.
+description: Aplikacja Python do monitorowania wybranych użytkowników TikTok, nagrywania ich transmisji na żywo oraz zarządzania procesami z kontrolami stanu przez interfejs webowy.
+full_description: Automatyzowana aplikacja Python monitorująca wybranych użytkowników TikToka i nagrywająca ich transmisje na żywo. System wykorzystuje wykrywanie oparte na Selenium, trwałe zarządzanie procesami oraz monitorowanie stanu. Zapewnia efektywne zarządzanie zasobami z limitami pojemności i interfejsem webowym do monitorowania w czasie rzeczywistym. Gwarantuje niezawodność dzięki automatycznemu restartowi, czyszczeniu procesów zombie i odzyskiwaniu po awariach. Obsługuje tryb tylko do odczytu dla bezpiecznego dostępu zewnętrznego. Architektura obejmuje głównego nadzorcy, silnik nagrywania FFmpeg oraz interfejs webowy Flask. Konfiguracja wymaga pliku cookies z TikTok dla uwierzytelnienia. System synchronizuje bazę danych SQLite z aktywnymi procesami nagrywania. Obsługuje różne źródła cookies, w tym pliki JSON i przeglądarkę Firefox.
 date: '2026-04-27'
 repo: hipotures/tklivetracker
 repo_url: https://github.com/hipotures/tklivetracker
@@ -9,19 +10,22 @@ topics:
 - tiktok
 - live-stream-recording
 - python
-- monitoring
-- web-interface
+- selenium
+- ffmpeg
+- flask
 - automation
+- monitoring
 project_type: app
-summary_en: tklivetracker is a Python application designed to monitor selected TikTok users. It automatically records their live streams for later use. The tool manages processes and performs health checks to ensure stability. Users can control the system through a dedicated web interface. It tracks live activity in real-time for specified accounts. Recorded streams are saved for archival or further processing. The application includes robust process management features. The web interface simplifies the monitoring and recording workflow. It is tailored for users needing automated TikTok live stream capture. The project functions as a standalone Python application.
+summary_en: Automated Python application that monitors specified TikTok users and records their live streams using Selenium-based detection. It features persistent process management, health monitoring, and a web interface for real-time oversight. The system efficiently manages resources with capacity limits and ensures reliability through automatic restarts and zombie process cleanup. It supports a read-only mode for safe external access and demonstrations. The architecture includes a production supervisor, an FFmpeg-based recording engine, and a Flask web interface. Configuration requires TikTok cookies for authentication, supporting JSON files or Firefox browser extraction. The system synchronizes a SQLite database with active recording processes and handles user states dynamically. It provides comprehensive monitoring capabilities including analytics and historical activity visualization.
 generated: true
+listed: true
 draft: false
 weight: 20
 ---
 
 ## Opis
 
-tklivetracker to aplikacja napisana w Pythonie służąca do monitorowania wybranych użytkowników TikToka. Narzędzie automatycznie rejestruje ich transmisje na żywo. Zapewnia zarządzanie procesami oraz monitorowanie ich stanu zdrowia. Użytkownicy mogą korzystać z interfejsu sieciowego do kontroli systemu. Aplikacja umożliwia śledzenie aktywności na żywo w czasie rzeczywistym. Rejestrowane są nagrania z transmisji dla późniejszego wykorzystania. System zawiera mechanizmy sprawdzania poprawności działania usług. Interfejs webowy ułatwia zarządzanie całym procesem monitorowania. Projekt jest skierowany do osób potrzebujących automatyzacji nagrywania treści z TikToka. Całość działa jako samodzielna aplikacja Python.
+Automatyzowana aplikacja Python monitorująca wybranych użytkowników TikToka i nagrywająca ich transmisje na żywo. System wykorzystuje wykrywanie oparte na Selenium, trwałe zarządzanie procesami oraz monitorowanie stanu. Zapewnia efektywne zarządzanie zasobami z limitami pojemności i interfejsem webowym do monitorowania w czasie rzeczywistym. Gwarantuje niezawodność dzięki automatycznemu restartowi, czyszczeniu procesów zombie i odzyskiwaniu po awariach. Obsługuje tryb tylko do odczytu dla bezpiecznego dostępu zewnętrznego. Architektura obejmuje głównego nadzorcy, silnik nagrywania FFmpeg oraz interfejs webowy Flask. Konfiguracja wymaga pliku cookies z TikTok dla uwierzytelnienia. System synchronizuje bazę danych SQLite z aktywnymi procesami nagrywania. Obsługuje różne źródła cookies, w tym pliki JSON i przeglądarkę Firefox.
 
 ## Linki
 

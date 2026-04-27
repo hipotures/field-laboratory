@@ -1,5 +1,5 @@
 ---
-title: "Vibe coding - Vibe Operator AI (część II)"
+title: "Vibe coding - Vibe Operator AI (II)"
 date: 2025-03-18
 description: "Archiwalna druga część tekstu o vibe codingu: rola Vibe Operatora AI, kompetencje, proces pracy i przykład projektu Sonus."
 tags: ["vibe coding", "ai", "programowanie"]

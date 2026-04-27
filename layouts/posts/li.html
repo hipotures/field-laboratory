@@ -1,0 +1,11 @@
+<article class="post-list-item">
+  <time datetime="{{ .Date.Format "2006-01-02" }}">
+    {{ .Date | time.Format (.Site.Params.dateFormat | default "2006-01-02") }}
+  </time>
+  <h2>
+    <a href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
+  </h2>
+  {{ with .Description }}
+    <p>{{ . }}</p>
+  {{ end }}
+</article>

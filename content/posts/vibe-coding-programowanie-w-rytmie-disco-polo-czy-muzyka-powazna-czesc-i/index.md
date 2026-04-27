@@ -1,5 +1,5 @@
 ---
-title: "Vibe coding - programowanie w rytmie disco polo czy muzyka poważna? (część I)"
+title: "Vibe coding - programowanie w rytmie disco polo czy muzyka poważna? (I)"
 date: 2025-03-18
 description: "Archiwalny tekst o vibe codingu, jego historii, narzędziach, zaletach, wadach i praktycznym znaczeniu dla programowania."
 tags: ["vibe coding", "ai", "programowanie"]
