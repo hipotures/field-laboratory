@@ -1,6 +1,7 @@
 ---
 title: calendar-mcp
-description: Projekt implementuje serwer MCP (Model Context Protocol) w Pythonie, który działa jako interfejs między dużymi modelami językowymi (LLM) a API Google Calendar, umożliwiając operacje na kalendarzu poprzez zapytania w języku naturalnym.
+description: >-
+  Projekt implementuje serwer MCP (Model Context Protocol) w Pythonie, który działa jako interfejs między dużymi modelami językowymi (LLM) a API Google Calendar, umożliwiając operacje na kalendarzu poprzez zapytania w języku naturalnym.
 full_description: ''
 date: '2026-04-27'
 repo: hipotures/calendar-mcp

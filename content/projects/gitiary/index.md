@@ -1,7 +1,9 @@
 ---
 title: gitiary
-description: Osobista dashboard do wizualizacji aktywności commitów na GitHubie w wielu repozytoriach.
-full_description: Gitiary to osobowy panel do wizualizacji aktywności commitów na GitHubie w wielu repozytoriach. Aplikacja oferuje przegląd repozytoriów z selektorami zakresów czasowych oraz szczegółowe strony z wykresami dziennymi i mapami cieplnymi. Umożliwia porównywanie repozytoriów pod kątem regularności, streaków i luk, a także analizę wpływu zmian (dodania, usunięcia, zmienione pliki). Zawiera widok narracyjny z podsumowaniem wydarzeń oraz interfejs ustawień do synchronizacji i aktywacji repozytoriów. Technologia opiera się na SvelteKit, TypeScript, SQLite i Apache ECharts. Dane są pobierane za pomocą GitHub CLI, a indeksowanie można automatyzować przez CLI lub systemd. Aplikacja obsługuje eksport statyczny oraz automatyczne generowanie zrzutów ekranu. Konfiguracja repozytoriów jest przechowywana w bazie SQLite, a bezpieczeństwo wymaga ochrony punktów końcowych API.
+description: >-
+  Lokalny panel aktywności commitów z wielu repozytoriów GitHuba.
+full_description: >-
+  Gitiary wizualizuje aktywność commitów z wielu repozytoriów GitHuba. Pokazuje wykresy dzienne, heatmapy, regularność pracy, przerwy oraz zmiany w liczbie dodanych i usuniętych linii. Dane są pobierane przez GitHub CLI i zapisywane w SQLite. Interfejs powstał w SvelteKit i TypeScript, a wykresy są renderowane przez Apache ECharts. Projekt wspiera eksport statyczny oraz automatyczne generowanie zrzutów ekranu.
 date: '2026-04-27'
 repo: hipotures/gitiary
 repo_url: https://github.com/hipotures/gitiary
@@ -15,7 +17,8 @@ topics:
 - typescript
 - analytics
 project_type: app
-summary_en: Gitiary is a personal dashboard for visualizing GitHub commit activity across multiple repositories. It provides repository overviews with time range selectors and detailed pages featuring daily charts and calendar heatmaps. The tool enables cross-repository comparison regarding regularity, streaks, and gaps, along with impact analytics for additions, deletions, and file changes. It includes a narrative story view and a settings UI for repository synchronization and activation. Built with SvelteKit, TypeScript, SQLite, and Apache ECharts, it uses the GitHub CLI for data access. Indexing can be automated via CLI commands or systemd timers. The application supports static export and automated screenshot generation for documentation. Repository configuration is stored in a local SQLite database, and API endpoints require protection for secure deployment.
+summary_en: >-
+  Gitiary is a personal dashboard for visualizing GitHub commit activity across multiple repositories. It provides repository overviews with time range selectors and detailed pages featuring daily charts and calendar heatmaps. The tool enables cross-repository comparison regarding regularity, streaks, and gaps, along with impact analytics for additions, deletions, and file changes. It includes a narrative story view and a settings UI for repository synchronization and activation. Built with SvelteKit, TypeScript, SQLite, and Apache ECharts, it uses the GitHub CLI for data access. Indexing can be automated via CLI commands or systemd timers. The application supports static export and automated screenshot generation for documentation. Repository configuration is stored in a local SQLite database, and API endpoints require protection for secure deployment.
 generated: true
 listed: true
 draft: false
@@ -24,7 +27,7 @@ weight: 110
 
 ## Opis
 
-**Gitiary** to osobowy panel do wizualizacji aktywności commitów na GitHubie w wielu repozytoriach. Aplikacja oferuje przegląd repozytoriów z selektorami zakresów czasowych oraz szczegółowe strony z wykresami dziennymi i mapami cieplnymi. Umożliwia porównywanie repozytoriów pod kątem regularności, streaków i luk, a także analizę wpływu zmian (dodania, usunięcia, zmienione pliki). Zawiera widok narracyjny z podsumowaniem wydarzeń oraz interfejs ustawień do synchronizacji i aktywacji repozytoriów. Technologia opiera się na SvelteKit, TypeScript, SQLite i Apache ECharts. Dane są pobierane za pomocą GitHub CLI, a indeksowanie można automatyzować przez CLI lub systemd. Aplikacja obsługuje eksport statyczny oraz automatyczne generowanie zrzutów ekranu. Konfiguracja repozytoriów jest przechowywana w bazie SQLite, a bezpieczeństwo wymaga ochrony punktów końcowych API.
+**Gitiary** wizualizuje aktywność commitów z wielu repozytoriów GitHuba. Pokazuje wykresy dzienne, heatmapy, regularność pracy, przerwy oraz zmiany w liczbie dodanych i usuniętych linii. Dane są pobierane przez GitHub CLI i zapisywane w SQLite. Interfejs powstał w SvelteKit i TypeScript, a wykresy są renderowane przez Apache ECharts. Projekt wspiera eksport statyczny oraz automatyczne generowanie zrzutów ekranu.
 
 ## Linki
 

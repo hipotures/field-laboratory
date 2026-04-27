@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import argparse
-from datetime import date
+from datetime import datetime, timezone
 import hashlib
 import json
 import re
@@ -25,6 +25,10 @@ README_NAMES = ("README.md", "Readme.md", "readme.md", "README.MD")
 LOCAL_REPO_ALIASES = {
     "tklivetracker": ("ttracker", "ttracker-selenium", "ttracker-gemini"),
 }
+
+
+def build_date() -> str:
+    return datetime.now(timezone.utc).date().isoformat()
 
 
 def parse_args() -> argparse.Namespace:
@@ -211,6 +215,38 @@ def read_readme(path: Path | None) -> str:
     if path is None:
         return ""
     return path.read_text(encoding="utf-8", errors="replace")
+
+
+def fetch_github_readme(repo: str) -> str:
+    repo = repo.strip()
+    if "/" not in repo:
+        return ""
+    request = urllib.request.Request(
+        f"https://api.github.com/repos/{repo}/readme",
+        headers={
+            "Accept": "application/vnd.github.raw",
+            "User-Agent": "field-laboratory-project-generator",
+        },
+        method="GET",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            return response.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as exc:
+        if exc.code == 404:
+            return ""
+        raise
+
+
+def project_readme(project: dict[str, Any], readme_root: Path) -> tuple[str, str]:
+    readme_path = find_readme(project, readme_root)
+    if readme_path is not None:
+        return read_readme(readme_path), str(readme_path)
+    repo = str(project.get("repo") or "").strip()
+    readme = fetch_github_readme(repo)
+    if readme.strip():
+        return readme, f"github:{repo}"
+    return "", ""
 
 
 def sha256_text(value: str) -> str:
@@ -517,7 +553,7 @@ def project_markdown(project: dict[str, Any], summary: dict[str, Any], index: in
         "title": title,
         "description": about_pl,
         "full_description": summary_pl,
-        "date": date.today().isoformat(),
+        "date": build_date(),
         "repo": repo,
         "repo_url": url,
         "homepage": homepage,
@@ -560,7 +596,7 @@ def write_index(output: Path) -> None:
     data = {
         "title": "Projekty",
         "description": "Wybrane projekty techniczne i eksperymenty.",
-        "date": date.today().isoformat(),
+        "date": build_date(),
     }
     body = "Wybrane projekty generowane z lokalnego CV i opisów repozytoriów.\n"
     (output / "_index.md").write_text(front_matter(data) + body, encoding="utf-8")
@@ -622,8 +658,7 @@ def main() -> int:
             prune_stale_generated_projects(output, {project_slug(project) for project in projects})
             write_index(output)
         for index, project in enumerate(projects, start=1):
-            readme_path = find_readme(project, args.readme_root.expanduser())
-            readme = read_readme(readme_path)
+            readme, readme_source = project_readme(project, args.readme_root.expanduser())
             summary = cached_summary(
                 project=project,
                 readme=readme,
@@ -638,7 +673,10 @@ def main() -> int:
                 no_summary_llm=args.no_summary_llm,
             )
             write_project(output, project_slug(project), project_markdown(project, summary, index, draft=args.no_llm))
-            print(f"generated {project_slug(project)}")
+            if readme_source:
+                print(f"generated {project_slug(project)} from {readme_source}")
+            else:
+                print(f"generated {project_slug(project)} without README")
     except (
         OSError,
         subprocess.CalledProcessError,
