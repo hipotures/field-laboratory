@@ -47,21 +47,32 @@ enableEmoji = true
   languageName = "PL"
 
   [[languages.pl.menu.main]]
-    name = "O stronie"
+    name = "Teksty"
     weight = 1
-    url = "about/"
-
-  [[languages.pl.menu.main]]
-    name = "Artykuły"
-    weight = 2
     url = "posts/"
 
   [[languages.pl.menu.main]]
     name = "Projekty"
-    weight = 3
+    weight = 2
     url = "projects/"
 
   [[languages.pl.menu.main]]
-    name = "Kontakt"
+    name = "Zdjęcia"
+    weight = 3
+    url = ""
+    [languages.pl.menu.main.params]
+      disabled = true
+
+  [[languages.pl.menu.main]]
+    name = "Tematy"
     weight = 4
-    url = "contact/"
+    url = ""
+    [languages.pl.menu.main.params]
+      disabled = true
+
+  [[languages.pl.menu.main]]
+    name = "Szukaj"
+    weight = 5
+    url = ""
+    [languages.pl.menu.main.params]
+      disabled = true
