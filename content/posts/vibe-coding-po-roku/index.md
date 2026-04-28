@@ -6,10 +6,10 @@ tags: ["vibe coding", "ai", "programowanie", "projekty"]
 categories: ["artykuly"]
 authors: ["Andrzej Marszałek"]
 resources:
-  - src: "figures/*"
+  - src: "images/*"
     params:
       gallery: false
-      kind: figure
+      kind: image
 ---
 
 ## Wstęp
@@ -44,7 +44,7 @@ Andrej Karpathy w tweecie z 19 lutego 2026 używa określenia „bespoke softwar
 > 
 > TLDR the "app store" of a set of discrete apps that you choose from is an increasingly outdated concept all by itself. The future are services of AI-native sensors & actuators orchestrated via LLM glue into highly custom, ephemeral apps. It's just not here yet.
 > 
-> ![alt text](figures/image-12.png)
+> ![alt text](images/image-12.png)
 </details>
 
 ---
@@ -152,7 +152,7 @@ Pamięć o własnej pracy jest selektywna i systematycznie błędna. Pamiętam p
 
 ### 2.2 gitiary – pulpit, który zamienia commity w opowieść
 
-![alt text](figures/image-9.png)
+![alt text](images/image-9.png)
 
 `gitiary` (GitHub: `hipotures/gitiary`, luty 2026, TypeScript). Miałem kilkanaście repozytoriów i chciałem zobaczyć w jednym miejscu, gdzie spędziłem czas w ostatnich dwunastu miesiącach. GitHub ma swój wykres wkładu, ale jest on liczony osobno dla każdego repozytorium i nie daje mi tego, czego potrzebuję: porównania aktywności między projektami, identyfikacji przerw, analizy rytmu pracy.
 
@@ -172,8 +172,8 @@ Jedno zdanie o liczbie commitów jako metryce: liczba commitów mierzy intensywn
 
 ### 2.3 command-center – raport kosztów i tokenów
 
-![alt text](figures/image-10.png)
-![alt text](figures/image-11.png)
+![alt text](images/image-10.png)
+![alt text](images/image-11.png)
 
 `command-center` (GitHub: `hipotures/command-center`, grudzień 2025–styczeń 2026, Python) rozwiązuje inny problem: chciałem wiedzieć, ile naprawdę kosztuje moja praca z Claude Code i jak te koszty rozkładają się w czasie i między projektami.
 
@@ -257,7 +257,7 @@ Kilkudniowy sprint na przełomie czerwca i lipca 2025. Równolegle budowałem al
 Jeden wniosek, który warto zabrać: MCTS jako framework decyzyjny ma sens wszędzie tam, gdzie przestrzeń jest za duża na brute-force, a funkcja oceny jest kosztowna, ale możliwa. To nie jest narzędzie specyficzne dla gier – to ogólny sposób na systematyczne eksplorowanie przestrzeni decyzji.
 
 #### mdm
-![alt text](figures/image.png)
+![alt text](images/image.png)
 
 `mdm` (GitHub: `hipotures/mdm`, lipiec 2025, projekt zakończony, Python) rozwiązuje problem, który mają wszyscy ML-inżynierzy, którzy robią więcej niż jeden projekt: chaos danych. Różne wersje tego samego datasetu, bez etykiet, kiedy i po co zostały przetransformowane, bez informacji o typach kolumn, bez profilowania jakości. Po trzecim projekcie zaczynam spędzać więcej czasu, szukając „skąd wziąć ten dataset, który był w tamtym projekcie”, niż robiąc faktyczne modelowanie.
 
@@ -268,7 +268,7 @@ Automatyczne wykrywanie typów kolumn i kodowania plików przy rejestracji. Rozp
 Krótki, intensywny sprint. Równolegle: fundamenty (rejestracja, backendy, konfiguracja) i ergonomia terminala. Stabilizacja: walidacja wejścia, obsługa błędów, metadane i statystyki kolumn. Jakość: pytest + ruff + mypy + black od początku, żeby szybkie iteracje nie rozbijały kontraktów.
 
 #### MLArena
-![alt text](figures/image-1.png)
+![alt text](images/image-1.png)
 
 `mlarena` (GitHub: `hipotures/mlarena`, listopad 2025–styczeń 2026, projekt zakończony, Python) to próba odpowiedzi na pytanie: ile czasu spędza się przy każdym konkursie Kaggle na powtarzaniu tych samych czynności? Dużo. mlarena to framework, który to standaryzuje.
 
@@ -311,7 +311,7 @@ Sprint: piątek po południu do poniedziałku, ~40 godzin.  Problemy: diff mode 
 Wynik: ~5000 linii Python, ~1500 linii Terraform, ~2500 linii StepByStep.md, ~2500 linii innych plików .md.
 
 #### 37degrees
-![alt text](figures/image-3.png)
+![alt text](images/image-3.png)
 
 `37degrees` (GitHub: `hipotures/37degrees`, lipiec–listopad 2025, projekt zawieszony, Python) to największy projekt pod względem łącznego czasu pracy. Nie ma jednego „wydania” – to pipeline produkcji, który działa ciągle.
 
@@ -326,7 +326,7 @@ Trzy fale intensywności przez cztery miesiące. Sprint startowy latem: architek
 Po zrealizowaniu około 90% projektu okazało się, że najsłabszym elementem całego pipeline’u jest warstwa audio. Generator NotebookLM błędnie rozpoznawał rodzaj postaci, co prowadziło do niewłaściwej fleksji, a do tego dochodziły drobniejsze błędy językowe i problemy z odmianą skrótów, np. „CIA” czytane jako „cija” zamiast „siː aɪ eɪ”. Szukając wyjścia, zacząłem sprawdzać ElevenLabs, ale zatrzymałem się na etapie dokumentacji i integracji. W efekcie projekt, który był już niemal domknięty, utknął tuż przed końcem. Dziś widzę to raczej jako sygnał, że potrzebne jest nie punktowe poprawianie błędów, lecz przeprojektowanie tej części pipeline’u i uniezależnienie jej od ograniczeń Claude Code, który działa tu przy znacznie ostrzejszych limitach tokenów.
 
 #### tklivetracker
-![alt text](figures/image-4.png)
+![alt text](images/image-4.png)
 
 `tklivetracker` (GitHub: `hipotures/tklivetracker`, kwiecień–lipiec 2025, projekt aktywny, Python) rozwiązuje problem, który jest trudny do opisania, ale natychmiastowo rozumiany przez każdego, kto go miał: ręczne pilnowanie transmisji live jest niemożliwe przy wielu użytkownikach.
 
@@ -341,7 +341,7 @@ Aktywność: intensywny start (kwiecień 2025), potem kilka tygodni stabilizacji
 Projekt nie jest publicznie dostępny ze względu na zastosowanie biblioteki, która została mocno zintegrowana/przerobiona pod moje potrzeby.
 
 #### vbc
-![alt text](figures/image-5.png)
+![alt text](images/image-5.png)
 
 `vbc` (GitHub: `hipotures/vbc`, grudzień 2025–luty 2026, projekt aktywny, Python) to odpowiedź na prosty problem: mam terabajty materiałów z kamer w formatach H.264/H.265 i chcę je skompresować do AV1 bez utraty jakości, automatycznie, na tysiącach plików, z możliwością wznowienia po przerwaniu.
 
@@ -364,7 +364,7 @@ Projekt wyrósł ze skryptu `scriptoza` do samodzielnego kodu. Kod ma kilka zabe
 Cztery projekty, które łączy warstwa protokołu i integracji. MCP jako zmiana jakościowa: model nie tylko generuje kod, ale też *wykonuje* akcje w systemie. Różnica jest zasadnicza – to przejście od asystenta do agenta.
 
 #### todoit
-![alt text](figures/image-6.png)
+![alt text](images/image-6.png)
 
 `todoit` (GitHub: `hipotures/todoit`, sierpień–październik 2025, projekt zakończony, Python) zaczął się od prostej potrzeby: chciałem menedżera zadań, który rozumie zależności między zadaniami i nadaje się jako interfejs dla asystenta AI. W sierpniu 2025 jedynym agentem programowania AI, który miał listę TODO, był Claude Code; dzięki MCP/CLI mogłem używać todoit w Codexie i Gemini.
 
@@ -390,7 +390,7 @@ Dodałem do tego narzędzia kilka modyfikacji na swoje potrzeby.
 
 
 #### any-item
-![alt text](figures/image-7.png)
+![alt text](images/image-7.png)
 
 `any-item` (GitHub: `hipotures/any-item`, luty 2026, projekt rozwijany, Rust/Tauri + TypeScript/SvelteKit + Python) to najbardziej wielojęzyczny projekt w portfolio i dobry przykład tego, co się dzieje, gdy masz trzy różne ekosystemy do połączenia.
 
@@ -427,7 +427,7 @@ Intensywny sprint pod koniec kwietnia 2025. Krótka sesja w czerwcu 2025 do dopi
 Sześć projektów o bardzo różnych charakterach. Trzy DevTools (gitiary, command-center, scriptoza) zostały omówione szczegółowo w Sekcji II – tu krótsze odniesienie z perspektywy kategorii. Trzy projekty kreatywne/eksploracyjne: fractal explorer, ProfundaImmersio, identity.
 
 #### quaternion-julia-fractal-explorer
-![alt text](figures/image-8.png)
+![alt text](images/image-8.png)
 
 `quaternion-julia-fractal-explorer` (GitHub: `hipotures/quaternion-julia-fractal-explorer`, kwiecień–czerwiec 2025, testy w VR 2026, JavaScript/WebGL) to interaktywny trójwymiarowy eksplorator fraktali Julii w ujęciu quaternionowym.
 

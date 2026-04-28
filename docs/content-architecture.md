@@ -71,7 +71,7 @@ content/posts/post-slug/
   index.md
   photos/
     001.jpg
-  figures/
+  images/
     chart.png
   diagrams/
     pipeline.svg
@@ -80,8 +80,8 @@ content/posts/post-slug/
 Use directories by meaning:
 
 - `photos/` for real photos that may appear in photo browsing.
-- `figures/` for charts, tables, screenshots, UI captures, generated report
-  images, and article figures.
+- `images/` for charts, tables, screenshots, UI captures, generated report
+  images, and article images.
 - `diagrams/` for diagrams and architecture drawings.
 
 Every bundle that contains images intended for future filtering should declare
@@ -96,10 +96,10 @@ resources:
       gallery: true
       kind: photo
 
-  - src: "figures/*"
+  - src: "images/*"
     params:
       gallery: false
-      kind: figure
+      kind: image
 
   - src: "diagrams/*"
     params:
