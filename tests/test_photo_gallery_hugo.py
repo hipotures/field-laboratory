@@ -94,6 +94,26 @@ class PhotoGalleryHugoTests(unittest.TestCase):
         self.assertIn("https://media.armum.eu/field-laboratory/photos/storm-2025-09-06/1600/", html)
         self.assertIn('data-download-url="https://media.armum.eu/field-laboratory/photos/storm-2025-09-06/1600/', html)
 
+    def test_lightbox_caption_does_not_fallback_to_alt_text(self):
+        script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
+
+        self.assertIn("currentElement?.dataset.caption", script)
+        self.assertNotIn("querySelector('img')?.getAttribute('alt')", script)
+
+    def test_thumbnail_strip_has_theme_aware_framed_style(self):
+        styles = (ROOT / "assets/scss/custom.scss").read_text(encoding="utf-8")
+
+        self.assertIn("--photo-lightbox-strip-bg", styles)
+        self.assertIn("--photo-lightbox-thumb-border", styles)
+        self.assertIn("--photo-lightbox-thumb-active-border", styles)
+        self.assertIn("--photo-lightbox-thumb-active-border: #0f62c9", styles)
+        self.assertIn("--photo-lightbox-thumb-active-border: #67a8ff", styles)
+        self.assertIn("--photo-lightbox-thumb-dim", styles)
+        self.assertIn(".field-photo-lightbox .pswp__thumbnail-button::before", styles)
+        self.assertIn("border-top: 1px solid var(--photo-lightbox-strip-border)", styles)
+        self.assertIn("border: 2px solid var(--photo-lightbox-thumb-border)", styles)
+        self.assertNotIn("opacity: 0.62", styles)
+
     def test_album_page_loads_local_photoswipe_assets(self):
         html = self.read_public("photos/storm-2025-09-06/index.html")
 

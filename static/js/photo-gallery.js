@@ -174,7 +174,7 @@ if (gallery) {
       onInit: (el, pswp) => {
         pswp.on('change', () => {
           const currentElement = pswp.currSlide.data.element;
-          const caption = currentElement?.dataset.caption || currentElement?.querySelector('img')?.getAttribute('alt') || '';
+          const caption = currentElement?.dataset.caption || '';
           el.textContent = caption;
           el.hidden = !caption;
         });
