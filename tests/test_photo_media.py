@@ -66,6 +66,64 @@ class PhotoMediaTests(unittest.TestCase):
         self.assertIn("-n", command)
         self.assertNotIn("--delete", command)
 
+    def test_sources_with_hashes_already_in_manifest_are_skipped(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            old_source = root / "old.jpg"
+            new_source = root / "new.jpg"
+            old_source.write_bytes(b"old image")
+            new_source.write_bytes(b"new image")
+            existing = {
+                "images": [
+                    {
+                        "source": "old.jpg",
+                        "hash": photo_media.file_hash(old_source, 8),
+                        "name": "old.existing.webp",
+                        "variants": {},
+                    }
+                ]
+            }
+
+            remaining = photo_media.filter_new_sources(
+                [old_source, new_source],
+                existing,
+                hash_chars=8,
+            )
+
+        self.assertEqual(remaining, [new_source])
+
+    def test_merge_manifest_keeps_old_images_and_appends_new_images(self):
+        existing = {
+            "album": "storm",
+            "images": [
+                {
+                    "source": "old.jpg",
+                    "hash": "oldhash",
+                    "name": "old.oldhash.webp",
+                    "variants": {"600": {"url": "https://example.com/old.webp"}},
+                }
+            ],
+        }
+        new = {
+            "album": "storm",
+            "images": [
+                {
+                    "source": "new.jpg",
+                    "hash": "newhash",
+                    "name": "new.newhash.webp",
+                    "variants": {"600": {"url": "https://example.com/new.webp"}},
+                }
+            ],
+            "sizes": [600, 1600],
+            "format": "webp",
+        }
+
+        merged = photo_media.merge_manifest(existing, new)
+
+        self.assertEqual([item["hash"] for item in merged["images"]], ["oldhash", "newhash"])
+        self.assertEqual(merged["sizes"], [600, 1600])
+        self.assertEqual(merged["format"], "webp")
+
 
 if __name__ == "__main__":
     unittest.main()

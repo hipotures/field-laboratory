@@ -203,6 +203,61 @@ def write_manifest(path: Path, manifest: dict[str, object]) -> None:
     path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def read_manifest(path: Path | None) -> dict[str, object]:
+    if path is None or not path.exists():
+        return {}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError(f"Manifest root must be an object: {path}")
+    return data
+
+
+def manifest_hashes(manifest: dict[str, object]) -> set[str]:
+    hashes: set[str] = set()
+    images = manifest.get("images", [])
+    if not isinstance(images, list):
+        return hashes
+    for image in images:
+        if not isinstance(image, dict):
+            continue
+        value = image.get("hash")
+        if isinstance(value, str) and value:
+            hashes.add(value)
+    return hashes
+
+
+def filter_new_sources(
+    sources: list[Path],
+    existing_manifest: dict[str, object],
+    hash_chars: int,
+) -> list[Path]:
+    known_hashes = manifest_hashes(existing_manifest)
+    return [source for source in sources if file_hash(source, hash_chars) not in known_hashes]
+
+
+def merge_manifest(existing: dict[str, object], new: dict[str, object]) -> dict[str, object]:
+    merged = dict(existing)
+    known_hashes = manifest_hashes(existing)
+    images: list[object] = []
+    existing_images = existing.get("images", [])
+    if isinstance(existing_images, list):
+        images.extend(existing_images)
+    new_images = new.get("images", [])
+    if isinstance(new_images, list):
+        for image in new_images:
+            if not isinstance(image, dict):
+                continue
+            image_hash = image.get("hash")
+            if isinstance(image_hash, str) and image_hash in known_hashes:
+                continue
+            images.append(image)
+            if isinstance(image_hash, str):
+                known_hashes.add(image_hash)
+    merged.update(new)
+    merged["images"] = images
+    return merged
+
+
 def build_rsync_command(album_dir: Path, remote_base: str, dry_run: bool) -> list[str]:
     remote_base = remote_base.rstrip("/")
     remote_target = f"{remote_base}/{album_dir.name}/"
@@ -245,9 +300,15 @@ def main() -> int:
     args = parse_args()
     sizes = parse_sizes(args.sizes)
     staging_root = args.staging_root or default_staging_root()
-    sources = list_sources(args.source)
+    existing_manifest = read_manifest(args.manifest_output)
+    sources = filter_new_sources(
+        list_sources(args.source),
+        existing_manifest,
+        args.hash_chars,
+    )
     if not sources:
-        raise ValueError(f"No supported image files found in {args.source}")
+        print("no new images to process")
+        return 0
 
     plan = build_album_plan(
         album=args.album,
@@ -264,7 +325,8 @@ def main() -> int:
             print(f"generate {size}: {item.source} -> {destination}")
             generated[destination] = generate_variant(item.source, destination, size, args.quality)
 
-    manifest = build_manifest(plan, generated, args.media_base_url)
+    new_manifest = build_manifest(plan, generated, args.media_base_url)
+    manifest = merge_manifest(existing_manifest, new_manifest)
     staging_manifest = plan.album_dir / "manifest.json"
     write_manifest(staging_manifest, manifest)
     print(f"manifest: {staging_manifest}")

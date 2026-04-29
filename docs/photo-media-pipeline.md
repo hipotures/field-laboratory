@@ -37,9 +37,12 @@ python scripts/photo_media.py --album storm-2025-09-06 --source tmp/photos/burza
 By default the script:
 
 1. Reads supported image files from `--source`.
-2. Generates resized variants into `tmp/photo-media/<timestamp>/<album>/`.
-3. Writes a `manifest.json` into the staging album directory.
-4. Runs `rsync` to the media host.
+2. Reads the existing manifest from `--manifest-output`, if that file exists.
+3. Skips source files whose hash already exists in that manifest.
+4. Generates resized variants for new images into
+   `tmp/photo-media/<timestamp>/<album>/`.
+5. Writes a merged `manifest.json` into the staging album directory.
+6. Runs `rsync` to the media host.
 
 The default remote target is:
 
@@ -49,6 +52,9 @@ deploy@armum.eu:/srv/www/media/field-laboratory/photos/<album>/
 
 The script appends files. It does not pass `--delete` to `rsync`. Old files can
 remain on the server and may be cleaned later by a separate orphan cleanup tool.
+
+The manifest follows the same append model. Existing images are preserved, new
+hashes are appended, and duplicate hashes are skipped.
 
 ## Generated variants
 
@@ -185,6 +191,8 @@ python scripts/photo_media.py \
 ```
 
 Write an extra manifest copy into the repository:
+This is the normal mode for gallery publishing because the Hugo gallery reads
+the lightweight manifest from Git.
 
 ```bash
 python scripts/photo_media.py \
@@ -192,6 +200,10 @@ python scripts/photo_media.py \
   --source tmp/photos/burza \
   --manifest-output data/photos/storm-2025-09-06.json
 ```
+
+If `data/photos/storm-2025-09-06.json` already exists, the script reads it
+first. Images whose source hash is already present are not regenerated. New
+images are added to the end of the manifest.
 
 ## Local testing
 
