@@ -1,0 +1,48 @@
+{{ define "title" }}
+  {{ .Title }} · {{ .Site.Title }}
+{{ end }}
+
+{{ define "content" }}
+<section class="container list photo-index">
+  <header>
+    <h1 class="title">
+      <a class="title-link" href="{{ .RelPermalink | safeURL }}">{{ .Title }}</a>
+    </h1>
+  </header>
+
+  {{ with .Content }}
+    <div class="photo-index-intro">{{ . }}</div>
+  {{ end }}
+
+  <div class="photo-album-list">
+    {{ range .Pages.ByDate.Reverse }}
+      {{ $page := . }}
+      {{ $manifest := index site.Data.photos (.Params.manifest | default .File.ContentBaseName) }}
+      {{ $images := $manifest.images | default slice }}
+      {{ $cover := index $images 0 }}
+      {{ $coverHash := .Params.cover_hash }}
+      {{ if $coverHash }}
+        {{ range $images }}
+          {{ if eq .hash $coverHash }}
+            {{ $cover = . }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      {{ $coverVariant := index $cover.variants "600" }}
+      <article class="photo-album-list-item">
+        <a class="photo-album-cover" href="{{ .RelPermalink }}">
+          {{ with $coverVariant }}
+            <img src="{{ .url }}" width="{{ .width }}" height="{{ .height }}" alt="{{ $page.Title }}">
+          {{ end }}
+        </a>
+        <div class="photo-album-summary">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (site.Params.dateFormat | default "2006-01-02") }}</time>
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+          <span>{{ len $images }} zdjęć</span>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

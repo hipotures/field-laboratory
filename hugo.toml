@@ -59,9 +59,7 @@ enableEmoji = true
   [[languages.pl.menu.main]]
     name = "Zdjęcia"
     weight = 3
-    url = ""
-    [languages.pl.menu.main.params]
-      disabled = true
+    url = "photos/"
 
   [[languages.pl.menu.main]]
     name = "Tematy"

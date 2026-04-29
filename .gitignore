@@ -1,5 +1,6 @@
 # Hugo build output
 /public/
+/public-test-gallery/
 /resources/_gen/
 /.hugo_build.lock
 

@@ -1,0 +1,59 @@
+{{ define "title" }}
+  {{ .Title }} · {{ .Site.Title }}
+{{ end }}
+
+{{ define "content" }}
+{{ $manifestName := .Params.manifest | default .File.ContentBaseName }}
+{{ $manifest := index site.Data.photos $manifestName }}
+{{ $images := $manifest.images | default slice }}
+{{ $photoMeta := .Params.photos | default dict }}
+
+<section class="container photo-album">
+  <header>
+    <h1 class="title">
+      <a class="title-link" href="{{ .RelPermalink | safeURL }}">{{ .Title }}</a>
+    </h1>
+    <div class="photo-album-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (site.Params.dateFormat | default "2006-01-02") }}</time>
+      <span>{{ len $images }} zdjęć</span>
+    </div>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+  </header>
+
+  {{ with .Content }}
+    <div class="photo-album-intro">{{ . }}</div>
+  {{ end }}
+
+  <div class="photo-gallery" id="photo-gallery-{{ $manifestName }}">
+    {{ range $index, $image := $images }}
+      {{ $thumb := index $image.variants "600" }}
+      {{ $large := index $image.variants "1600" }}
+      {{ $meta := index $photoMeta $image.hash | default dict }}
+      {{ $caption := $meta.caption | default "" }}
+      {{ $alt := $meta.alt | default (printf "Zdjęcie z albumu %s, numer %d" $.Title (add $index 1)) }}
+      {{ $ratio := div (float $thumb.width) (float $thumb.height) }}
+      <figure class="photo-gallery-item" style="--photo-ratio: {{ printf "%.4f" $ratio }};">
+        <a
+          class="photo-gallery-link no-lightbox"
+          href="{{ $large.url }}"
+          data-pswp-width="{{ $large.width }}"
+          data-pswp-height="{{ $large.height }}"
+          data-pswp-srcset="{{ $thumb.url }} {{ $thumb.width }}w, {{ $large.url }} {{ $large.width }}w"
+          data-download-url="{{ $large.url }}"
+          data-thumb-src="{{ $thumb.url }}"
+          data-caption="{{ $caption }}"
+        >
+          <img
+            src="{{ $thumb.url }}"
+            width="{{ $thumb.width }}"
+            height="{{ $thumb.height }}"
+            alt="{{ $alt }}"
+            loading="lazy"
+          >
+        </a>
+        {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+      </figure>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
