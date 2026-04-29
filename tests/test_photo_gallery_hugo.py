@@ -34,6 +34,12 @@ class PhotoGalleryHugoTests(unittest.TestCase):
         self.assertIn("pswp.events.add(document, 'keyup'", script)
         self.assertIn("previewIndex", script)
 
+    def test_lightbox_uses_explicit_zoom_transition(self):
+        script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
+
+        self.assertIn("showHideAnimationType: 'zoom'", script)
+        self.assertIn("spacing: 0.5", script)
+
     def test_lightbox_has_thumbnail_size_toggle(self):
         script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
 

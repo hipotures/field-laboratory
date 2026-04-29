@@ -90,6 +90,8 @@ if (gallery) {
     children: 'a.photo-gallery-link',
     pswpModule: () => import('/vendor/photoswipe/photoswipe.esm.min.js'),
     mainClass: 'field-photo-lightbox',
+    showHideAnimationType: 'zoom',
+    spacing: 0.5,
     bgOpacity: 1,
     paddingFn: (viewportSize) => ({
       top: viewportSize.y < 720 ? 48 : 72,
