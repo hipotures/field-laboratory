@@ -26,6 +26,14 @@ class PhotoGalleryHugoTests(unittest.TestCase):
         self.assertNotIn("behavior: 'smooth'", script)
         self.assertIn("revealThumbnail", script)
 
+    def test_clicked_thumbnail_is_centered_in_strip(self):
+        script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
+
+        self.assertIn("function centerThumbnail(strip, thumbnail", script)
+        self.assertIn("centerThumbnail(el, button, 'smooth')", script)
+        self.assertIn("behavior", script)
+        self.assertIn("strip.scrollWidth - strip.clientWidth", script)
+
     def test_arrow_key_hold_previews_thumbnails_before_loading_slide(self):
         script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
 

@@ -51,6 +51,23 @@ function applyPhotoswipeLabels(pswp) {
   });
 }
 
+function clampScrollLeft(strip, scrollLeft) {
+  const maxScrollLeft = Math.max(0, strip.scrollWidth - strip.clientWidth);
+  return Math.min(Math.max(0, scrollLeft), maxScrollLeft);
+}
+
+function centerThumbnail(strip, thumbnail, behavior = 'auto') {
+  if (!strip || !thumbnail) {
+    return;
+  }
+
+  const centeredOffset = thumbnail.offsetLeft - ((strip.clientWidth - thumbnail.offsetWidth) / 2);
+  strip.scrollTo({
+    left: clampScrollLeft(strip, centeredOffset),
+    behavior
+  });
+}
+
 function revealThumbnail(strip, thumbnail) {
   if (!thumbnail) {
     return;
@@ -63,8 +80,7 @@ function revealThumbnail(strip, thumbnail) {
     return;
   }
 
-  const centeredOffset = thumbnail.offsetLeft - ((strip.clientWidth - thumbnail.offsetWidth) / 2);
-  strip.scrollLeft = Math.max(0, centeredOffset);
+  centerThumbnail(strip, thumbnail);
 }
 
 function normalizeIndex(index, total) {
@@ -92,7 +108,7 @@ function centerActiveThumbnail(strip) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       const centeredOffset = activeThumbnail.offsetLeft - ((strip.clientWidth - activeThumbnail.offsetWidth) / 2);
-      strip.scrollLeft = Math.max(0, centeredOffset);
+      strip.scrollLeft = clampScrollLeft(strip, centeredOffset);
     });
   });
 }
@@ -212,6 +228,8 @@ if (gallery) {
           button.style.backgroundImage = `url("${link.dataset.thumbSrc || img?.src || link.href}")`;
           button.addEventListener('click', () => {
             previewIndex = null;
+            setActiveThumbnail(buttons, el, index);
+            centerThumbnail(el, button, 'smooth');
             pswp.goTo(index);
           });
           el.appendChild(button);
