@@ -67,6 +67,24 @@ class PhotoMediaTests(unittest.TestCase):
         self.assertIn("-n", command)
         self.assertNotIn("--delete", command)
 
+    def test_remote_manifest_command_reads_album_manifest_without_delete(self):
+        command = photo_media.build_remote_manifest_command(
+            album="storm",
+            remote_base="deploy@armum.eu:/srv/www/media/field-laboratory/photos/",
+            destination=Path("/tmp/storm.json"),
+        )
+
+        self.assertEqual(
+            command,
+            [
+                "rsync",
+                "-az",
+                "deploy@armum.eu:/srv/www/media/field-laboratory/photos/storm/manifest.json",
+                "/tmp/storm.json",
+            ],
+        )
+        self.assertNotIn("--delete", command)
+
     def test_sources_with_hashes_already_in_manifest_are_skipped(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
@@ -229,6 +247,7 @@ class PhotoMediaTests(unittest.TestCase):
                 "--body",
                 "Storm album.",
                 "--no-publish",
+                "--skip-remote-manifest",
             ]
             with mock.patch("sys.argv", argv):
                 result = photo_media.main()
@@ -239,6 +258,56 @@ class PhotoMediaTests(unittest.TestCase):
             self.assertIn(f'cover_hash: "{source_hash}"', content)
             self.assertIn('  - "storm"', content)
             self.assertIn('  - "best"', content)
+
+    def test_main_uses_remote_manifest_when_local_manifest_is_missing(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            source_dir = root / "source"
+            source_dir.mkdir()
+            source = source_dir / "first.jpg"
+            source.write_bytes(b"existing image")
+            source_hash = photo_media.file_hash(source, 10)
+            remote_manifest = {
+                "album": "storm",
+                "images": [
+                    {
+                        "source": "first.jpg",
+                        "hash": source_hash,
+                        "name": f"first.{source_hash}.webp",
+                        "variants": {},
+                    }
+                ],
+            }
+            manifest_path = root / "data" / "photos" / "storm.json"
+            index_path = root / "content" / "photos" / "storm" / "index.md"
+
+            def fake_fetch(*, album: str, remote_base: str, destination: Path) -> bool:
+                self.assertEqual(album, "storm")
+                photo_media.write_manifest(destination, remote_manifest)
+                return True
+
+            argv = [
+                "photo_media.py",
+                "--album",
+                "storm",
+                "--source",
+                str(source_dir),
+                "--manifest-output",
+                str(manifest_path),
+                "--index-output",
+                str(index_path),
+                "--title",
+                "Storm",
+                "--no-publish",
+            ]
+            with mock.patch("sys.argv", argv), mock.patch.object(photo_media, "fetch_remote_manifest", fake_fetch):
+                with mock.patch.object(photo_media, "generate_variant") as generate:
+                    result = photo_media.main()
+
+            self.assertEqual(result, 0)
+            generate.assert_not_called()
+            self.assertEqual(photo_media.read_manifest(manifest_path), remote_manifest)
+            self.assertTrue(index_path.exists())
 
     def test_main_publishes_repo_changes_by_default_after_index_generation(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -277,6 +346,7 @@ class PhotoMediaTests(unittest.TestCase):
                 str(index_path),
                 "--title",
                 "Storm",
+                "--skip-remote-manifest",
             ]
             with mock.patch("sys.argv", argv), mock.patch.object(photo_media, "publish_repo_changes") as publish:
                 result = photo_media.main()
@@ -325,6 +395,7 @@ class PhotoMediaTests(unittest.TestCase):
                 "--title",
                 "Storm",
                 "--no-publish",
+                "--skip-remote-manifest",
             ]
             with mock.patch("sys.argv", argv), mock.patch.object(photo_media, "publish_repo_changes") as publish:
                 result = photo_media.main()
@@ -349,6 +420,7 @@ class PhotoMediaTests(unittest.TestCase):
                 "--manifest-output",
                 str(manifest_path),
                 "--skip-rsync",
+                "--skip-remote-manifest",
             ]
             with mock.patch("sys.argv", argv):
                 with self.assertRaisesRegex(ValueError, "Refusing to publish"):

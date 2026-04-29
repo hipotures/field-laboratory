@@ -408,6 +408,27 @@ def sync_album(album_dir: Path, remote_base: str, dry_run: bool) -> None:
     run_command(build_rsync_command(album_dir, remote_base, dry_run))
 
 
+def build_remote_manifest_command(album: str, remote_base: str, destination: Path) -> list[str]:
+    remote_base = remote_base.rstrip("/")
+    return [
+        "rsync",
+        "-az",
+        f"{remote_base}/{slugify(album)}/manifest.json",
+        str(destination),
+    ]
+
+
+def fetch_remote_manifest(*, album: str, remote_base: str, destination: Path) -> bool:
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    command = build_remote_manifest_command(album, remote_base, destination)
+    result = subprocess.run(command, check=False, text=True)
+    if result.returncode == 0:
+        print(f"remote manifest: {destination}")
+        return True
+    print(f"remote manifest unavailable for album: {slugify(album)}")
+    return False
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Generate hashed 600/1600 photo variants and sync them to the media host."
@@ -467,6 +488,11 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Git commit message used when publishing. Defaults to 'Publish <album> photo album'.",
     )
+    parser.add_argument(
+        "--skip-remote-manifest",
+        action="store_true",
+        help="Do not try to pull an existing media-host manifest before processing sources.",
+    )
     return parser.parse_args()
 
 
@@ -482,6 +508,12 @@ def main() -> int:
         manifest_output = default_manifest_output(album_slug)
     body_text = read_body(args)
 
+    if manifest_output and not args.dry_run_rsync and not args.skip_remote_manifest:
+        fetch_remote_manifest(
+            album=album_slug,
+            remote_base=args.remote_base,
+            destination=manifest_output,
+        )
     existing_manifest = read_manifest(manifest_output)
     sources = filter_new_sources(
         list_sources(args.source),

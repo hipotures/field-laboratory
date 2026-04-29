@@ -37,13 +37,15 @@ python scripts/photo_media.py --album storm-2025-09-06 --source tmp/photos/burza
 By default the script:
 
 1. Reads supported image files from `--source`.
-2. Reads the existing manifest from `--manifest-output`, if that file exists.
-3. Skips source files whose hash already exists in that manifest.
-4. Generates resized variants for new images into
+2. If `--manifest-output` is active, tries to pull the existing
+   `manifest.json` from the media host.
+3. Reads the existing manifest from `--manifest-output`, if that file exists.
+4. Skips source files whose hash already exists in that manifest.
+5. Generates resized variants for new images into
    `tmp/photo-media/<timestamp>/<album>/`.
-5. Writes a merged `manifest.json` into the staging album directory.
-6. Runs `rsync` to the media host.
-7. If repository files were written, runs a local Hugo build, commits those
+6. Writes a merged `manifest.json` into the staging album directory.
+7. Runs `rsync` to the media host.
+8. If repository files were written, runs a local Hugo build, commits those
    files, and pushes to GitHub.
 
 When `--write-index` is used, the script can also create the Hugo album page
@@ -71,6 +73,11 @@ remain on the server and may be cleaned later by a separate orphan cleanup tool.
 
 The manifest follows the same append model. Existing images are preserved, new
 hashes are appended, and duplicate hashes are skipped.
+
+When a local repository manifest is missing but media still exists on the
+server, the remote `manifest.json` is used to restore the local manifest before
+hash comparison. This lets an album be republished without regenerating images
+whose original hashes are already present on the media host.
 
 ## Generated variants
 
@@ -164,6 +171,9 @@ Use `--no-publish` to stop after writing local files without committing or
 pushing. If new images are generated with `--skip-rsync`, publishing is refused
 unless `--no-publish` is also passed.
 
+Use `--skip-remote-manifest` only when you intentionally do not want to read
+the media-host manifest before processing sources.
+
 ## Useful commands
 
 Generate and sync with defaults:
@@ -185,6 +195,16 @@ python scripts/photo_media.py \
   --album storm-2025-09-06 \
   --source tmp/photos/burza \
   --no-publish
+```
+
+Skip the media-host manifest lookup:
+
+```bash
+python scripts/photo_media.py \
+  --album storm-2025-09-06 \
+  --source tmp/photos/burza \
+  --write-index \
+  --skip-remote-manifest
 ```
 
 Generate only, without `rsync`:
