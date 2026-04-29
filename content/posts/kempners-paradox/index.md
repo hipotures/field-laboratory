@@ -14,7 +14,7 @@ resources:
 
 Szereg harmoniczny jest jednym z najprostszych szeregów nieskończonych:
 
-1 + 1/2 + 1/3 + 1/4 + …
+<div class="math-block">1 + ½ + ⅓ + ¼ + …</div>
 
 Mimo że jego wyrazy maleją do zera, suma rośnie bez ograniczeń. Co zaskakujące, wystarczy usunąć z niego wszystkie składniki, których mianownik zawiera cyfrę 9, aby otrzymać szereg zbieżny. Ten obiekt nazywa się szeregiem Kempnera. Zwykle zapisuje się go jako sumę odwrotności tych liczb naturalnych, których zapis dziesiętny nie zawiera dziewiątki. Klasyczny przypadek ma wartość około 22.920676619264150…, choć prosty dowód zbieżności daje tylko bardzo luźne ograniczenie z góry.
 
@@ -33,7 +33,7 @@ Zwykły szereg harmoniczny sumuje odwrotności wszystkich liczb naturalnych. Jes
 
 Po prawej stronie planszy pojawia się jego wersja z ograniczeniem: sumujemy tylko te 1/n, dla których zapis dziesiętny n nie zawiera cyfry 9. To jest szereg Kempnera K₉. Zaskoczenie polega na tym, że usunięcie pozornie niewielkiej klasy mianowników zmienia charakter całego szeregu. Zamiast sumy rosnącej do nieskończoności dostajemy skończoną stałą:
 
-K₉ ≈ 22.92067661926415034816…
+<div class="math-block">K₉ ≈ 22.92067661926415034816…</div>
 
 Plansza celowo zaznacza też, że ta liczba nie jest równa 10 ln 10. Stała 10 ln 10 pojawia się w pokrewnych seriach Irwina, ale nie jest wartością szeregu Kempnera.
 
@@ -50,15 +50,15 @@ Pierwsza fałszywa intuicja jest taka: skoro zakazujemy jednej cyfry z dziesięc
 
 Plansza liczy liczby m-cyfrowe bez cyfry 9. Pierwsza cyfra może być jedną z cyfr 1, …, 8, więc mamy 8 możliwości. Każda kolejna cyfra może być jedną z cyfr 0, …, 8, więc daje 9 możliwości. Dlatego liczba m-cyfrowych liczb bez 9 wynosi:
 
-8 · 9ᵐ⁻¹.
+<div class="math-block">8 · 9ᵐ⁻¹</div>
 
 Wszystkich m-cyfrowych dodatnich liczb jest natomiast:
 
-9 · 10ᵐ⁻¹.
+<div class="math-block">9 · 10ᵐ⁻¹</div>
 
 Ułamek liczb, które „przeżywają”, wynosi więc:
 
-F(m) = (8/9) · (9/10)ᵐ⁻¹.
+<div class="math-block">F(m) = (8/9) · (9/10)ᵐ⁻¹</div>
 
 Każda dodatkowa cyfra mnoży ten ułamek przez 0.9. Dla 100 cyfr zostaje już tylko około 0.002656% liczb. To nie jest stałe usunięcie 10% — wśród dużych mianowników usuwamy prawie wszystko.
 
@@ -77,11 +77,11 @@ Dla liczb m-cyfrowych bez cyfry 9 mamy najwyżej 8 · 9ᵐ⁻¹ dopuszczalnych m
 
 Wkład całej grupy m-cyfrowej jest więc nie większy niż:
 
-8 · 9ᵐ⁻¹ · 1/10ᵐ⁻¹ = 8 · (9/10)ᵐ⁻¹.
+<div class="math-block">8 · 9ᵐ⁻¹ · 1/10ᵐ⁻¹ = 8 · (9/10)ᵐ⁻¹</div>
 
 Po zsumowaniu po wszystkich długościach dostajemy szereg geometryczny:
 
-K₉ ≤ 8 · ∑(9/10)ᵐ⁻¹ = 80.
+<div class="math-block">K₉ ≤ 8 · ∑(9/10)ᵐ⁻¹ = 80</div>
 
 Liczba 80 nie jest wartością szeregu. Jest tylko górnym ograniczeniem, ale wystarcza, aby udowodnić zbieżność.
 
@@ -96,11 +96,11 @@ Liczba 80 nie jest wartością szeregu. Jest tylko górnym ograniczeniem, ale wy
 
 Dowód z poprzedniej planszy mówi tylko, że K₉ ≤ 80. To wystarcza do zbieżności, ale jest bardzo słabym przybliżeniem. Rzeczywista wartość szeregu jest dużo mniejsza:
 
-K₉ ≈ 22.92067661926415034816…
+<div class="math-block">K₉ ≈ 22.92067661926415034816…</div>
 
 Żeby ją obliczyć, nie wystarczy prosto wypisywać wszystkich liczb bez cyfry 9 i dodawać ich odwrotności. Takie sumowanie jest poprawne teoretycznie, ale praktycznie bardzo wolne. Liczb n-cyfrowych bez 9 jest 8 · 9ⁿ⁻¹, a liczb bez 9 o długości co najwyżej n jest 9ⁿ − 1. Już dla n = 10 daje to:
 
-9¹⁰ − 1 = 3 486 784 400
+<div class="math-block">9¹⁰ − 1 = 3 486 784 400</div>
 
 dopuszczalnych mianowników.
 
@@ -123,9 +123,9 @@ Ten sam mechanizm działa również w innych bazach. Jeśli w bazie b zakazujemy
 
 Można też zakazywać całych bloków cyfr, na przykład „42”. Wtedy liczba dozwolonych napisów cyfrowych nadal rośnie wykładniczo, ale z podstawą mniejszą niż pełna baza, co ponownie prowadzi do zbieżności.
 
-Ostatni panel wspomina serie Irwina. Tam nie zakazujemy cyfry całkowicie, lecz sumujemy odwrotności liczb mających dokładnie k wystąpień danej cyfry. Dla dużego k odpowiednie sumy dążą do:
+Ostatni panel wspomina serie Irwina. Tam nie zakazujemy cyfry całkowicie, lecz sumujemy odwrotności liczb mających dokładnie k wystąpień danej cyfry. Na przykład dla cyfry 9 i k = 2 bierzemy liczby takie jak 99, 1909 albo 29090, ale nie bierzemy 19, bo ma tylko jedną dziewiątkę, ani 999, bo ma trzy. Dla dużego k odpowiednie sumy dążą do:
 
-10 ln 10 ≈ 23.02585093.
+<div class="math-block">10 ln 10 ≈ 23.02585093</div>
 
 To piękny wynik pokrewny, ale nie należy go mylić z wartością K₉.
 

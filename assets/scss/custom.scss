@@ -261,6 +261,18 @@
   opacity: 0.74;
 }
 
+.math-block {
+  margin: 1.8rem auto;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 0.7rem 1rem;
+  text-align: center;
+  font-size: 1.08em;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  opacity: 0.95;
+}
+
 #lightbox .img {
   width: calc(100vw - 3rem);
   height: calc(100vh - 3rem);
