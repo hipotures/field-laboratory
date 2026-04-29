@@ -359,6 +359,41 @@ def write_album_index(path: Path, content: str, overwrite: bool) -> bool:
     return True
 
 
+def default_commit_message(album: str) -> str:
+    return f"Publish {slugify(album)} photo album"
+
+
+def git_pathspec(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(Path.cwd().resolve()))
+    except ValueError:
+        return str(path)
+
+
+def publish_repo_changes(paths: list[Path], commit_message: str) -> bool:
+    pathspecs = [git_pathspec(path) for path in dict.fromkeys(paths) if path.exists()]
+    if not pathspecs:
+        print("publish: no repository files to commit")
+        return False
+
+    run_command(["hugo", "--minify", "--gc", "--cleanDestinationDir"])
+    run_command(["git", "add", *pathspecs])
+    diff = subprocess.run(
+        ["git", "diff", "--cached", "--quiet", "--", *pathspecs],
+        check=False,
+        text=True,
+    )
+    if diff.returncode == 0:
+        print("publish: no repository changes to commit")
+        return False
+    if diff.returncode != 1:
+        raise subprocess.CalledProcessError(diff.returncode, diff.args)
+
+    run_command(["git", "commit", "-m", commit_message, "--", *pathspecs])
+    run_command(["git", "push"])
+    return True
+
+
 def build_rsync_command(album_dir: Path, remote_base: str, dry_run: bool) -> list[str]:
     remote_base = remote_base.rstrip("/")
     remote_target = f"{remote_base}/{album_dir.name}/"
@@ -422,6 +457,16 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Remove staging directory after successful non-dry-run rsync.",
     )
+    parser.add_argument(
+        "--no-publish",
+        action="store_true",
+        help="Do not commit and push generated Hugo files after a successful run.",
+    )
+    parser.add_argument(
+        "--commit-message",
+        default=None,
+        help="Git commit message used when publishing. Defaults to 'Publish <album> photo album'.",
+    )
     return parser.parse_args()
 
 
@@ -449,6 +494,8 @@ def main() -> int:
     if not sources and args.write_index and not existing_manifest:
         print("no new images to process")
         raise ValueError("Cannot create index.md without an existing manifest or new images")
+    if sources and args.skip_rsync and not args.no_publish:
+        raise ValueError("Refusing to publish new image metadata when --skip-rsync was used. Use --no-publish.")
 
     manifest = existing_manifest
     plan: AlbumPlan | None = None
@@ -480,6 +527,7 @@ def main() -> int:
         sync_album(plan.album_dir, args.remote_base, args.dry_run_rsync)
 
     can_write_repo_files = not args.dry_run_rsync
+    repo_paths_to_publish: list[Path] = []
     index_output: Path | None = None
     index_content: str | None = None
     if can_write_repo_files and args.write_index:
@@ -502,9 +550,17 @@ def main() -> int:
     if can_write_repo_files and manifest_output:
         write_manifest(manifest_output, manifest)
         print(f"manifest copy: {manifest_output}")
+        repo_paths_to_publish.append(manifest_output)
 
     if index_output and index_content:
         write_album_index(index_output, index_content, args.overwrite_index)
+        repo_paths_to_publish.append(index_output)
+
+    if not args.no_publish and can_write_repo_files:
+        publish_repo_changes(
+            paths=repo_paths_to_publish,
+            commit_message=args.commit_message or default_commit_message(album_slug),
+        )
 
     if plan and args.cleanup_after_sync and not args.skip_rsync and not args.dry_run_rsync:
         shutil.rmtree(plan.album_dir)

@@ -43,6 +43,8 @@ By default the script:
    `tmp/photo-media/<timestamp>/<album>/`.
 5. Writes a merged `manifest.json` into the staging album directory.
 6. Runs `rsync` to the media host.
+7. If repository files were written, runs a local Hugo build, commits those
+   files, and pushes to GitHub.
 
 When `--write-index` is used, the script can also create the Hugo album page
 after media sync succeeds. In that mode, if `--manifest-output` is not provided,
@@ -146,17 +148,21 @@ copy or transform this metadata into versioned site data.
 Media sync must happen before committing and pushing the Hugo content that links
 to the media files.
 
-Correct order:
+The script follows this order by default:
 
 ```text
 1. Generate and rsync photo media.
-2. Verify media URLs.
-3. Update local Hugo content or manifests.
-4. Run a local Hugo build.
-5. Commit and push the site.
+2. Update local Hugo content or manifests.
+3. Run a local Hugo build.
+4. Commit only the generated album files.
+5. Push to GitHub.
 ```
 
 This prevents GitHub Actions from deploying HTML that points to missing media.
+
+Use `--no-publish` to stop after writing local files without committing or
+pushing. If new images are generated with `--skip-rsync`, publishing is refused
+unless `--no-publish` is also passed.
 
 ## Useful commands
 
@@ -168,13 +174,27 @@ python scripts/photo_media.py \
   --source tmp/photos/burza
 ```
 
+This syncs media, but does not create a gallery page unless `--write-index` or
+`--manifest-output` is used. With no repository files to commit, the publish
+step is a no-op.
+
+Generate and sync without committing or pushing:
+
+```bash
+python scripts/photo_media.py \
+  --album storm-2025-09-06 \
+  --source tmp/photos/burza \
+  --no-publish
+```
+
 Generate only, without `rsync`:
 
 ```bash
 python scripts/photo_media.py \
   --album storm-2025-09-06 \
   --source tmp/photos/burza \
-  --skip-rsync
+  --skip-rsync \
+  --no-publish
 ```
 
 Run `rsync` as a dry run:
@@ -231,6 +251,22 @@ python scripts/photo_media.py \
   --description "Nocne zdjęcia burzy." \
   --tags storm,night,best \
   --body "Krótki album z nocnej obserwacji burzy."
+```
+
+This is the normal publishing command. It syncs media first, writes
+`data/photos/storm-2025-09-06.json` and
+`content/photos/storm-2025-09-06/index.md`, runs `hugo`, commits those files,
+and pushes to GitHub.
+
+Use a custom commit message:
+
+```bash
+python scripts/photo_media.py \
+  --album storm-2025-09-06 \
+  --source tmp/photos/burza \
+  --write-index \
+  --title "Burza 2025-09-06" \
+  --commit-message "Add storm photo album"
 ```
 
 The generated front matter contains the album metadata used by the gallery:
@@ -290,6 +326,8 @@ magick
 identify
 rsync
 ssh
+hugo
+git
 ```
 
 `magick` and `identify` come from ImageMagick. `rsync` uses the local SSH

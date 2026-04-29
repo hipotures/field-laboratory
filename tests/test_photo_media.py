@@ -228,6 +228,7 @@ class PhotoMediaTests(unittest.TestCase):
                 "storm,best",
                 "--body",
                 "Storm album.",
+                "--no-publish",
             ]
             with mock.patch("sys.argv", argv):
                 result = photo_media.main()
@@ -238,6 +239,120 @@ class PhotoMediaTests(unittest.TestCase):
             self.assertIn(f'cover_hash: "{source_hash}"', content)
             self.assertIn('  - "storm"', content)
             self.assertIn('  - "best"', content)
+
+    def test_main_publishes_repo_changes_by_default_after_index_generation(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            source_dir = root / "source"
+            source_dir.mkdir()
+            source = source_dir / "first.jpg"
+            source.write_bytes(b"existing image")
+            source_hash = photo_media.file_hash(source, 10)
+            manifest_path = root / "data" / "photos" / "storm.json"
+            photo_media.write_manifest(
+                manifest_path,
+                {
+                    "album": "storm",
+                    "images": [
+                        {
+                            "source": "first.jpg",
+                            "hash": source_hash,
+                            "name": f"first.{source_hash}.webp",
+                            "variants": {},
+                        }
+                    ],
+                },
+            )
+            index_path = root / "content" / "photos" / "storm" / "index.md"
+
+            argv = [
+                "photo_media.py",
+                "--album",
+                "storm",
+                "--source",
+                str(source_dir),
+                "--manifest-output",
+                str(manifest_path),
+                "--index-output",
+                str(index_path),
+                "--title",
+                "Storm",
+            ]
+            with mock.patch("sys.argv", argv), mock.patch.object(photo_media, "publish_repo_changes") as publish:
+                result = photo_media.main()
+
+            self.assertEqual(result, 0)
+            publish.assert_called_once()
+            _, kwargs = publish.call_args
+            self.assertEqual(kwargs["paths"], [manifest_path, index_path])
+            self.assertEqual(kwargs["commit_message"], "Publish storm photo album")
+
+    def test_main_can_skip_github_publication(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            source_dir = root / "source"
+            source_dir.mkdir()
+            source = source_dir / "first.jpg"
+            source.write_bytes(b"existing image")
+            source_hash = photo_media.file_hash(source, 10)
+            manifest_path = root / "data" / "photos" / "storm.json"
+            photo_media.write_manifest(
+                manifest_path,
+                {
+                    "album": "storm",
+                    "images": [
+                        {
+                            "source": "first.jpg",
+                            "hash": source_hash,
+                            "name": f"first.{source_hash}.webp",
+                            "variants": {},
+                        }
+                    ],
+                },
+            )
+            index_path = root / "content" / "photos" / "storm" / "index.md"
+
+            argv = [
+                "photo_media.py",
+                "--album",
+                "storm",
+                "--source",
+                str(source_dir),
+                "--manifest-output",
+                str(manifest_path),
+                "--index-output",
+                str(index_path),
+                "--title",
+                "Storm",
+                "--no-publish",
+            ]
+            with mock.patch("sys.argv", argv), mock.patch.object(photo_media, "publish_repo_changes") as publish:
+                result = photo_media.main()
+
+            self.assertEqual(result, 0)
+            publish.assert_not_called()
+
+    def test_main_refuses_publish_when_new_images_are_not_synced(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            source_dir = root / "source"
+            source_dir.mkdir()
+            (source_dir / "first.jpg").write_bytes(b"new image")
+            manifest_path = root / "data" / "photos" / "storm.json"
+
+            argv = [
+                "photo_media.py",
+                "--album",
+                "storm",
+                "--source",
+                str(source_dir),
+                "--manifest-output",
+                str(manifest_path),
+                "--skip-rsync",
+            ]
+            with mock.patch("sys.argv", argv):
+                with self.assertRaisesRegex(ValueError, "Refusing to publish"):
+                    photo_media.main()
 
 
 if __name__ == "__main__":
