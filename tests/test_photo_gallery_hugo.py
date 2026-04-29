@@ -94,6 +94,12 @@ class PhotoGalleryHugoTests(unittest.TestCase):
         self.assertIn("https://media.armum.eu/field-laboratory/photos/dwc/600/", html)
         self.assertIn("https://media.armum.eu/field-laboratory/photos/dwc/1600/", html)
 
+    def test_album_page_does_not_generate_placeholder_alt_text(self):
+        html = self.read_public("photos/dwc/index.html")
+
+        self.assertNotIn("Zdjęcie z albumu", html)
+        self.assertIn('alt=""', html)
+
     def test_album_page_renders_manifest_gallery_for_photoswipe(self):
         html = self.read_public("photos/storm-2025-09-06/index.html")
 

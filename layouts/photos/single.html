@@ -43,7 +43,7 @@
       {{ $large := index $image.variants "1600" }}
       {{ $meta := index $photoMeta $image.hash | default dict }}
       {{ $caption := $meta.caption | default "" }}
-      {{ $alt := $meta.alt | default (i18n "photo_album_image_alt" (dict "Title" $.Title "Number" (add $index 1))) }}
+      {{ $alt := $meta.alt | default "" }}
       {{ $ratio := div (float $thumb.width) (float $thumb.height) }}
       <figure class="photo-gallery-item" style="--photo-ratio: {{ printf "%.4f" $ratio }};">
         <a

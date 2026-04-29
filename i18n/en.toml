@@ -30,6 +30,3 @@ other = "Show photo"
 
 [photo_lightbox_load_error]
 other = "The photo could not be loaded"
-
-[photo_album_image_alt]
-other = "Photo from album {{ .Title }}, number {{ .Number }}"

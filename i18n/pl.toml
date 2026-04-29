@@ -30,6 +30,3 @@ other = "Pokaż zdjęcie"
 
 [photo_lightbox_load_error]
 other = "Nie można wczytać zdjęcia"
-
-[photo_album_image_alt]
-other = "Zdjęcie z albumu {{ .Title }}, numer {{ .Number }}"
