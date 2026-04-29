@@ -1,6 +1,7 @@
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from scripts import photo_media
 
@@ -123,6 +124,120 @@ class PhotoMediaTests(unittest.TestCase):
         self.assertEqual([item["hash"] for item in merged["images"]], ["oldhash", "newhash"])
         self.assertEqual(merged["sizes"], [600, 1600])
         self.assertEqual(merged["format"], "webp")
+
+    def test_render_album_index_includes_gallery_metadata_and_album_tags(self):
+        content = photo_media.render_album_index(
+            title="Burza 2025-09-06",
+            date="2025-09-06",
+            description="Nocne zdjęcia burzy.",
+            manifest="storm-2025-09-06",
+            cover_hash="85e0ae2ac1",
+            tags=["storm", "night", "best"],
+            body="Krótki album z nocnej obserwacji burzy.",
+        )
+
+        self.assertEqual(
+            content,
+            """---\n"""
+            """title: "Burza 2025-09-06"\n"""
+            """date: 2025-09-06\n"""
+            """description: "Nocne zdjęcia burzy."\n"""
+            """manifest: "storm-2025-09-06"\n"""
+            """cover_hash: "85e0ae2ac1"\n"""
+            """tags:\n"""
+            """  - "storm"\n"""
+            """  - "night"\n"""
+            """  - "best"\n"""
+            """---\n"""
+            """\n"""
+            """Krótki album z nocnej obserwacji burzy.\n""",
+        )
+
+    def test_album_index_creation_does_not_overwrite_existing_file_by_default(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            index_path = Path(tmpdir) / "content" / "photos" / "storm" / "index.md"
+            index_path.parent.mkdir(parents=True)
+            index_path.write_text("manual content\n", encoding="utf-8")
+
+            written = photo_media.write_album_index(
+                path=index_path,
+                content="generated content\n",
+                overwrite=False,
+            )
+
+            self.assertFalse(written)
+            self.assertEqual(index_path.read_text(encoding="utf-8"), "manual content\n")
+
+    def test_select_cover_hash_uses_cover_source_or_first_manifest_image(self):
+        manifest = {
+            "images": [
+                {"source": "first.jpg", "hash": "firsthash"},
+                {"source": "selected.jpg", "hash": "selectedhash"},
+            ]
+        }
+
+        self.assertEqual(
+            photo_media.select_cover_hash(manifest, cover_source="selected.jpg", cover_hash=None),
+            "selectedhash",
+        )
+        self.assertEqual(
+            photo_media.select_cover_hash(manifest, cover_source=None, cover_hash=None),
+            "firsthash",
+        )
+
+    def test_main_can_create_index_from_existing_manifest_without_regenerating_images(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            source_dir = root / "source"
+            source_dir.mkdir()
+            source = source_dir / "first.jpg"
+            source.write_bytes(b"existing image")
+            source_hash = photo_media.file_hash(source, 10)
+            manifest_path = root / "data" / "photos" / "storm.json"
+            photo_media.write_manifest(
+                manifest_path,
+                {
+                    "album": "storm",
+                    "images": [
+                        {
+                            "source": "first.jpg",
+                            "hash": source_hash,
+                            "name": f"first.{source_hash}.webp",
+                            "variants": {},
+                        }
+                    ],
+                },
+            )
+            index_path = root / "content" / "photos" / "storm" / "index.md"
+
+            argv = [
+                "photo_media.py",
+                "--album",
+                "storm",
+                "--source",
+                str(source_dir),
+                "--manifest-output",
+                str(manifest_path),
+                "--index-output",
+                str(index_path),
+                "--title",
+                "Storm",
+                "--date",
+                "2025-09-06",
+                "--tags",
+                "storm,best",
+                "--body",
+                "Storm album.",
+            ]
+            with mock.patch("sys.argv", argv):
+                result = photo_media.main()
+
+            self.assertEqual(result, 0)
+            content = index_path.read_text(encoding="utf-8")
+            self.assertIn('manifest: "storm"', content)
+            self.assertIn(f'cover_hash: "{source_hash}"', content)
+            self.assertIn('  - "storm"', content)
+            self.assertIn('  - "best"', content)
 
 
 if __name__ == "__main__":

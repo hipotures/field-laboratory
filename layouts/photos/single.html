@@ -24,13 +24,26 @@
     <div class="photo-album-intro">{{ . }}</div>
   {{ end }}
 
-  <div class="photo-gallery" id="photo-gallery-{{ $manifestName }}">
+  <div
+    class="photo-gallery"
+    id="photo-gallery-{{ $manifestName }}"
+    data-label-close="{{ i18n "photo_lightbox_close" }}"
+    data-label-zoom="{{ i18n "photo_lightbox_zoom" }}"
+    data-label-previous="{{ i18n "photo_lightbox_previous" }}"
+    data-label-next="{{ i18n "photo_lightbox_next" }}"
+    data-label-download="{{ i18n "photo_lightbox_download" }}"
+    data-label-theme="{{ i18n "photo_lightbox_theme" }}"
+    data-label-thumbnail-large="{{ i18n "photo_lightbox_thumbnail_large" }}"
+    data-label-thumbnail-small="{{ i18n "photo_lightbox_thumbnail_small" }}"
+    data-label-thumbnail-item="{{ i18n "photo_lightbox_thumbnail_item" }}"
+    data-label-load-error="{{ i18n "photo_lightbox_load_error" }}"
+  >
     {{ range $index, $image := $images }}
       {{ $thumb := index $image.variants "600" }}
       {{ $large := index $image.variants "1600" }}
       {{ $meta := index $photoMeta $image.hash | default dict }}
       {{ $caption := $meta.caption | default "" }}
-      {{ $alt := $meta.alt | default (printf "Zdjęcie z albumu %s, numer %d" $.Title (add $index 1)) }}
+      {{ $alt := $meta.alt | default (i18n "photo_album_image_alt" (dict "Title" $.Title "Number" (add $index 1))) }}
       {{ $ratio := div (float $thumb.width) (float $thumb.height) }}
       <figure class="photo-gallery-item" style="--photo-ratio: {{ printf "%.4f" $ratio }};">
         <a

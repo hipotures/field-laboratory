@@ -504,6 +504,13 @@
 .field-photo-lightbox {
   --pswp-icon-color: currentColor;
   --pswp-icon-color-secondary: color-mix(in srgb, currentColor 24%, transparent);
+  --photo-lightbox-thumb-width: 7.8rem;
+  --photo-lightbox-thumb-height: 5.2rem;
+}
+
+.field-photo-lightbox.field-photo-lightbox--large-thumbnails {
+  --photo-lightbox-thumb-width: 15.6rem;
+  --photo-lightbox-thumb-height: 10.4rem;
 }
 
 body.colorscheme-light .field-photo-lightbox {
@@ -524,7 +531,8 @@ body.colorscheme-dark .field-photo-lightbox {
   color: inherit;
 }
 
-.field-photo-lightbox .pswp__button--theme-button i {
+.field-photo-lightbox .pswp__button--theme-button i,
+.field-photo-lightbox .pswp__button--thumbnail-size-button i {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -542,7 +550,7 @@ body.colorscheme-dark .field-photo-lightbox {
 .field-photo-lightbox .pswp__custom-caption {
   position: absolute;
   right: 2rem;
-  bottom: 8.6rem;
+  bottom: calc(var(--photo-lightbox-thumb-height) + 3.4rem);
   left: 2rem;
   text-align: center;
   font-size: 1.35rem;
@@ -569,9 +577,9 @@ body.colorscheme-dark .field-photo-lightbox {
 }
 
 .field-photo-lightbox .pswp__thumbnail-button {
-  flex: 0 0 7.8rem;
-  width: 7.8rem;
-  height: 5.2rem;
+  flex: 0 0 var(--photo-lightbox-thumb-width);
+  width: var(--photo-lightbox-thumb-width);
+  height: var(--photo-lightbox-thumb-height);
   border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
   border-radius: 0;
   padding: 0;
@@ -608,9 +616,13 @@ body.colorscheme-dark .field-photo-lightbox {
     font-size: 1.25rem;
   }
 
-  .field-photo-lightbox .pswp__thumbnail-button {
-    flex-basis: 6.4rem;
-    width: 6.4rem;
-    height: 4.4rem;
+  .field-photo-lightbox {
+    --photo-lightbox-thumb-width: 6.4rem;
+    --photo-lightbox-thumb-height: 4.4rem;
+  }
+
+  .field-photo-lightbox.field-photo-lightbox--large-thumbnails {
+    --photo-lightbox-thumb-width: 12.8rem;
+    --photo-lightbox-thumb-height: 8.8rem;
   }
 }

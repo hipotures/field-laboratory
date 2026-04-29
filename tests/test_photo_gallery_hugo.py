@@ -34,6 +34,31 @@ class PhotoGalleryHugoTests(unittest.TestCase):
         self.assertIn("pswp.events.add(document, 'keyup'", script)
         self.assertIn("previewIndex", script)
 
+    def test_lightbox_has_thumbnail_size_toggle(self):
+        script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
+
+        self.assertIn("thumbnail-size-button", script)
+        self.assertIn("field-photo-lightbox--large-thumbnails", script)
+        self.assertIn("labelThumbnailLarge", script)
+        self.assertIn("fa-th", script)
+        self.assertIn("fa-th-large", script)
+        self.assertIn("const pswp = lightbox.pswp", script)
+        self.assertIn("pswp.updateSize(true)", script)
+
+    def test_lightbox_ui_labels_come_from_hugo_i18n_data_attributes(self):
+        script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
+        html = self.read_public("photos/storm-2025-09-06/index.html")
+
+        self.assertIn("gallery.dataset.labelDownload", script)
+        self.assertIn("gallery.dataset.labelLoadError", script)
+        self.assertIn('data-label-download="Pobierz zdjęcie"', html)
+        self.assertIn('data-label-thumbnail-large="Powiększ miniatury"', html)
+        self.assertIn('data-label-load-error="Nie można wczytać zdjęcia"', html)
+        self.assertNotIn("Pobierz zdjęcie", script)
+        self.assertNotIn("Zamknij", script)
+        self.assertNotIn("Powiększ miniatury", script)
+        self.assertNotIn("The image cannot be loaded", script)
+
     def test_photos_index_links_first_album_and_preserves_theme_toggle(self):
         html = self.read_public("photos/index.html")
 

@@ -258,6 +258,107 @@ def merge_manifest(existing: dict[str, object], new: dict[str, object]) -> dict[
     return merged
 
 
+def yaml_quote(value: str) -> str:
+    return json.dumps(value, ensure_ascii=False)
+
+
+def parse_tags(value: str | None) -> list[str]:
+    if not value:
+        return []
+    tags: list[str] = []
+    seen: set[str] = set()
+    for raw in value.split(","):
+        tag = raw.strip()
+        if not tag or tag in seen:
+            continue
+        tags.append(tag)
+        seen.add(tag)
+    return tags
+
+
+def read_body(args: argparse.Namespace) -> str:
+    if args.body and args.body_file:
+        raise ValueError("Use either --body or --body-file, not both")
+    if args.body_file:
+        return args.body_file.read_text(encoding="utf-8").strip()
+    return (args.body or "").strip()
+
+
+def default_index_output(album: str) -> Path:
+    return Path("content") / "photos" / slugify(album) / "index.md"
+
+
+def default_manifest_output(album: str) -> Path:
+    return Path("data") / "photos" / f"{slugify(album)}.json"
+
+
+def select_cover_hash(
+    manifest: dict[str, object],
+    *,
+    cover_source: str | None,
+    cover_hash: str | None,
+) -> str | None:
+    if cover_hash:
+        return cover_hash
+    images = manifest.get("images", [])
+    if not isinstance(images, list):
+        return None
+    if cover_source:
+        for image in images:
+            if not isinstance(image, dict):
+                continue
+            if image.get("source") == cover_source:
+                value = image.get("hash")
+                return value if isinstance(value, str) else None
+        raise ValueError(f"Cover source not found in manifest: {cover_source}")
+    for image in images:
+        if not isinstance(image, dict):
+            continue
+        value = image.get("hash")
+        if isinstance(value, str) and value:
+            return value
+    return None
+
+
+def render_album_index(
+    *,
+    title: str,
+    date: str,
+    description: str,
+    manifest: str,
+    cover_hash: str | None,
+    tags: list[str],
+    body: str,
+) -> str:
+    lines = [
+        "---",
+        f"title: {yaml_quote(title)}",
+        f"date: {date}",
+    ]
+    if description:
+        lines.append(f"description: {yaml_quote(description)}")
+    lines.append(f"manifest: {yaml_quote(manifest)}")
+    if cover_hash:
+        lines.append(f"cover_hash: {yaml_quote(cover_hash)}")
+    if tags:
+        lines.append("tags:")
+        lines.extend(f"  - {yaml_quote(tag)}" for tag in tags)
+    lines.extend(["---", ""])
+    if body:
+        lines.append(body)
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_album_index(path: Path, content: str, overwrite: bool) -> bool:
+    if path.exists() and not overwrite:
+        print(f"index exists, not overwriting: {path}")
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+    print(f"index: {path}")
+    return True
+
+
 def build_rsync_command(album_dir: Path, remote_base: str, dry_run: bool) -> list[str]:
     remote_base = remote_base.rstrip("/")
     remote_target = f"{remote_base}/{album_dir.name}/"
@@ -286,6 +387,34 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--remote-base", default=DEFAULT_REMOTE_BASE)
     parser.add_argument("--media-base-url", default=DEFAULT_MEDIA_BASE_URL)
     parser.add_argument("--manifest-output", type=Path, default=None)
+    parser.add_argument(
+        "--write-index",
+        action="store_true",
+        help="Create a Hugo photo album index.md after media sync succeeds.",
+    )
+    parser.add_argument(
+        "--index-output",
+        type=Path,
+        default=None,
+        help="Album index path. Defaults to content/photos/<album>/index.md when --write-index is used.",
+    )
+    parser.add_argument("--title", default=None, help="Album title for generated index.md.")
+    parser.add_argument(
+        "--date",
+        default=None,
+        help="Album date for generated index.md. Defaults to today's local date.",
+    )
+    parser.add_argument("--description", default="", help="Album description for generated index.md.")
+    parser.add_argument("--tags", default=None, help="Comma-separated album tags for generated index.md.")
+    parser.add_argument("--body", default="", help="Album body text for generated index.md.")
+    parser.add_argument("--body-file", type=Path, default=None, help="Read album body text from a file.")
+    parser.add_argument("--cover-source", default=None, help="Original source filename to use as album cover.")
+    parser.add_argument("--cover-hash", default=None, help="Existing image hash to use as album cover.")
+    parser.add_argument(
+        "--overwrite-index",
+        action="store_true",
+        help="Overwrite an existing generated index.md.",
+    )
     parser.add_argument("--skip-rsync", action="store_true", help="Generate files only.")
     parser.add_argument("--dry-run-rsync", action="store_true", help="Run rsync with -n.")
     parser.add_argument(
@@ -300,47 +429,84 @@ def main() -> int:
     args = parse_args()
     sizes = parse_sizes(args.sizes)
     staging_root = args.staging_root or default_staging_root()
-    existing_manifest = read_manifest(args.manifest_output)
+    album_slug = slugify(args.album)
+    if args.index_output:
+        args.write_index = True
+    manifest_output = args.manifest_output
+    if args.write_index and manifest_output is None:
+        manifest_output = default_manifest_output(album_slug)
+    body_text = read_body(args)
+
+    existing_manifest = read_manifest(manifest_output)
     sources = filter_new_sources(
         list_sources(args.source),
         existing_manifest,
         args.hash_chars,
     )
-    if not sources:
+    if not sources and not args.write_index:
         print("no new images to process")
         return 0
+    if not sources and args.write_index and not existing_manifest:
+        print("no new images to process")
+        raise ValueError("Cannot create index.md without an existing manifest or new images")
 
-    plan = build_album_plan(
-        album=args.album,
-        sources=sources,
-        staging_root=staging_root,
-        sizes=sizes,
-        image_format=args.format,
-        hash_chars=args.hash_chars,
-    )
+    manifest = existing_manifest
+    plan: AlbumPlan | None = None
+    if sources:
+        plan = build_album_plan(
+            album=album_slug,
+            sources=sources,
+            staging_root=staging_root,
+            sizes=sizes,
+            image_format=args.format,
+            hash_chars=args.hash_chars,
+        )
 
-    generated: dict[Path, tuple[int, int]] = {}
-    for item in plan.items:
-        for size, destination in item.outputs.items():
-            print(f"generate {size}: {item.source} -> {destination}")
-            generated[destination] = generate_variant(item.source, destination, size, args.quality)
+        generated: dict[Path, tuple[int, int]] = {}
+        for item in plan.items:
+            for size, destination in item.outputs.items():
+                print(f"generate {size}: {item.source} -> {destination}")
+                generated[destination] = generate_variant(item.source, destination, size, args.quality)
 
-    new_manifest = build_manifest(plan, generated, args.media_base_url)
-    manifest = merge_manifest(existing_manifest, new_manifest)
-    staging_manifest = plan.album_dir / "manifest.json"
-    write_manifest(staging_manifest, manifest)
-    print(f"manifest: {staging_manifest}")
+        new_manifest = build_manifest(plan, generated, args.media_base_url)
+        manifest = merge_manifest(existing_manifest, new_manifest)
+        staging_manifest = plan.album_dir / "manifest.json"
+        write_manifest(staging_manifest, manifest)
+        print(f"manifest: {staging_manifest}")
 
-    if args.manifest_output:
-        write_manifest(args.manifest_output, manifest)
-        print(f"manifest copy: {args.manifest_output}")
-
-    if not args.skip_rsync:
+    if plan and not args.skip_rsync:
         command = build_rsync_command(plan.album_dir, args.remote_base, args.dry_run_rsync)
         print("rsync:", " ".join(command))
         sync_album(plan.album_dir, args.remote_base, args.dry_run_rsync)
 
-    if args.cleanup_after_sync and not args.skip_rsync and not args.dry_run_rsync:
+    can_write_repo_files = not args.dry_run_rsync
+    index_output: Path | None = None
+    index_content: str | None = None
+    if can_write_repo_files and args.write_index:
+        index_output = args.index_output or default_index_output(album_slug)
+        title = args.title or album_slug.replace("-", " ").title()
+        index_content = render_album_index(
+            title=title,
+            date=args.date or datetime.now().astimezone().date().isoformat(),
+            description=args.description,
+            manifest=album_slug,
+            cover_hash=select_cover_hash(
+                manifest,
+                cover_source=args.cover_source,
+                cover_hash=args.cover_hash,
+            ),
+            tags=parse_tags(args.tags),
+            body=body_text,
+        )
+
+    if can_write_repo_files and manifest_output:
+        write_manifest(manifest_output, manifest)
+        print(f"manifest copy: {manifest_output}")
+
+    if index_output and index_content:
+        write_album_index(index_output, index_content, args.overwrite_index)
+
+    if plan and args.cleanup_after_sync and not args.skip_rsync and not args.dry_run_rsync:
         shutil.rmtree(plan.album_dir)
         print(f"removed staging album: {plan.album_dir}")
 

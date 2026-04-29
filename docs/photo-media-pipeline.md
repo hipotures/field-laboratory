@@ -44,6 +44,20 @@ By default the script:
 5. Writes a merged `manifest.json` into the staging album directory.
 6. Runs `rsync` to the media host.
 
+When `--write-index` is used, the script can also create the Hugo album page
+after media sync succeeds. In that mode, if `--manifest-output` is not provided,
+the repository manifest path defaults to:
+
+```text
+data/photos/<album>.json
+```
+
+and the album page path defaults to:
+
+```text
+content/photos/<album>/index.md
+```
+
 The default remote target is:
 
 ```text
@@ -204,6 +218,56 @@ python scripts/photo_media.py \
 If `data/photos/storm-2025-09-06.json` already exists, the script reads it
 first. Images whose source hash is already present are not regenerated. New
 images are added to the end of the manifest.
+
+Create a full gallery entry in one run:
+
+```bash
+python scripts/photo_media.py \
+  --album storm-2025-09-06 \
+  --source tmp/photos/burza \
+  --write-index \
+  --title "Burza 2025-09-06" \
+  --date 2025-09-06 \
+  --description "Nocne zdjęcia burzy." \
+  --tags storm,night,best \
+  --body "Krótki album z nocnej obserwacji burzy."
+```
+
+The generated front matter contains the album metadata used by the gallery:
+
+```yaml
+---
+title: "Burza 2025-09-06"
+date: 2025-09-06
+description: "Nocne zdjęcia burzy."
+manifest: "storm-2025-09-06"
+cover_hash: "..."
+tags:
+  - "storm"
+  - "night"
+  - "best"
+---
+```
+
+`--date` accepts a plain Hugo date such as `2025-09-06`. If omitted, the script
+uses the current local date. It does not read EXIF dates by default.
+
+Use `--cover-source` to choose the album cover by original source filename:
+
+```bash
+python scripts/photo_media.py \
+  --album storm-2025-09-06 \
+  --source tmp/photos/burza \
+  --write-index \
+  --cover-source 20250906_030919_000_35561485.jpg
+```
+
+The script resolves the matching manifest hash and writes it as `cover_hash`.
+`--cover-hash` can be used instead when the hash is already known.
+
+If `index.md` already exists, the script leaves it untouched by default. This
+protects manual body text and per-photo metadata. Use `--overwrite-index` only
+when replacing that file is intentional.
 
 ## Local testing
 

@@ -1,0 +1,35 @@
+[powered_by]
+other = "Powered by"
+
+[photo_lightbox_close]
+other = "Close"
+
+[photo_lightbox_zoom]
+other = "Zoom in or out"
+
+[photo_lightbox_previous]
+other = "Previous photo"
+
+[photo_lightbox_next]
+other = "Next photo"
+
+[photo_lightbox_download]
+other = "Download photo"
+
+[photo_lightbox_theme]
+other = "Change theme"
+
+[photo_lightbox_thumbnail_large]
+other = "Increase thumbnail size"
+
+[photo_lightbox_thumbnail_small]
+other = "Decrease thumbnail size"
+
+[photo_lightbox_thumbnail_item]
+other = "Show photo"
+
+[photo_lightbox_load_error]
+other = "The photo could not be loaded"
+
+[photo_album_image_alt]
+other = "Photo from album {{ .Title }}, number {{ .Number }}"

@@ -1,2 +1,35 @@
 [powered_by]
 other = "Powered by"
+
+[photo_lightbox_close]
+other = "Zamknij"
+
+[photo_lightbox_zoom]
+other = "Powiększ lub zmniejsz"
+
+[photo_lightbox_previous]
+other = "Poprzednie zdjęcie"
+
+[photo_lightbox_next]
+other = "Następne zdjęcie"
+
+[photo_lightbox_download]
+other = "Pobierz zdjęcie"
+
+[photo_lightbox_theme]
+other = "Zmień motyw"
+
+[photo_lightbox_thumbnail_large]
+other = "Powiększ miniatury"
+
+[photo_lightbox_thumbnail_small]
+other = "Zmniejsz miniatury"
+
+[photo_lightbox_thumbnail_item]
+other = "Pokaż zdjęcie"
+
+[photo_lightbox_load_error]
+other = "Nie można wczytać zdjęcia"
+
+[photo_album_image_alt]
+other = "Zdjęcie z albumu {{ .Title }}, numer {{ .Number }}"
