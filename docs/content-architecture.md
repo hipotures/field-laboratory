@@ -125,19 +125,20 @@ views just because they are image files.
 
 ## Standalone photo galleries
 
-Future standalone galleries should live under `content/photos/` as page bundles:
+Future standalone galleries should live under `content/photos/` as page bundles
+for album metadata and descriptions only:
 
 ```text
 content/photos/gallery-slug/
   index.md
-  001.jpg
-  002.jpg
-  003.jpg
 ```
 
-The gallery page can use `layout: gallery` and a local layout that reads image
-resources, creates thumbnails with Hugo image processing, and renders a simple
-grid consistent with the Coder theme.
+Generated photo binaries are not stored in Git. The photo media pipeline creates
+600px and 1600px WebP variants locally, syncs them to `media.armum.eu`, and
+records dimensions and URLs in a manifest. See `docs/photo-media-pipeline.md`.
+
+The gallery page can use `layout: gallery` and a local layout that reads album
+metadata or manifests and renders a grid consistent with the Coder theme.
 
 Do not switch the whole site to a gallery theme. The site remains based on
 `hugo-coder`; gallery behavior should be implemented with local layouts,
@@ -163,4 +164,3 @@ Site-specific changes belong in:
 - `assets/scss/custom.scss` for minimal CSS.
 - `content/` for source content.
 - `scripts/` for generators.
-
