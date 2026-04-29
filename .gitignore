@@ -17,3 +17,4 @@ __pycache__/
 # Local agent/tool state
 .codex
 .cache/
+tmp/
