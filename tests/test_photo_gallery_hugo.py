@@ -26,6 +26,14 @@ class PhotoGalleryHugoTests(unittest.TestCase):
         self.assertNotIn("behavior: 'smooth'", script)
         self.assertIn("revealThumbnail", script)
 
+    def test_arrow_key_hold_previews_thumbnails_before_loading_slide(self):
+        script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
+
+        self.assertIn("arrowKeys: false", script)
+        self.assertIn("lightbox.on('keydown'", script)
+        self.assertIn("pswp.events.add(document, 'keyup'", script)
+        self.assertIn("previewIndex", script)
+
     def test_photos_index_links_first_album_and_preserves_theme_toggle(self):
         html = self.read_public("photos/index.html")
 

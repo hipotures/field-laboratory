@@ -18,6 +18,23 @@ function revealThumbnail(strip, thumbnail) {
   strip.scrollLeft = Math.max(0, centeredOffset);
 }
 
+function normalizeIndex(index, total) {
+  if (index < 0) {
+    return total - 1;
+  }
+  if (index >= total) {
+    return 0;
+  }
+  return index;
+}
+
+function setActiveThumbnail(buttons, strip, index) {
+  buttons.forEach((button, buttonIndex) => {
+    button.classList.toggle('is-active', buttonIndex === index);
+  });
+  revealThumbnail(strip, buttons[index]);
+}
+
 if (gallery) {
   const lightbox = new PhotoSwipeLightbox({
     gallery: '.photo-gallery',
@@ -33,6 +50,7 @@ if (gallery) {
     }),
     imageClickAction: 'zoom-or-close',
     tapAction: 'toggle-controls',
+    arrowKeys: false,
     wheelToZoom: true
   });
 
@@ -91,6 +109,7 @@ if (gallery) {
       className: 'pswp__thumbnail-strip',
       appendTo: 'root',
       onInit: (el, pswp) => {
+        let previewIndex = null;
         const links = Array.from(gallery.querySelectorAll('a.photo-gallery-link'));
         const buttons = links.map((link, index) => {
           const button = document.createElement('button');
@@ -99,16 +118,47 @@ if (gallery) {
           button.className = 'pswp__thumbnail-button';
           button.setAttribute('aria-label', `Pokaż zdjęcie ${index + 1}`);
           button.style.backgroundImage = `url("${link.dataset.thumbSrc || img?.src || link.href}")`;
-          button.addEventListener('click', () => pswp.goTo(index));
+          button.addEventListener('click', () => {
+            previewIndex = null;
+            pswp.goTo(index);
+          });
           el.appendChild(button);
           return button;
         });
 
+        lightbox.on('keydown', ({ originalEvent }) => {
+          if (originalEvent.key !== 'ArrowRight' && originalEvent.key !== 'ArrowLeft') {
+            return;
+          }
+          if (originalEvent.altKey || originalEvent.ctrlKey || originalEvent.metaKey || originalEvent.shiftKey) {
+            return;
+          }
+
+          originalEvent.preventDefault();
+          const direction = originalEvent.key === 'ArrowRight' ? 1 : -1;
+          const baseIndex = previewIndex ?? pswp.currIndex;
+          previewIndex = normalizeIndex(baseIndex + direction, pswp.getNumItems());
+          setActiveThumbnail(buttons, el, previewIndex);
+        });
+
+        pswp.events.add(document, 'keyup', (event) => {
+          if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') {
+            return;
+          }
+          if (previewIndex === null) {
+            return;
+          }
+
+          event.preventDefault();
+          const targetIndex = previewIndex;
+          previewIndex = null;
+          pswp.goTo(targetIndex);
+        });
+
         pswp.on('change', () => {
-          buttons.forEach((button, index) => {
-            button.classList.toggle('is-active', index === pswp.currIndex);
-          });
-          revealThumbnail(el, buttons[pswp.currIndex]);
+          if (previewIndex === null) {
+            setActiveThumbnail(buttons, el, pswp.currIndex);
+          }
         });
       }
     });
