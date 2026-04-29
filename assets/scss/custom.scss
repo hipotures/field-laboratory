@@ -219,19 +219,22 @@
   opacity: 0.78;
 }
 
-.transformer-figure {
+.transformer-figure,
+.infographic-figure {
   width: 100%;
   max-width: 110rem;
   margin: 4rem auto;
 }
 
-.transformer-figure img {
+.transformer-figure img,
+.infographic-figure img {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.transformer-figure-link {
+.transformer-figure-link,
+.infographic-figure-link {
   display: block;
   border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
   border-radius: 0.4rem;
@@ -241,12 +244,15 @@
 }
 
 .transformer-figure-link:hover,
-.transformer-figure-link:focus {
+.transformer-figure-link:focus,
+.infographic-figure-link:hover,
+.infographic-figure-link:focus {
   border-color: color-mix(in srgb, currentColor 32%, transparent);
   opacity: 0.92;
 }
 
-.transformer-figure figcaption {
+.transformer-figure figcaption,
+.infographic-figure figcaption {
   max-width: 82rem;
   margin: 1rem auto 0;
   font-size: 1.45rem;
