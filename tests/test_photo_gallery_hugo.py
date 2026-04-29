@@ -50,6 +50,9 @@ class PhotoGalleryHugoTests(unittest.TestCase):
         self.assertIn("fa-th-large", script)
         self.assertIn("const pswp = lightbox.pswp", script)
         self.assertIn("pswp.updateSize(true)", script)
+        self.assertIn("centerActiveThumbnail", script)
+        self.assertIn("activeThumbnail.offsetLeft", script)
+        self.assertIn("querySelector('.pswp__thumbnail-strip')", script)
 
     def test_lightbox_ui_labels_come_from_hugo_i18n_data_attributes(self):
         script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")

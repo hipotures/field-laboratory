@@ -84,6 +84,19 @@ function setActiveThumbnail(buttons, strip, index) {
   revealThumbnail(strip, buttons[index]);
 }
 
+function centerActiveThumbnail(strip) {
+  const activeThumbnail = strip?.querySelector('.pswp__thumbnail-button.is-active');
+  if (!activeThumbnail) {
+    return;
+  }
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const centeredOffset = activeThumbnail.offsetLeft - ((strip.clientWidth - activeThumbnail.offsetWidth) / 2);
+      strip.scrollLeft = Math.max(0, centeredOffset);
+    });
+  });
+}
+
 if (gallery) {
   const lightbox = new PhotoSwipeLightbox({
     gallery: '.photo-gallery',
@@ -150,9 +163,6 @@ if (gallery) {
       order: 10,
       isButton: true,
       html: '<i class="fa-solid fa-th fa-fw" aria-hidden="true"></i>',
-      onInit: (el, pswp) => {
-        applyThumbnailSize(pswp, el);
-      },
       onClick: (_event, el) => {
         const pswp = lightbox.pswp;
         if (!pswp) {
@@ -162,6 +172,7 @@ if (gallery) {
         writeThumbnailSizePreference(largeThumbnails);
         applyThumbnailSize(pswp, el);
         pswp.updateSize(true);
+        centerActiveThumbnail(pswp.element?.querySelector('.pswp__thumbnail-strip'));
       }
     });
 
@@ -187,6 +198,10 @@ if (gallery) {
       appendTo: 'root',
       onInit: (el, pswp) => {
         let previewIndex = null;
+        const thumbnailSizeButton = pswp.element?.querySelector('.pswp__button--thumbnail-size-button');
+        if (thumbnailSizeButton) {
+          applyThumbnailSize(pswp, thumbnailSizeButton);
+        }
         const links = Array.from(gallery.querySelectorAll('a.photo-gallery-link'));
         const buttons = links.map((link, index) => {
           const button = document.createElement('button');
