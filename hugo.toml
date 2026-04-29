@@ -39,7 +39,7 @@ enableEmoji = true
   name = "RSS"
   icon = "fa-solid fa-rss fa-2x"
   weight = 1
-  url = "https://armum.eu/index.xml"
+  url = "/index.xml"
   rel = "alternate"
   type = "application/rss+xml"
 
