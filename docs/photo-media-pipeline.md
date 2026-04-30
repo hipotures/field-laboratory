@@ -111,18 +111,27 @@ python scripts/photo_media.py \
 
 ## File names
 
-Every generated file name includes a prefix of the SHA-256 hash of the original
-source file:
+Generated file names use the album date, the source-file sort order, and a
+prefix of the SHA-256 hash of the original source file:
 
 ```text
-20250906-013852-000-35126178.ca8236a31b.webp
+20250906-0001.ca8236a31b.webp
+20250906-0002.4d930e659e.webp
 ```
+
+The date part comes from `--date` when provided, or from the current local date
+when it is omitted. It does not come from EXIF or the source file name.
+
+The sequence part comes from the source file order after sorting by file name.
+When appending to an existing manifest, new images continue after the largest
+existing sequence number. If old manifest entries do not yet have a sequence,
+the script continues after the current manifest length.
 
 The same file name is used in each size directory:
 
 ```text
-600/20250906-013852-000-35126178.ca8236a31b.webp
-1600/20250906-013852-000-35126178.ca8236a31b.webp
+600/20250906-0001.ca8236a31b.webp
+1600/20250906-0001.ca8236a31b.webp
 ```
 
 This gives stable, cache-friendly URLs. If the source file changes, the hash
@@ -142,10 +151,14 @@ The manifest records:
 - media base URL,
 - generated sizes,
 - output format,
-- source file names,
 - source hash prefixes,
+- source-order sequence numbers,
 - generated file names,
 - width, height, and public URL for every variant.
+
+The public manifest does not store original source file names. Older remote
+manifests may still contain `source` fields from earlier pipeline versions, but
+the script removes them when writing a new local or synced manifest.
 
 The manifest is also synced to the media host. A later Hugo gallery layout can
 copy or transform this metadata into versioned site data.
@@ -308,7 +321,18 @@ tags:
 `--date` accepts a plain Hugo date such as `2025-09-06`. If omitted, the script
 uses the current local date. It does not read EXIF dates by default.
 
-Use `--cover-source` to choose the album cover by original source filename:
+Use `--cover-hash` when selecting a specific album cover:
+
+```bash
+python scripts/photo_media.py \
+  --album storm-2025-09-06 \
+  --source tmp/photos/burza \
+  --write-index \
+  --cover-hash ca8236a31b
+```
+
+`--cover-source` is legacy-only and works only with older manifests that still
+store original source file names:
 
 ```bash
 python scripts/photo_media.py \
@@ -318,8 +342,7 @@ python scripts/photo_media.py \
   --cover-source 20250906_030919_000_35561485.jpg
 ```
 
-The script resolves the matching manifest hash and writes it as `cover_hash`.
-`--cover-hash` can be used instead when the hash is already known.
+In both cases the generated index stores only `cover_hash`.
 
 If `index.md` already exists, the script leaves it untouched by default. This
 protects manual body text and per-photo metadata. Use `--overwrite-index` only

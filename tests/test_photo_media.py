@@ -7,14 +7,15 @@ from scripts import photo_media
 
 
 class PhotoMediaTests(unittest.TestCase):
-    def test_hashed_output_name_uses_source_hash_and_normalized_stem(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            source = Path(tmpdir) / "Storm Frame 01.JPG"
-            source.write_bytes(b"unique image bytes")
+    def test_sequenced_output_name_uses_album_date_sequence_and_hash(self):
+        name = photo_media.sequenced_output_name(
+            album_date_prefix="20250325",
+            sequence=7,
+            source_hash="99ba39bd",
+            image_format="jpg",
+        )
 
-            name = photo_media.hashed_output_name(source, "jpg", hash_chars=8)
-
-        self.assertEqual(name, "storm-frame-01.99ba39bd.jpg")
+        self.assertEqual(name, "20250325-0007.99ba39bd.jpg")
 
     def test_album_plan_uses_size_directories_and_same_name_for_each_size(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -30,13 +31,71 @@ class PhotoMediaTests(unittest.TestCase):
                 sizes=[600, 1600],
                 image_format="jpg",
                 hash_chars=8,
+                album_date_prefix="20250906",
+                sequence_start=3,
             )
 
         self.assertEqual(plan.album_dir, staging / "storm-2025-09-06")
         self.assertEqual(len(plan.items), 1)
         item = plan.items[0]
-        self.assertEqual(item.outputs[600], staging / "storm-2025-09-06" / "600" / "img-0001.de703023.jpg")
-        self.assertEqual(item.outputs[1600], staging / "storm-2025-09-06" / "1600" / "img-0001.de703023.jpg")
+        self.assertEqual(item.sequence, 3)
+        self.assertEqual(item.outputs[600], staging / "storm-2025-09-06" / "600" / "20250906-0003.de703023.jpg")
+        self.assertEqual(item.outputs[1600], staging / "storm-2025-09-06" / "1600" / "20250906-0003.de703023.jpg")
+
+    def test_build_manifest_does_not_publish_source_filenames(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            source = root / "private original name.jpg"
+            source.write_bytes(b"image bytes")
+            staging = root / "stage"
+            plan = photo_media.build_album_plan(
+                album="storm",
+                sources=[source],
+                staging_root=staging,
+                sizes=[600],
+                image_format="webp",
+                hash_chars=8,
+                album_date_prefix="20250906",
+                sequence_start=1,
+            )
+            item = plan.items[0]
+            generated = {item.outputs[600]: (600, 400)}
+
+            manifest = photo_media.build_manifest(plan, generated, "https://media.example/photos")
+
+        self.assertNotIn("source", manifest["images"][0])
+        self.assertEqual(manifest["images"][0]["sequence"], 1)
+        self.assertEqual(manifest["images"][0]["name"], "20250906-0001.de703023.webp")
+
+    def test_album_date_prefix_accepts_date_and_datetime(self):
+        self.assertEqual(photo_media.album_date_prefix("2025-03-25"), "20250325")
+        self.assertEqual(photo_media.album_date_prefix("2025-03-25T18:23:08+01:00"), "20250325")
+        self.assertEqual(photo_media.album_date_prefix("2025:03:25"), "20250325")
+
+    def test_next_sequence_uses_existing_sequence_or_image_count(self):
+        self.assertEqual(
+            photo_media.next_sequence({"images": [{"sequence": 4}, {"sequence": 9}]}),
+            10,
+        )
+        self.assertEqual(
+            photo_media.next_sequence({"images": [{"hash": "old"}, {"hash": "older"}]}),
+            3,
+        )
+
+    def test_public_manifest_removes_legacy_source_and_backfills_sequence(self):
+        manifest = {
+            "images": [
+                {"source": "private-name.jpg", "hash": "oldhash", "name": "old.webp"},
+                {"source": "other-private-name.jpg", "hash": "newhash", "sequence": 8, "name": "new.webp"},
+            ]
+        }
+
+        public = photo_media.public_manifest(manifest)
+
+        self.assertNotIn("source", public["images"][0])
+        self.assertNotIn("source", public["images"][1])
+        self.assertEqual(public["images"][0]["sequence"], 1)
+        self.assertEqual(public["images"][1]["sequence"], 8)
 
     def test_rsync_command_appends_album_without_delete_by_default(self):
         command = photo_media.build_rsync_command(
@@ -306,7 +365,7 @@ class PhotoMediaTests(unittest.TestCase):
 
             self.assertEqual(result, 0)
             generate.assert_not_called()
-            self.assertEqual(photo_media.read_manifest(manifest_path), remote_manifest)
+            self.assertEqual(photo_media.read_manifest(manifest_path), photo_media.public_manifest(remote_manifest))
             self.assertTrue(index_path.exists())
 
     def test_main_publishes_repo_changes_by_default_after_index_generation(self):

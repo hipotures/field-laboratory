@@ -21,6 +21,7 @@ DEFAULT_MEDIA_BASE_URL = "https://media.armum.eu/field-laboratory/photos"
 @dataclass(frozen=True)
 class PlannedImage:
     source: Path
+    sequence: int
     output_name: str
     source_hash: str
     outputs: dict[int, Path]
@@ -58,10 +59,25 @@ def normalize_format(value: str) -> str:
     raise ValueError(f"Unsupported output format: {value}")
 
 
-def hashed_output_name(source: Path, image_format: str, hash_chars: int = 10) -> str:
+def sequenced_output_name(
+    *,
+    album_date_prefix: str,
+    sequence: int,
+    source_hash: str,
+    image_format: str,
+) -> str:
     output_format = normalize_format(image_format)
-    source_hash = file_hash(source, hash_chars)
-    return f"{slugify(source.stem)}.{source_hash}.{output_format}"
+    if sequence <= 0:
+        raise ValueError(f"Image sequence must be positive: {sequence}")
+    return f"{album_date_prefix}-{sequence:04d}.{source_hash}.{output_format}"
+
+
+def album_date_prefix(value: str | None) -> str:
+    date_text = (value or datetime.now().astimezone().date().isoformat()).strip()
+    match = re.match(r"^(\d{4})[-:](\d{2})[-:](\d{2})", date_text)
+    if not match:
+        raise ValueError(f"Album date must start with YYYY-MM-DD or YYYY:MM:DD: {date_text}")
+    return "".join(match.groups())
 
 
 def parse_sizes(value: str) -> list[int]:
@@ -100,18 +116,27 @@ def build_album_plan(
     sizes: list[int],
     image_format: str,
     hash_chars: int,
+    album_date_prefix: str,
+    sequence_start: int,
 ) -> AlbumPlan:
     album_slug = slugify(album)
     output_format = normalize_format(image_format)
     album_dir = staging_root / album_slug
     items: list[PlannedImage] = []
-    for source in sources:
+    for offset, source in enumerate(sources):
+        sequence = sequence_start + offset
         source_hash = file_hash(source, hash_chars)
-        output_name = f"{slugify(source.stem)}.{source_hash}.{output_format}"
+        output_name = sequenced_output_name(
+            album_date_prefix=album_date_prefix,
+            sequence=sequence,
+            source_hash=source_hash,
+            image_format=output_format,
+        )
         outputs = {size: album_dir / str(size) / output_name for size in sizes}
         items.append(
             PlannedImage(
                 source=source,
+                sequence=sequence,
                 output_name=output_name,
                 source_hash=source_hash,
                 outputs=outputs,
@@ -182,8 +207,8 @@ def build_manifest(
             }
         images.append(
             {
-                "source": item.source.name,
                 "hash": item.source_hash,
+                "sequence": item.sequence,
                 "name": item.output_name,
                 "variants": variants,
             }
@@ -226,6 +251,22 @@ def manifest_hashes(manifest: dict[str, object]) -> set[str]:
     return hashes
 
 
+def next_sequence(manifest: dict[str, object]) -> int:
+    images = manifest.get("images", [])
+    if not isinstance(images, list):
+        return 1
+    max_sequence = 0
+    for image in images:
+        if not isinstance(image, dict):
+            continue
+        sequence = image.get("sequence")
+        if isinstance(sequence, int) and sequence > max_sequence:
+            max_sequence = sequence
+    if max_sequence:
+        return max_sequence + 1
+    return len(images) + 1
+
+
 def filter_new_sources(
     sources: list[Path],
     existing_manifest: dict[str, object],
@@ -256,6 +297,26 @@ def merge_manifest(existing: dict[str, object], new: dict[str, object]) -> dict[
     merged.update(new)
     merged["images"] = images
     return merged
+
+
+def public_manifest(manifest: dict[str, object]) -> dict[str, object]:
+    public = dict(manifest)
+    images = manifest.get("images", [])
+    if not isinstance(images, list):
+        return public
+    public_images: list[object] = []
+    for index, image in enumerate(images, start=1):
+        if not isinstance(image, dict):
+            public_images.append(image)
+            continue
+        public_image = dict(image)
+        public_image.pop("source", None)
+        sequence = public_image.get("sequence")
+        if not isinstance(sequence, int) or sequence <= 0:
+            public_image["sequence"] = index
+        public_images.append(public_image)
+    public["images"] = public_images
+    return public
 
 
 def yaml_quote(value: str) -> str:
@@ -464,7 +525,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tags", default=None, help="Comma-separated album tags for generated index.md.")
     parser.add_argument("--body", default="", help="Album body text for generated index.md.")
     parser.add_argument("--body-file", type=Path, default=None, help="Read album body text from a file.")
-    parser.add_argument("--cover-source", default=None, help="Original source filename to use as album cover.")
+    parser.add_argument(
+        "--cover-source",
+        default=None,
+        help="Legacy: original source filename to use as album cover when an old manifest stores source.",
+    )
     parser.add_argument("--cover-hash", default=None, help="Existing image hash to use as album cover.")
     parser.add_argument(
         "--overwrite-index",
@@ -507,6 +572,8 @@ def main() -> int:
     if args.write_index and manifest_output is None:
         manifest_output = default_manifest_output(album_slug)
     body_text = read_body(args)
+    album_date = args.date or datetime.now().astimezone().date().isoformat()
+    output_date_prefix = album_date_prefix(album_date)
 
     if manifest_output and not args.dry_run_rsync and not args.skip_remote_manifest:
         fetch_remote_manifest(
@@ -539,6 +606,8 @@ def main() -> int:
             sizes=sizes,
             image_format=args.format,
             hash_chars=args.hash_chars,
+            album_date_prefix=output_date_prefix,
+            sequence_start=next_sequence(existing_manifest),
         )
 
         generated: dict[Path, tuple[int, int]] = {}
@@ -550,7 +619,7 @@ def main() -> int:
         new_manifest = build_manifest(plan, generated, args.media_base_url)
         manifest = merge_manifest(existing_manifest, new_manifest)
         staging_manifest = plan.album_dir / "manifest.json"
-        write_manifest(staging_manifest, manifest)
+        write_manifest(staging_manifest, public_manifest(manifest))
         print(f"manifest: {staging_manifest}")
 
     if plan and not args.skip_rsync:
@@ -567,7 +636,7 @@ def main() -> int:
         title = args.title or album_slug.replace("-", " ").title()
         index_content = render_album_index(
             title=title,
-            date=args.date or datetime.now().astimezone().date().isoformat(),
+            date=album_date,
             description=args.description,
             manifest=album_slug,
             cover_hash=select_cover_hash(
@@ -580,7 +649,7 @@ def main() -> int:
         )
 
     if can_write_repo_files and manifest_output:
-        write_manifest(manifest_output, manifest)
+        write_manifest(manifest_output, public_manifest(manifest))
         print(f"manifest copy: {manifest_output}")
         repo_paths_to_publish.append(manifest_output)
 
