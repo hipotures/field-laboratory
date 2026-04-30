@@ -28,11 +28,17 @@
           {{ end }}
         {{ end }}
       {{ end }}
-      {{ $coverVariant := index $cover.variants "600" }}
+      {{ $coverVariant := index $cover.variants "1600" }}
       <article class="photo-album-list-item">
         <a class="photo-album-cover" href="{{ .RelPermalink }}">
           {{ with $coverVariant }}
-            <img src="{{ .url }}" width="{{ .width }}" height="{{ .height }}" alt="{{ $page.Title }}">
+            <img
+              src="{{ .url }}"
+              width="{{ .width }}"
+              height="{{ .height }}"
+              alt="{{ $page.Title }}"
+              loading="lazy"
+            >
           {{ end }}
         </a>
         <div class="photo-album-summary">

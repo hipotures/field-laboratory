@@ -6,7 +6,37 @@ from unittest import mock
 from scripts import photo_media
 
 
+def test_variants(name: str = "image.webp") -> dict[str, dict[str, object]]:
+    return {
+        "320": {"file": name, "width": 320, "height": 213, "url": f"https://example.com/320/{name}"},
+        "1600": {"file": name, "width": 1600, "height": 1067, "url": f"https://example.com/1600/{name}"},
+        "3840": {"file": name, "width": 3840, "height": 2560, "url": f"https://example.com/3840/{name}"},
+    }
+
+
 class PhotoMediaTests(unittest.TestCase):
+    def test_default_variants_and_qualities_are_explicit(self):
+        self.assertEqual(photo_media.DEFAULT_SIZES, [320, 1600, 3840])
+        self.assertEqual(photo_media.DEFAULT_QUALITIES, {320: 78, 1600: 82, 3840: 84})
+
+    def test_parse_size_qualities_requires_every_requested_size(self):
+        self.assertEqual(
+            photo_media.parse_size_qualities("320:78,1600:82,3840:84", [320, 1600, 3840]),
+            {320: 78, 1600: 82, 3840: 84},
+        )
+
+        with self.assertRaisesRegex(ValueError, "Missing quality"):
+            photo_media.parse_size_qualities("320:78,1600:82", [320, 1600, 3840])
+
+        with self.assertRaisesRegex(ValueError, "Quality configured for unused size"):
+            photo_media.parse_size_qualities("320:78,1600:82,3840:84,600:86", [320, 1600, 3840])
+
+    def test_uniform_quality_override_applies_to_all_sizes(self):
+        self.assertEqual(
+            photo_media.build_quality_map(sizes=[320, 1600, 3840], quality=80, qualities="320:78"),
+            {320: 80, 1600: 80, 3840: 80},
+        )
+
     def test_sequenced_output_name_uses_album_date_sequence_and_hash(self):
         name = photo_media.sequenced_output_name(
             album_date_prefix="20250325",
@@ -67,6 +97,42 @@ class PhotoMediaTests(unittest.TestCase):
         self.assertEqual(manifest["images"][0]["sequence"], 1)
         self.assertEqual(manifest["images"][0]["name"], "20250906-0001.de703023.webp")
 
+    def test_generate_album_variants_uses_size_specific_quality_and_worker_count(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            source = root / "source.jpg"
+            source.write_bytes(b"image bytes")
+            staging = root / "stage"
+            plan = photo_media.build_album_plan(
+                album="storm",
+                sources=[source],
+                staging_root=staging,
+                sizes=[320, 1600],
+                image_format="webp",
+                hash_chars=8,
+                album_date_prefix="20250906",
+                sequence_start=1,
+            )
+            calls = []
+
+            def fake_generate(source_path: Path, destination: Path, size: int, quality: int) -> tuple[int, int]:
+                calls.append((source_path, destination, size, quality))
+                return size, size // 2
+
+            with mock.patch.object(photo_media, "generate_variant", fake_generate):
+                generated = photo_media.generate_album_variants(
+                    plan,
+                    qualities={320: 78, 1600: 82},
+                    resize_workers=2,
+                )
+
+        self.assertEqual(
+            sorted((size, quality) for _, _, size, quality in calls),
+            [(320, 78), (1600, 82)],
+        )
+        self.assertEqual(generated[plan.items[0].outputs[320]], (320, 160))
+        self.assertEqual(generated[plan.items[0].outputs[1600]], (1600, 800))
+
     def test_album_date_prefix_accepts_date_and_datetime(self):
         self.assertEqual(photo_media.album_date_prefix("2025-03-25"), "20250325")
         self.assertEqual(photo_media.album_date_prefix("2025-03-25T18:23:08+01:00"), "20250325")
@@ -96,6 +162,22 @@ class PhotoMediaTests(unittest.TestCase):
         self.assertNotIn("source", public["images"][1])
         self.assertEqual(public["images"][0]["sequence"], 1)
         self.assertEqual(public["images"][1]["sequence"], 8)
+
+    def test_existing_manifest_must_include_every_requested_size(self):
+        manifest = {
+            "images": [
+                {
+                    "hash": "oldhash",
+                    "variants": {
+                        "600": {"url": "https://example.com/old-600.webp"},
+                        "1600": {"url": "https://example.com/old-1600.webp"},
+                    },
+                }
+            ]
+        }
+
+        with self.assertRaisesRegex(ValueError, "missing variants"):
+            photo_media.validate_manifest_variants(manifest, [320, 1600, 3840])
 
     def test_rsync_command_appends_album_without_delete_by_default(self):
         command = photo_media.build_rsync_command(
@@ -157,7 +239,7 @@ class PhotoMediaTests(unittest.TestCase):
                         "source": "old.jpg",
                         "hash": photo_media.file_hash(old_source, 8),
                         "name": "old.existing.webp",
-                        "variants": {},
+                        "variants": test_variants(),
                     }
                 ]
             }
@@ -280,7 +362,7 @@ class PhotoMediaTests(unittest.TestCase):
                             "source": "first.jpg",
                             "hash": source_hash,
                             "name": f"first.{source_hash}.webp",
-                            "variants": {},
+                            "variants": test_variants(),
                         }
                     ],
                 },
@@ -333,7 +415,7 @@ class PhotoMediaTests(unittest.TestCase):
                         "source": "first.jpg",
                         "hash": source_hash,
                         "name": f"first.{source_hash}.webp",
-                        "variants": {},
+                        "variants": test_variants(),
                     }
                 ],
             }
@@ -386,7 +468,7 @@ class PhotoMediaTests(unittest.TestCase):
                             "source": "first.jpg",
                             "hash": source_hash,
                             "name": f"first.{source_hash}.webp",
-                            "variants": {},
+                            "variants": test_variants(),
                         }
                     ],
                 },
@@ -434,7 +516,7 @@ class PhotoMediaTests(unittest.TestCase):
                             "source": "first.jpg",
                             "hash": source_hash,
                             "name": f"first.{source_hash}.webp",
-                            "variants": {},
+                            "variants": test_variants(),
                         }
                     ],
                 },

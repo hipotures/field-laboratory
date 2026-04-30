@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
@@ -16,6 +17,10 @@ from pathlib import Path
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
 DEFAULT_REMOTE_BASE = "deploy@armum.eu:/srv/www/media/field-laboratory/photos"
 DEFAULT_MEDIA_BASE_URL = "https://media.armum.eu/field-laboratory/photos"
+DEFAULT_SIZES = [320, 1600, 3840]
+DEFAULT_QUALITIES = {320: 78, 1600: 82, 3840: 84}
+DEFAULT_RESIZE_WORKERS = 16
+DEFAULT_WEBP_EFFORT = 4
 
 
 @dataclass(frozen=True)
@@ -95,6 +100,40 @@ def parse_sizes(value: str) -> list[int]:
     return sorted(dict.fromkeys(sizes))
 
 
+def parse_size_qualities(value: str, sizes: list[int]) -> dict[int, int]:
+    qualities: dict[int, int] = {}
+    for raw in value.split(","):
+        raw = raw.strip()
+        if not raw:
+            continue
+        if ":" not in raw:
+            raise ValueError(f"Quality entry must use SIZE:QUALITY: {raw}")
+        size_raw, quality_raw = raw.split(":", 1)
+        size = int(size_raw.strip())
+        quality = int(quality_raw.strip())
+        if quality < 1 or quality > 100:
+            raise ValueError(f"Quality must be between 1 and 100 for size {size}: {quality}")
+        qualities[size] = quality
+
+    requested = set(sizes)
+    configured = set(qualities)
+    missing = sorted(requested - configured)
+    if missing:
+        raise ValueError(f"Missing quality for sizes: {','.join(str(size) for size in missing)}")
+    unused = sorted(configured - requested)
+    if unused:
+        raise ValueError(f"Quality configured for unused size: {','.join(str(size) for size in unused)}")
+    return {size: qualities[size] for size in sizes}
+
+
+def build_quality_map(*, sizes: list[int], quality: int | None, qualities: str) -> dict[int, int]:
+    if quality is not None:
+        if quality < 1 or quality > 100:
+            raise ValueError(f"Quality must be between 1 and 100: {quality}")
+        return {size: quality for size in sizes}
+    return parse_size_qualities(qualities, sizes)
+
+
 def list_sources(source_dir: Path) -> list[Path]:
     if not source_dir.exists():
         raise FileNotFoundError(f"Source directory does not exist: {source_dir}")
@@ -161,31 +200,51 @@ def run_command(command: list[str]) -> subprocess.CompletedProcess[str]:
 
 
 def image_dimensions(path: Path) -> tuple[int, int]:
-    result = subprocess.run(
-        ["identify", "-format", "%w %h", str(path)],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    width_raw, height_raw = result.stdout.strip().split()
-    return int(width_raw), int(height_raw)
+    import pyvips
+
+    image = pyvips.Image.new_from_file(str(path), access="sequential")
+    return image.width, image.height
 
 
 def generate_variant(source: Path, destination: Path, size: int, quality: int) -> tuple[int, int]:
+    import pyvips
+
     destination.parent.mkdir(parents=True, exist_ok=True)
-    command = [
-        "magick",
-        str(source),
-        "-auto-orient",
-        "-resize",
-        f"{size}x{size}>",
-        "-strip",
-        "-quality",
-        str(quality),
-        str(destination),
-    ]
-    run_command(command)
-    return image_dimensions(destination)
+    image = pyvips.Image.thumbnail(str(source), size, height=size, size="down")
+    if normalize_format(destination.suffix) == "webp":
+        image.webpsave(str(destination), Q=quality, effort=DEFAULT_WEBP_EFFORT, keep="none")
+    elif normalize_format(destination.suffix) == "jpg":
+        image.jpegsave(str(destination), Q=quality, keep="none")
+    else:
+        image.write_to_file(str(destination))
+    return image.width, image.height
+
+
+def generate_album_variants(
+    plan: AlbumPlan,
+    *,
+    qualities: dict[int, int],
+    resize_workers: int,
+) -> dict[Path, tuple[int, int]]:
+    if resize_workers <= 0:
+        raise ValueError(f"Resize workers must be positive: {resize_workers}")
+
+    jobs: list[tuple[Path, Path, int, int]] = []
+    for item in plan.items:
+        for size, destination in item.outputs.items():
+            jobs.append((item.source, destination, size, qualities[size]))
+
+    generated: dict[Path, tuple[int, int]] = {}
+    with ThreadPoolExecutor(max_workers=resize_workers) as executor:
+        futures = {
+            executor.submit(generate_variant, source, destination, size, quality): (source, destination, size)
+            for source, destination, size, quality in jobs
+        }
+        for future in as_completed(futures):
+            source, destination, size = futures[future]
+            generated[destination] = future.result()
+            print(f"generate {size}: {source} -> {destination}")
+    return generated
 
 
 def build_manifest(
@@ -235,6 +294,30 @@ def read_manifest(path: Path | None) -> dict[str, object]:
     if not isinstance(data, dict):
         raise ValueError(f"Manifest root must be an object: {path}")
     return data
+
+
+def validate_manifest_variants(manifest: dict[str, object], sizes: list[int]) -> None:
+    images = manifest.get("images", [])
+    if not isinstance(images, list):
+        return
+
+    missing_entries: list[str] = []
+    for index, image in enumerate(images, start=1):
+        if not isinstance(image, dict):
+            continue
+        variants = image.get("variants", {})
+        if not isinstance(variants, dict):
+            variants = {}
+        missing = [str(size) for size in sizes if str(size) not in variants]
+        if missing:
+            image_id = str(image.get("hash") or image.get("name") or index)
+            missing_entries.append(f"{image_id}: {','.join(missing)}")
+
+    if missing_entries:
+        raise ValueError(
+            "Existing manifest is missing variants for requested sizes: "
+            + "; ".join(missing_entries)
+        )
 
 
 def manifest_hashes(manifest: dict[str, object]) -> set[str]:
@@ -492,13 +575,33 @@ def fetch_remote_manifest(*, album: str, remote_base: str, destination: Path) ->
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate hashed 600/1600 photo variants and sync them to the media host."
+        description="Generate hashed 320/1600/3840 photo variants and sync them to the media host."
     )
     parser.add_argument("--album", required=True, help="Album slug, e.g. storm-2025-09-06.")
     parser.add_argument("--source", type=Path, required=True, help="Directory with original images.")
-    parser.add_argument("--sizes", default="600,1600", help="Comma-separated square-fit sizes.")
+    parser.add_argument(
+        "--sizes",
+        default=",".join(str(size) for size in DEFAULT_SIZES),
+        help="Comma-separated square-fit sizes.",
+    )
     parser.add_argument("--format", default="webp", help="Output format: webp or jpg.")
-    parser.add_argument("--quality", type=int, default=86)
+    parser.add_argument(
+        "--quality",
+        type=int,
+        default=None,
+        help="Use one quality for every size. Overrides --qualities when provided.",
+    )
+    parser.add_argument(
+        "--qualities",
+        default=",".join(f"{size}:{quality}" for size, quality in DEFAULT_QUALITIES.items()),
+        help="Comma-separated SIZE:QUALITY map. Must include every requested size.",
+    )
+    parser.add_argument(
+        "--resize-workers",
+        type=int,
+        default=DEFAULT_RESIZE_WORKERS,
+        help="Number of parallel resize/encode jobs.",
+    )
     parser.add_argument("--hash-chars", type=int, default=10)
     parser.add_argument("--staging-root", type=Path, default=None)
     parser.add_argument("--remote-base", default=DEFAULT_REMOTE_BASE)
@@ -564,6 +667,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     sizes = parse_sizes(args.sizes)
+    qualities = build_quality_map(sizes=sizes, quality=args.quality, qualities=args.qualities)
     staging_root = args.staging_root or default_staging_root()
     album_slug = slugify(args.album)
     if args.index_output:
@@ -582,6 +686,8 @@ def main() -> int:
             destination=manifest_output,
         )
     existing_manifest = read_manifest(manifest_output)
+    if existing_manifest:
+        validate_manifest_variants(existing_manifest, sizes)
     sources = filter_new_sources(
         list_sources(args.source),
         existing_manifest,
@@ -610,11 +716,11 @@ def main() -> int:
             sequence_start=next_sequence(existing_manifest),
         )
 
-        generated: dict[Path, tuple[int, int]] = {}
-        for item in plan.items:
-            for size, destination in item.outputs.items():
-                print(f"generate {size}: {item.source} -> {destination}")
-                generated[destination] = generate_variant(item.source, destination, size, args.quality)
+        generated = generate_album_variants(
+            plan,
+            qualities=qualities,
+            resize_workers=args.resize_workers,
+        )
 
         new_manifest = build_manifest(plan, generated, args.media_base_url)
         manifest = merge_manifest(existing_manifest, new_manifest)

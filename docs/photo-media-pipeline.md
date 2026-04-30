@@ -84,8 +84,9 @@ whose original hashes are already present on the media host.
 The default variants are:
 
 ```text
-600   grid thumbnail
-1600  PhotoSwipe image and download target
+320   thumbnail strip and small grid preview
+1600  album grid, mobile, and fast lightbox preview
+3840  full lightbox image for 4K screens and download target
 ```
 
 The default output format is WebP:
@@ -94,11 +95,25 @@ The default output format is WebP:
 --format webp
 ```
 
-The default quality is:
+The default per-size WebP quality is:
 
 ```text
---quality 86
+--qualities 320:78,1600:82,3840:84
 ```
+
+Use `--quality <value>` only when you intentionally want one quality for every
+generated size.
+
+Photo variants are generated with libvips through `pyvips`, not ImageMagick.
+The default worker count is:
+
+```text
+--resize-workers 16
+```
+
+Every configured size must have an explicit quality entry. The gallery expects
+the exact `320`, `1600`, and `3840` variants; it does not fall back to older
+`600`-pixel manifests.
 
 JPEG is still available when needed:
 
@@ -130,8 +145,9 @@ the script continues after the current manifest length.
 The same file name is used in each size directory:
 
 ```text
-600/20250906-0001.ca8236a31b.webp
+320/20250906-0001.ca8236a31b.webp
 1600/20250906-0001.ca8236a31b.webp
+3840/20250906-0001.ca8236a31b.webp
 ```
 
 This gives stable, cache-friendly URLs. If the source file changes, the hash
@@ -254,7 +270,8 @@ Use a custom staging directory:
 python scripts/photo_media.py \
   --album storm-2025-09-06 \
   --source tmp/photos/burza \
-  --staging-root tmp/photo-media-verification
+  --staging-root tmp/photo-media-verification \
+  --resize-workers 8
 ```
 
 Write an extra manifest copy into the repository:
@@ -270,7 +287,9 @@ python scripts/photo_media.py \
 
 If `data/photos/storm-2025-09-06.json` already exists, the script reads it
 first. Images whose source hash is already present are not regenerated. New
-images are added to the end of the manifest.
+images are added to the end of the manifest. When changing the size set for an
+existing album, regenerate from a clean manifest and sync the new media before
+publishing the Hugo data.
 
 Create a full gallery entry in one run:
 

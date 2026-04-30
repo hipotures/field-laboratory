@@ -39,8 +39,9 @@
     data-label-load-error="{{ i18n "photo_lightbox_load_error" }}"
   >
     {{ range $index, $image := $images }}
-      {{ $thumb := index $image.variants "600" }}
-      {{ $large := index $image.variants "1600" }}
+      {{ $thumb := index $image.variants "320" }}
+      {{ $preview := index $image.variants "1600" }}
+      {{ $full := index $image.variants "3840" }}
       {{ $meta := index $photoMeta $image.hash | default dict }}
       {{ $caption := $meta.caption | default "" }}
       {{ $alt := $meta.alt | default "" }}
@@ -48,16 +49,18 @@
       <figure class="photo-gallery-item" style="--photo-ratio: {{ printf "%.4f" $ratio }};">
         <a
           class="photo-gallery-link no-lightbox"
-          href="{{ $large.url }}"
-          data-pswp-width="{{ $large.width }}"
-          data-pswp-height="{{ $large.height }}"
-          data-pswp-srcset="{{ $thumb.url }} {{ $thumb.width }}w, {{ $large.url }} {{ $large.width }}w"
-          data-download-url="{{ $large.url }}"
+          href="{{ $full.url }}"
+          data-pswp-width="{{ $full.width }}"
+          data-pswp-height="{{ $full.height }}"
+          data-pswp-srcset="{{ $thumb.url }} {{ $thumb.width }}w, {{ $preview.url }} {{ $preview.width }}w, {{ $full.url }} {{ $full.width }}w"
+          data-download-url="{{ $full.url }}"
           data-thumb-src="{{ $thumb.url }}"
           data-caption="{{ $caption }}"
         >
           <img
             src="{{ $thumb.url }}"
+            srcset="{{ $thumb.url }} {{ $thumb.width }}w, {{ $preview.url }} {{ $preview.width }}w"
+            sizes="(max-width: 720px) 50vw, (max-width: 1080px) 33vw, 420px"
             width="{{ $thumb.width }}"
             height="{{ $thumb.height }}"
             alt="{{ $alt }}"

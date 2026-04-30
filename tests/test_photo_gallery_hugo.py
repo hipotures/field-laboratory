@@ -81,7 +81,8 @@ class PhotoGalleryHugoTests(unittest.TestCase):
 
         self.assertIn('href="/photos/storm-2025-09-06/"', html)
         self.assertIn("Burza 2025-09-06", html)
-        self.assertNotIn('href="/photos/dwc/"', html)
+        self.assertIn('href="/photos/dwc/"', html)
+        self.assertIn("DWC", html)
         self.assertIn('id="dark-mode-toggle"', html)
 
     def test_album_page_does_not_generate_placeholder_alt_text(self):
@@ -96,9 +97,10 @@ class PhotoGalleryHugoTests(unittest.TestCase):
         self.assertIn('data-pswp-width="', html)
         self.assertIn('data-pswp-height="', html)
         self.assertIn('class="photo-gallery-link no-lightbox"', html)
-        self.assertIn("https://media.armum.eu/field-laboratory/photos/storm-2025-09-06/600/", html)
+        self.assertIn("https://media.armum.eu/field-laboratory/photos/storm-2025-09-06/320/", html)
         self.assertIn("https://media.armum.eu/field-laboratory/photos/storm-2025-09-06/1600/", html)
-        self.assertIn('data-download-url="https://media.armum.eu/field-laboratory/photos/storm-2025-09-06/1600/', html)
+        self.assertIn("https://media.armum.eu/field-laboratory/photos/storm-2025-09-06/3840/", html)
+        self.assertIn('data-download-url="https://media.armum.eu/field-laboratory/photos/storm-2025-09-06/3840/', html)
 
     def test_lightbox_caption_does_not_fallback_to_alt_text(self):
         script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
