@@ -1,0 +1,2513 @@
+{
+  "album": "dwc",
+  "generated_at": "2026-04-30T02:11:26.544933+00:00",
+  "media_base_url": "https://media.armum.eu/field-laboratory/photos",
+  "sizes": [
+    320,
+    1600,
+    3840
+  ],
+  "format": "webp",
+  "images": [
+    {
+      "hash": "cefb56fa81",
+      "sequence": 1,
+      "name": "20250325-0001.cefb56fa81.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0001.cefb56fa81.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0001.cefb56fa81.webp"
+        },
+        "1600": {
+          "file": "20250325-0001.cefb56fa81.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0001.cefb56fa81.webp"
+        },
+        "3840": {
+          "file": "20250325-0001.cefb56fa81.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0001.cefb56fa81.webp"
+        }
+      }
+    },
+    {
+      "hash": "4d930e659e",
+      "sequence": 2,
+      "name": "20250325-0002.4d930e659e.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0002.4d930e659e.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0002.4d930e659e.webp"
+        },
+        "1600": {
+          "file": "20250325-0002.4d930e659e.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0002.4d930e659e.webp"
+        },
+        "3840": {
+          "file": "20250325-0002.4d930e659e.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0002.4d930e659e.webp"
+        }
+      }
+    },
+    {
+      "hash": "78e2cc0a95",
+      "sequence": 3,
+      "name": "20250325-0003.78e2cc0a95.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0003.78e2cc0a95.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0003.78e2cc0a95.webp"
+        },
+        "1600": {
+          "file": "20250325-0003.78e2cc0a95.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0003.78e2cc0a95.webp"
+        },
+        "3840": {
+          "file": "20250325-0003.78e2cc0a95.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0003.78e2cc0a95.webp"
+        }
+      }
+    },
+    {
+      "hash": "ac980cf043",
+      "sequence": 4,
+      "name": "20250325-0004.ac980cf043.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0004.ac980cf043.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0004.ac980cf043.webp"
+        },
+        "1600": {
+          "file": "20250325-0004.ac980cf043.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0004.ac980cf043.webp"
+        },
+        "3840": {
+          "file": "20250325-0004.ac980cf043.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0004.ac980cf043.webp"
+        }
+      }
+    },
+    {
+      "hash": "cdbbd84708",
+      "sequence": 5,
+      "name": "20250325-0005.cdbbd84708.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0005.cdbbd84708.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0005.cdbbd84708.webp"
+        },
+        "1600": {
+          "file": "20250325-0005.cdbbd84708.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0005.cdbbd84708.webp"
+        },
+        "3840": {
+          "file": "20250325-0005.cdbbd84708.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0005.cdbbd84708.webp"
+        }
+      }
+    },
+    {
+      "hash": "6660a2e527",
+      "sequence": 6,
+      "name": "20250325-0006.6660a2e527.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0006.6660a2e527.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0006.6660a2e527.webp"
+        },
+        "1600": {
+          "file": "20250325-0006.6660a2e527.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0006.6660a2e527.webp"
+        },
+        "3840": {
+          "file": "20250325-0006.6660a2e527.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0006.6660a2e527.webp"
+        }
+      }
+    },
+    {
+      "hash": "d0cfa2cb62",
+      "sequence": 7,
+      "name": "20250325-0007.d0cfa2cb62.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0007.d0cfa2cb62.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0007.d0cfa2cb62.webp"
+        },
+        "1600": {
+          "file": "20250325-0007.d0cfa2cb62.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0007.d0cfa2cb62.webp"
+        },
+        "3840": {
+          "file": "20250325-0007.d0cfa2cb62.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0007.d0cfa2cb62.webp"
+        }
+      }
+    },
+    {
+      "hash": "36b2c9a1a9",
+      "sequence": 8,
+      "name": "20250325-0008.36b2c9a1a9.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0008.36b2c9a1a9.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0008.36b2c9a1a9.webp"
+        },
+        "1600": {
+          "file": "20250325-0008.36b2c9a1a9.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0008.36b2c9a1a9.webp"
+        },
+        "3840": {
+          "file": "20250325-0008.36b2c9a1a9.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0008.36b2c9a1a9.webp"
+        }
+      }
+    },
+    {
+      "hash": "f6185f4cd1",
+      "sequence": 9,
+      "name": "20250325-0009.f6185f4cd1.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0009.f6185f4cd1.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0009.f6185f4cd1.webp"
+        },
+        "1600": {
+          "file": "20250325-0009.f6185f4cd1.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0009.f6185f4cd1.webp"
+        },
+        "3840": {
+          "file": "20250325-0009.f6185f4cd1.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0009.f6185f4cd1.webp"
+        }
+      }
+    },
+    {
+      "hash": "c963965f5b",
+      "sequence": 10,
+      "name": "20250325-0010.c963965f5b.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0010.c963965f5b.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0010.c963965f5b.webp"
+        },
+        "1600": {
+          "file": "20250325-0010.c963965f5b.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0010.c963965f5b.webp"
+        },
+        "3840": {
+          "file": "20250325-0010.c963965f5b.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0010.c963965f5b.webp"
+        }
+      }
+    },
+    {
+      "hash": "6eb3ad34ae",
+      "sequence": 11,
+      "name": "20250325-0011.6eb3ad34ae.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0011.6eb3ad34ae.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0011.6eb3ad34ae.webp"
+        },
+        "1600": {
+          "file": "20250325-0011.6eb3ad34ae.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0011.6eb3ad34ae.webp"
+        },
+        "3840": {
+          "file": "20250325-0011.6eb3ad34ae.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0011.6eb3ad34ae.webp"
+        }
+      }
+    },
+    {
+      "hash": "011674f66f",
+      "sequence": 12,
+      "name": "20250325-0012.011674f66f.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0012.011674f66f.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0012.011674f66f.webp"
+        },
+        "1600": {
+          "file": "20250325-0012.011674f66f.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0012.011674f66f.webp"
+        },
+        "3840": {
+          "file": "20250325-0012.011674f66f.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0012.011674f66f.webp"
+        }
+      }
+    },
+    {
+      "hash": "a1ceadb95e",
+      "sequence": 13,
+      "name": "20250325-0013.a1ceadb95e.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0013.a1ceadb95e.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0013.a1ceadb95e.webp"
+        },
+        "1600": {
+          "file": "20250325-0013.a1ceadb95e.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0013.a1ceadb95e.webp"
+        },
+        "3840": {
+          "file": "20250325-0013.a1ceadb95e.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0013.a1ceadb95e.webp"
+        }
+      }
+    },
+    {
+      "hash": "5ed3636720",
+      "sequence": 14,
+      "name": "20250325-0014.5ed3636720.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0014.5ed3636720.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0014.5ed3636720.webp"
+        },
+        "1600": {
+          "file": "20250325-0014.5ed3636720.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0014.5ed3636720.webp"
+        },
+        "3840": {
+          "file": "20250325-0014.5ed3636720.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0014.5ed3636720.webp"
+        }
+      }
+    },
+    {
+      "hash": "7392a8fddd",
+      "sequence": 15,
+      "name": "20250325-0015.7392a8fddd.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0015.7392a8fddd.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0015.7392a8fddd.webp"
+        },
+        "1600": {
+          "file": "20250325-0015.7392a8fddd.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0015.7392a8fddd.webp"
+        },
+        "3840": {
+          "file": "20250325-0015.7392a8fddd.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0015.7392a8fddd.webp"
+        }
+      }
+    },
+    {
+      "hash": "f00680acbe",
+      "sequence": 16,
+      "name": "20250325-0016.f00680acbe.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0016.f00680acbe.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0016.f00680acbe.webp"
+        },
+        "1600": {
+          "file": "20250325-0016.f00680acbe.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0016.f00680acbe.webp"
+        },
+        "3840": {
+          "file": "20250325-0016.f00680acbe.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0016.f00680acbe.webp"
+        }
+      }
+    },
+    {
+      "hash": "2c75392e84",
+      "sequence": 17,
+      "name": "20250325-0017.2c75392e84.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0017.2c75392e84.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0017.2c75392e84.webp"
+        },
+        "1600": {
+          "file": "20250325-0017.2c75392e84.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0017.2c75392e84.webp"
+        },
+        "3840": {
+          "file": "20250325-0017.2c75392e84.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0017.2c75392e84.webp"
+        }
+      }
+    },
+    {
+      "hash": "b85c08c24b",
+      "sequence": 18,
+      "name": "20250325-0018.b85c08c24b.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0018.b85c08c24b.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0018.b85c08c24b.webp"
+        },
+        "1600": {
+          "file": "20250325-0018.b85c08c24b.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0018.b85c08c24b.webp"
+        },
+        "3840": {
+          "file": "20250325-0018.b85c08c24b.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0018.b85c08c24b.webp"
+        }
+      }
+    },
+    {
+      "hash": "fed40a6aba",
+      "sequence": 19,
+      "name": "20250325-0019.fed40a6aba.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0019.fed40a6aba.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0019.fed40a6aba.webp"
+        },
+        "1600": {
+          "file": "20250325-0019.fed40a6aba.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0019.fed40a6aba.webp"
+        },
+        "3840": {
+          "file": "20250325-0019.fed40a6aba.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0019.fed40a6aba.webp"
+        }
+      }
+    },
+    {
+      "hash": "bf5ac68fbb",
+      "sequence": 20,
+      "name": "20250325-0020.bf5ac68fbb.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0020.bf5ac68fbb.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0020.bf5ac68fbb.webp"
+        },
+        "1600": {
+          "file": "20250325-0020.bf5ac68fbb.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0020.bf5ac68fbb.webp"
+        },
+        "3840": {
+          "file": "20250325-0020.bf5ac68fbb.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0020.bf5ac68fbb.webp"
+        }
+      }
+    },
+    {
+      "hash": "f9e968fe74",
+      "sequence": 21,
+      "name": "20250325-0021.f9e968fe74.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0021.f9e968fe74.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0021.f9e968fe74.webp"
+        },
+        "1600": {
+          "file": "20250325-0021.f9e968fe74.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0021.f9e968fe74.webp"
+        },
+        "3840": {
+          "file": "20250325-0021.f9e968fe74.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0021.f9e968fe74.webp"
+        }
+      }
+    },
+    {
+      "hash": "91118ac438",
+      "sequence": 22,
+      "name": "20250325-0022.91118ac438.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0022.91118ac438.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0022.91118ac438.webp"
+        },
+        "1600": {
+          "file": "20250325-0022.91118ac438.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0022.91118ac438.webp"
+        },
+        "3840": {
+          "file": "20250325-0022.91118ac438.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0022.91118ac438.webp"
+        }
+      }
+    },
+    {
+      "hash": "8ab282aca9",
+      "sequence": 23,
+      "name": "20250325-0023.8ab282aca9.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0023.8ab282aca9.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0023.8ab282aca9.webp"
+        },
+        "1600": {
+          "file": "20250325-0023.8ab282aca9.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0023.8ab282aca9.webp"
+        },
+        "3840": {
+          "file": "20250325-0023.8ab282aca9.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0023.8ab282aca9.webp"
+        }
+      }
+    },
+    {
+      "hash": "ebdd377556",
+      "sequence": 24,
+      "name": "20250325-0024.ebdd377556.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0024.ebdd377556.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0024.ebdd377556.webp"
+        },
+        "1600": {
+          "file": "20250325-0024.ebdd377556.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0024.ebdd377556.webp"
+        },
+        "3840": {
+          "file": "20250325-0024.ebdd377556.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0024.ebdd377556.webp"
+        }
+      }
+    },
+    {
+      "hash": "7e97245e2b",
+      "sequence": 25,
+      "name": "20250325-0025.7e97245e2b.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0025.7e97245e2b.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0025.7e97245e2b.webp"
+        },
+        "1600": {
+          "file": "20250325-0025.7e97245e2b.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0025.7e97245e2b.webp"
+        },
+        "3840": {
+          "file": "20250325-0025.7e97245e2b.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0025.7e97245e2b.webp"
+        }
+      }
+    },
+    {
+      "hash": "ca2671fcbc",
+      "sequence": 26,
+      "name": "20250325-0026.ca2671fcbc.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0026.ca2671fcbc.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0026.ca2671fcbc.webp"
+        },
+        "1600": {
+          "file": "20250325-0026.ca2671fcbc.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0026.ca2671fcbc.webp"
+        },
+        "3840": {
+          "file": "20250325-0026.ca2671fcbc.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0026.ca2671fcbc.webp"
+        }
+      }
+    },
+    {
+      "hash": "7b5950e271",
+      "sequence": 27,
+      "name": "20250325-0027.7b5950e271.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0027.7b5950e271.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0027.7b5950e271.webp"
+        },
+        "1600": {
+          "file": "20250325-0027.7b5950e271.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0027.7b5950e271.webp"
+        },
+        "3840": {
+          "file": "20250325-0027.7b5950e271.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0027.7b5950e271.webp"
+        }
+      }
+    },
+    {
+      "hash": "b8723c28b9",
+      "sequence": 28,
+      "name": "20250325-0028.b8723c28b9.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0028.b8723c28b9.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0028.b8723c28b9.webp"
+        },
+        "1600": {
+          "file": "20250325-0028.b8723c28b9.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0028.b8723c28b9.webp"
+        },
+        "3840": {
+          "file": "20250325-0028.b8723c28b9.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0028.b8723c28b9.webp"
+        }
+      }
+    },
+    {
+      "hash": "c11d663e61",
+      "sequence": 29,
+      "name": "20250325-0029.c11d663e61.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0029.c11d663e61.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0029.c11d663e61.webp"
+        },
+        "1600": {
+          "file": "20250325-0029.c11d663e61.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0029.c11d663e61.webp"
+        },
+        "3840": {
+          "file": "20250325-0029.c11d663e61.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0029.c11d663e61.webp"
+        }
+      }
+    },
+    {
+      "hash": "7f4e0836c9",
+      "sequence": 30,
+      "name": "20250325-0030.7f4e0836c9.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0030.7f4e0836c9.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0030.7f4e0836c9.webp"
+        },
+        "1600": {
+          "file": "20250325-0030.7f4e0836c9.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0030.7f4e0836c9.webp"
+        },
+        "3840": {
+          "file": "20250325-0030.7f4e0836c9.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0030.7f4e0836c9.webp"
+        }
+      }
+    },
+    {
+      "hash": "a1be895291",
+      "sequence": 31,
+      "name": "20250325-0031.a1be895291.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0031.a1be895291.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0031.a1be895291.webp"
+        },
+        "1600": {
+          "file": "20250325-0031.a1be895291.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0031.a1be895291.webp"
+        },
+        "3840": {
+          "file": "20250325-0031.a1be895291.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0031.a1be895291.webp"
+        }
+      }
+    },
+    {
+      "hash": "fddabd86da",
+      "sequence": 32,
+      "name": "20250325-0032.fddabd86da.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0032.fddabd86da.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0032.fddabd86da.webp"
+        },
+        "1600": {
+          "file": "20250325-0032.fddabd86da.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0032.fddabd86da.webp"
+        },
+        "3840": {
+          "file": "20250325-0032.fddabd86da.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0032.fddabd86da.webp"
+        }
+      }
+    },
+    {
+      "hash": "4d1912fc7e",
+      "sequence": 33,
+      "name": "20250325-0033.4d1912fc7e.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0033.4d1912fc7e.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0033.4d1912fc7e.webp"
+        },
+        "1600": {
+          "file": "20250325-0033.4d1912fc7e.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0033.4d1912fc7e.webp"
+        },
+        "3840": {
+          "file": "20250325-0033.4d1912fc7e.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0033.4d1912fc7e.webp"
+        }
+      }
+    },
+    {
+      "hash": "668d489464",
+      "sequence": 34,
+      "name": "20250325-0034.668d489464.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0034.668d489464.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0034.668d489464.webp"
+        },
+        "1600": {
+          "file": "20250325-0034.668d489464.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0034.668d489464.webp"
+        },
+        "3840": {
+          "file": "20250325-0034.668d489464.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0034.668d489464.webp"
+        }
+      }
+    },
+    {
+      "hash": "3adf8598ba",
+      "sequence": 35,
+      "name": "20250325-0035.3adf8598ba.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0035.3adf8598ba.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0035.3adf8598ba.webp"
+        },
+        "1600": {
+          "file": "20250325-0035.3adf8598ba.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0035.3adf8598ba.webp"
+        },
+        "3840": {
+          "file": "20250325-0035.3adf8598ba.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0035.3adf8598ba.webp"
+        }
+      }
+    },
+    {
+      "hash": "c981f8e45e",
+      "sequence": 36,
+      "name": "20250325-0036.c981f8e45e.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0036.c981f8e45e.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0036.c981f8e45e.webp"
+        },
+        "1600": {
+          "file": "20250325-0036.c981f8e45e.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0036.c981f8e45e.webp"
+        },
+        "3840": {
+          "file": "20250325-0036.c981f8e45e.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0036.c981f8e45e.webp"
+        }
+      }
+    },
+    {
+      "hash": "c2a7334e03",
+      "sequence": 37,
+      "name": "20250325-0037.c2a7334e03.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0037.c2a7334e03.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0037.c2a7334e03.webp"
+        },
+        "1600": {
+          "file": "20250325-0037.c2a7334e03.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0037.c2a7334e03.webp"
+        },
+        "3840": {
+          "file": "20250325-0037.c2a7334e03.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0037.c2a7334e03.webp"
+        }
+      }
+    },
+    {
+      "hash": "a232ab3431",
+      "sequence": 38,
+      "name": "20250325-0038.a232ab3431.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0038.a232ab3431.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0038.a232ab3431.webp"
+        },
+        "1600": {
+          "file": "20250325-0038.a232ab3431.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0038.a232ab3431.webp"
+        },
+        "3840": {
+          "file": "20250325-0038.a232ab3431.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0038.a232ab3431.webp"
+        }
+      }
+    },
+    {
+      "hash": "92e9832410",
+      "sequence": 39,
+      "name": "20250325-0039.92e9832410.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0039.92e9832410.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0039.92e9832410.webp"
+        },
+        "1600": {
+          "file": "20250325-0039.92e9832410.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0039.92e9832410.webp"
+        },
+        "3840": {
+          "file": "20250325-0039.92e9832410.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0039.92e9832410.webp"
+        }
+      }
+    },
+    {
+      "hash": "4e41087ec5",
+      "sequence": 40,
+      "name": "20250325-0040.4e41087ec5.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0040.4e41087ec5.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0040.4e41087ec5.webp"
+        },
+        "1600": {
+          "file": "20250325-0040.4e41087ec5.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0040.4e41087ec5.webp"
+        },
+        "3840": {
+          "file": "20250325-0040.4e41087ec5.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0040.4e41087ec5.webp"
+        }
+      }
+    },
+    {
+      "hash": "d9fbbbb7f6",
+      "sequence": 41,
+      "name": "20250325-0041.d9fbbbb7f6.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0041.d9fbbbb7f6.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0041.d9fbbbb7f6.webp"
+        },
+        "1600": {
+          "file": "20250325-0041.d9fbbbb7f6.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0041.d9fbbbb7f6.webp"
+        },
+        "3840": {
+          "file": "20250325-0041.d9fbbbb7f6.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0041.d9fbbbb7f6.webp"
+        }
+      }
+    },
+    {
+      "hash": "fdc10ee44a",
+      "sequence": 42,
+      "name": "20250325-0042.fdc10ee44a.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0042.fdc10ee44a.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0042.fdc10ee44a.webp"
+        },
+        "1600": {
+          "file": "20250325-0042.fdc10ee44a.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0042.fdc10ee44a.webp"
+        },
+        "3840": {
+          "file": "20250325-0042.fdc10ee44a.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0042.fdc10ee44a.webp"
+        }
+      }
+    },
+    {
+      "hash": "57f2d3ff2c",
+      "sequence": 43,
+      "name": "20250325-0043.57f2d3ff2c.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0043.57f2d3ff2c.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0043.57f2d3ff2c.webp"
+        },
+        "1600": {
+          "file": "20250325-0043.57f2d3ff2c.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0043.57f2d3ff2c.webp"
+        },
+        "3840": {
+          "file": "20250325-0043.57f2d3ff2c.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0043.57f2d3ff2c.webp"
+        }
+      }
+    },
+    {
+      "hash": "14ae5ed3a9",
+      "sequence": 44,
+      "name": "20250325-0044.14ae5ed3a9.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0044.14ae5ed3a9.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0044.14ae5ed3a9.webp"
+        },
+        "1600": {
+          "file": "20250325-0044.14ae5ed3a9.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0044.14ae5ed3a9.webp"
+        },
+        "3840": {
+          "file": "20250325-0044.14ae5ed3a9.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0044.14ae5ed3a9.webp"
+        }
+      }
+    },
+    {
+      "hash": "31a3de4b4a",
+      "sequence": 45,
+      "name": "20250325-0045.31a3de4b4a.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0045.31a3de4b4a.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0045.31a3de4b4a.webp"
+        },
+        "1600": {
+          "file": "20250325-0045.31a3de4b4a.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0045.31a3de4b4a.webp"
+        },
+        "3840": {
+          "file": "20250325-0045.31a3de4b4a.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0045.31a3de4b4a.webp"
+        }
+      }
+    },
+    {
+      "hash": "fe36eec96b",
+      "sequence": 46,
+      "name": "20250325-0046.fe36eec96b.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0046.fe36eec96b.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0046.fe36eec96b.webp"
+        },
+        "1600": {
+          "file": "20250325-0046.fe36eec96b.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0046.fe36eec96b.webp"
+        },
+        "3840": {
+          "file": "20250325-0046.fe36eec96b.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0046.fe36eec96b.webp"
+        }
+      }
+    },
+    {
+      "hash": "82647e8f60",
+      "sequence": 47,
+      "name": "20250325-0047.82647e8f60.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0047.82647e8f60.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0047.82647e8f60.webp"
+        },
+        "1600": {
+          "file": "20250325-0047.82647e8f60.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0047.82647e8f60.webp"
+        },
+        "3840": {
+          "file": "20250325-0047.82647e8f60.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0047.82647e8f60.webp"
+        }
+      }
+    },
+    {
+      "hash": "07a87dd486",
+      "sequence": 48,
+      "name": "20250325-0048.07a87dd486.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0048.07a87dd486.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0048.07a87dd486.webp"
+        },
+        "1600": {
+          "file": "20250325-0048.07a87dd486.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0048.07a87dd486.webp"
+        },
+        "3840": {
+          "file": "20250325-0048.07a87dd486.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0048.07a87dd486.webp"
+        }
+      }
+    },
+    {
+      "hash": "5caf74ba68",
+      "sequence": 49,
+      "name": "20250325-0049.5caf74ba68.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0049.5caf74ba68.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0049.5caf74ba68.webp"
+        },
+        "1600": {
+          "file": "20250325-0049.5caf74ba68.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0049.5caf74ba68.webp"
+        },
+        "3840": {
+          "file": "20250325-0049.5caf74ba68.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0049.5caf74ba68.webp"
+        }
+      }
+    },
+    {
+      "hash": "a7a75b73b7",
+      "sequence": 50,
+      "name": "20250325-0050.a7a75b73b7.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0050.a7a75b73b7.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0050.a7a75b73b7.webp"
+        },
+        "1600": {
+          "file": "20250325-0050.a7a75b73b7.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0050.a7a75b73b7.webp"
+        },
+        "3840": {
+          "file": "20250325-0050.a7a75b73b7.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0050.a7a75b73b7.webp"
+        }
+      }
+    },
+    {
+      "hash": "5b4c7246d4",
+      "sequence": 51,
+      "name": "20250325-0051.5b4c7246d4.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0051.5b4c7246d4.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0051.5b4c7246d4.webp"
+        },
+        "1600": {
+          "file": "20250325-0051.5b4c7246d4.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0051.5b4c7246d4.webp"
+        },
+        "3840": {
+          "file": "20250325-0051.5b4c7246d4.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0051.5b4c7246d4.webp"
+        }
+      }
+    },
+    {
+      "hash": "4b6485229a",
+      "sequence": 52,
+      "name": "20250325-0052.4b6485229a.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0052.4b6485229a.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0052.4b6485229a.webp"
+        },
+        "1600": {
+          "file": "20250325-0052.4b6485229a.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0052.4b6485229a.webp"
+        },
+        "3840": {
+          "file": "20250325-0052.4b6485229a.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0052.4b6485229a.webp"
+        }
+      }
+    },
+    {
+      "hash": "f926700c97",
+      "sequence": 53,
+      "name": "20250325-0053.f926700c97.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0053.f926700c97.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0053.f926700c97.webp"
+        },
+        "1600": {
+          "file": "20250325-0053.f926700c97.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0053.f926700c97.webp"
+        },
+        "3840": {
+          "file": "20250325-0053.f926700c97.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0053.f926700c97.webp"
+        }
+      }
+    },
+    {
+      "hash": "6832233fd6",
+      "sequence": 54,
+      "name": "20250325-0054.6832233fd6.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0054.6832233fd6.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0054.6832233fd6.webp"
+        },
+        "1600": {
+          "file": "20250325-0054.6832233fd6.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0054.6832233fd6.webp"
+        },
+        "3840": {
+          "file": "20250325-0054.6832233fd6.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0054.6832233fd6.webp"
+        }
+      }
+    },
+    {
+      "hash": "950b3729de",
+      "sequence": 55,
+      "name": "20250325-0055.950b3729de.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0055.950b3729de.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0055.950b3729de.webp"
+        },
+        "1600": {
+          "file": "20250325-0055.950b3729de.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0055.950b3729de.webp"
+        },
+        "3840": {
+          "file": "20250325-0055.950b3729de.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0055.950b3729de.webp"
+        }
+      }
+    },
+    {
+      "hash": "8e980ef4c5",
+      "sequence": 56,
+      "name": "20250325-0056.8e980ef4c5.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0056.8e980ef4c5.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0056.8e980ef4c5.webp"
+        },
+        "1600": {
+          "file": "20250325-0056.8e980ef4c5.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0056.8e980ef4c5.webp"
+        },
+        "3840": {
+          "file": "20250325-0056.8e980ef4c5.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0056.8e980ef4c5.webp"
+        }
+      }
+    },
+    {
+      "hash": "62217b4a1a",
+      "sequence": 57,
+      "name": "20250325-0057.62217b4a1a.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0057.62217b4a1a.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0057.62217b4a1a.webp"
+        },
+        "1600": {
+          "file": "20250325-0057.62217b4a1a.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0057.62217b4a1a.webp"
+        },
+        "3840": {
+          "file": "20250325-0057.62217b4a1a.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0057.62217b4a1a.webp"
+        }
+      }
+    },
+    {
+      "hash": "41f9875916",
+      "sequence": 58,
+      "name": "20250325-0058.41f9875916.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0058.41f9875916.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0058.41f9875916.webp"
+        },
+        "1600": {
+          "file": "20250325-0058.41f9875916.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0058.41f9875916.webp"
+        },
+        "3840": {
+          "file": "20250325-0058.41f9875916.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0058.41f9875916.webp"
+        }
+      }
+    },
+    {
+      "hash": "3e4c00a5c2",
+      "sequence": 59,
+      "name": "20250325-0059.3e4c00a5c2.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0059.3e4c00a5c2.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0059.3e4c00a5c2.webp"
+        },
+        "1600": {
+          "file": "20250325-0059.3e4c00a5c2.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0059.3e4c00a5c2.webp"
+        },
+        "3840": {
+          "file": "20250325-0059.3e4c00a5c2.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0059.3e4c00a5c2.webp"
+        }
+      }
+    },
+    {
+      "hash": "70448702e6",
+      "sequence": 60,
+      "name": "20250325-0060.70448702e6.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0060.70448702e6.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0060.70448702e6.webp"
+        },
+        "1600": {
+          "file": "20250325-0060.70448702e6.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0060.70448702e6.webp"
+        },
+        "3840": {
+          "file": "20250325-0060.70448702e6.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0060.70448702e6.webp"
+        }
+      }
+    },
+    {
+      "hash": "f6b6bd7482",
+      "sequence": 61,
+      "name": "20250325-0061.f6b6bd7482.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0061.f6b6bd7482.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0061.f6b6bd7482.webp"
+        },
+        "1600": {
+          "file": "20250325-0061.f6b6bd7482.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0061.f6b6bd7482.webp"
+        },
+        "3840": {
+          "file": "20250325-0061.f6b6bd7482.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0061.f6b6bd7482.webp"
+        }
+      }
+    },
+    {
+      "hash": "2f1368acb5",
+      "sequence": 62,
+      "name": "20250325-0062.2f1368acb5.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0062.2f1368acb5.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0062.2f1368acb5.webp"
+        },
+        "1600": {
+          "file": "20250325-0062.2f1368acb5.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0062.2f1368acb5.webp"
+        },
+        "3840": {
+          "file": "20250325-0062.2f1368acb5.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0062.2f1368acb5.webp"
+        }
+      }
+    },
+    {
+      "hash": "476982c5e5",
+      "sequence": 63,
+      "name": "20250325-0063.476982c5e5.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0063.476982c5e5.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0063.476982c5e5.webp"
+        },
+        "1600": {
+          "file": "20250325-0063.476982c5e5.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0063.476982c5e5.webp"
+        },
+        "3840": {
+          "file": "20250325-0063.476982c5e5.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0063.476982c5e5.webp"
+        }
+      }
+    },
+    {
+      "hash": "2eb38d3cd6",
+      "sequence": 64,
+      "name": "20250325-0064.2eb38d3cd6.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0064.2eb38d3cd6.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0064.2eb38d3cd6.webp"
+        },
+        "1600": {
+          "file": "20250325-0064.2eb38d3cd6.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0064.2eb38d3cd6.webp"
+        },
+        "3840": {
+          "file": "20250325-0064.2eb38d3cd6.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0064.2eb38d3cd6.webp"
+        }
+      }
+    },
+    {
+      "hash": "630eefd971",
+      "sequence": 65,
+      "name": "20250325-0065.630eefd971.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0065.630eefd971.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0065.630eefd971.webp"
+        },
+        "1600": {
+          "file": "20250325-0065.630eefd971.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0065.630eefd971.webp"
+        },
+        "3840": {
+          "file": "20250325-0065.630eefd971.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0065.630eefd971.webp"
+        }
+      }
+    },
+    {
+      "hash": "b9794749cc",
+      "sequence": 66,
+      "name": "20250325-0066.b9794749cc.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0066.b9794749cc.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0066.b9794749cc.webp"
+        },
+        "1600": {
+          "file": "20250325-0066.b9794749cc.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0066.b9794749cc.webp"
+        },
+        "3840": {
+          "file": "20250325-0066.b9794749cc.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0066.b9794749cc.webp"
+        }
+      }
+    },
+    {
+      "hash": "aabad5d0f7",
+      "sequence": 67,
+      "name": "20250325-0067.aabad5d0f7.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0067.aabad5d0f7.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0067.aabad5d0f7.webp"
+        },
+        "1600": {
+          "file": "20250325-0067.aabad5d0f7.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0067.aabad5d0f7.webp"
+        },
+        "3840": {
+          "file": "20250325-0067.aabad5d0f7.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0067.aabad5d0f7.webp"
+        }
+      }
+    },
+    {
+      "hash": "ae93b41975",
+      "sequence": 68,
+      "name": "20250325-0068.ae93b41975.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0068.ae93b41975.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0068.ae93b41975.webp"
+        },
+        "1600": {
+          "file": "20250325-0068.ae93b41975.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0068.ae93b41975.webp"
+        },
+        "3840": {
+          "file": "20250325-0068.ae93b41975.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0068.ae93b41975.webp"
+        }
+      }
+    },
+    {
+      "hash": "9e2c430d89",
+      "sequence": 69,
+      "name": "20250325-0069.9e2c430d89.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0069.9e2c430d89.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0069.9e2c430d89.webp"
+        },
+        "1600": {
+          "file": "20250325-0069.9e2c430d89.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0069.9e2c430d89.webp"
+        },
+        "3840": {
+          "file": "20250325-0069.9e2c430d89.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0069.9e2c430d89.webp"
+        }
+      }
+    },
+    {
+      "hash": "0acf2054f8",
+      "sequence": 70,
+      "name": "20250325-0070.0acf2054f8.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0070.0acf2054f8.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0070.0acf2054f8.webp"
+        },
+        "1600": {
+          "file": "20250325-0070.0acf2054f8.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0070.0acf2054f8.webp"
+        },
+        "3840": {
+          "file": "20250325-0070.0acf2054f8.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0070.0acf2054f8.webp"
+        }
+      }
+    },
+    {
+      "hash": "5807231c6a",
+      "sequence": 71,
+      "name": "20250325-0071.5807231c6a.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0071.5807231c6a.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0071.5807231c6a.webp"
+        },
+        "1600": {
+          "file": "20250325-0071.5807231c6a.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0071.5807231c6a.webp"
+        },
+        "3840": {
+          "file": "20250325-0071.5807231c6a.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0071.5807231c6a.webp"
+        }
+      }
+    },
+    {
+      "hash": "fa3326cea1",
+      "sequence": 72,
+      "name": "20250325-0072.fa3326cea1.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0072.fa3326cea1.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0072.fa3326cea1.webp"
+        },
+        "1600": {
+          "file": "20250325-0072.fa3326cea1.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0072.fa3326cea1.webp"
+        },
+        "3840": {
+          "file": "20250325-0072.fa3326cea1.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0072.fa3326cea1.webp"
+        }
+      }
+    },
+    {
+      "hash": "9b7297ba10",
+      "sequence": 73,
+      "name": "20250325-0073.9b7297ba10.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0073.9b7297ba10.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0073.9b7297ba10.webp"
+        },
+        "1600": {
+          "file": "20250325-0073.9b7297ba10.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0073.9b7297ba10.webp"
+        },
+        "3840": {
+          "file": "20250325-0073.9b7297ba10.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0073.9b7297ba10.webp"
+        }
+      }
+    },
+    {
+      "hash": "3c7b333af0",
+      "sequence": 74,
+      "name": "20250325-0074.3c7b333af0.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0074.3c7b333af0.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0074.3c7b333af0.webp"
+        },
+        "1600": {
+          "file": "20250325-0074.3c7b333af0.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0074.3c7b333af0.webp"
+        },
+        "3840": {
+          "file": "20250325-0074.3c7b333af0.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0074.3c7b333af0.webp"
+        }
+      }
+    },
+    {
+      "hash": "5403a7dd5c",
+      "sequence": 75,
+      "name": "20250325-0075.5403a7dd5c.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0075.5403a7dd5c.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0075.5403a7dd5c.webp"
+        },
+        "1600": {
+          "file": "20250325-0075.5403a7dd5c.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0075.5403a7dd5c.webp"
+        },
+        "3840": {
+          "file": "20250325-0075.5403a7dd5c.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0075.5403a7dd5c.webp"
+        }
+      }
+    },
+    {
+      "hash": "7bd1da9d47",
+      "sequence": 76,
+      "name": "20250325-0076.7bd1da9d47.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0076.7bd1da9d47.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0076.7bd1da9d47.webp"
+        },
+        "1600": {
+          "file": "20250325-0076.7bd1da9d47.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0076.7bd1da9d47.webp"
+        },
+        "3840": {
+          "file": "20250325-0076.7bd1da9d47.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0076.7bd1da9d47.webp"
+        }
+      }
+    },
+    {
+      "hash": "05a2352851",
+      "sequence": 77,
+      "name": "20250325-0077.05a2352851.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0077.05a2352851.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0077.05a2352851.webp"
+        },
+        "1600": {
+          "file": "20250325-0077.05a2352851.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0077.05a2352851.webp"
+        },
+        "3840": {
+          "file": "20250325-0077.05a2352851.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0077.05a2352851.webp"
+        }
+      }
+    },
+    {
+      "hash": "1576aa5243",
+      "sequence": 78,
+      "name": "20250325-0078.1576aa5243.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0078.1576aa5243.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0078.1576aa5243.webp"
+        },
+        "1600": {
+          "file": "20250325-0078.1576aa5243.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0078.1576aa5243.webp"
+        },
+        "3840": {
+          "file": "20250325-0078.1576aa5243.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0078.1576aa5243.webp"
+        }
+      }
+    },
+    {
+      "hash": "fd47c7cfac",
+      "sequence": 79,
+      "name": "20250325-0079.fd47c7cfac.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0079.fd47c7cfac.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0079.fd47c7cfac.webp"
+        },
+        "1600": {
+          "file": "20250325-0079.fd47c7cfac.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0079.fd47c7cfac.webp"
+        },
+        "3840": {
+          "file": "20250325-0079.fd47c7cfac.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0079.fd47c7cfac.webp"
+        }
+      }
+    },
+    {
+      "hash": "641fbd7fed",
+      "sequence": 80,
+      "name": "20250325-0080.641fbd7fed.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0080.641fbd7fed.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0080.641fbd7fed.webp"
+        },
+        "1600": {
+          "file": "20250325-0080.641fbd7fed.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0080.641fbd7fed.webp"
+        },
+        "3840": {
+          "file": "20250325-0080.641fbd7fed.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0080.641fbd7fed.webp"
+        }
+      }
+    },
+    {
+      "hash": "2576d6be64",
+      "sequence": 81,
+      "name": "20250325-0081.2576d6be64.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0081.2576d6be64.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0081.2576d6be64.webp"
+        },
+        "1600": {
+          "file": "20250325-0081.2576d6be64.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0081.2576d6be64.webp"
+        },
+        "3840": {
+          "file": "20250325-0081.2576d6be64.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0081.2576d6be64.webp"
+        }
+      }
+    },
+    {
+      "hash": "b246151be5",
+      "sequence": 82,
+      "name": "20250325-0082.b246151be5.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0082.b246151be5.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0082.b246151be5.webp"
+        },
+        "1600": {
+          "file": "20250325-0082.b246151be5.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0082.b246151be5.webp"
+        },
+        "3840": {
+          "file": "20250325-0082.b246151be5.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0082.b246151be5.webp"
+        }
+      }
+    },
+    {
+      "hash": "34820d193d",
+      "sequence": 83,
+      "name": "20250325-0083.34820d193d.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0083.34820d193d.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0083.34820d193d.webp"
+        },
+        "1600": {
+          "file": "20250325-0083.34820d193d.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0083.34820d193d.webp"
+        },
+        "3840": {
+          "file": "20250325-0083.34820d193d.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0083.34820d193d.webp"
+        }
+      }
+    },
+    {
+      "hash": "db7cc646a2",
+      "sequence": 84,
+      "name": "20250325-0084.db7cc646a2.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0084.db7cc646a2.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0084.db7cc646a2.webp"
+        },
+        "1600": {
+          "file": "20250325-0084.db7cc646a2.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0084.db7cc646a2.webp"
+        },
+        "3840": {
+          "file": "20250325-0084.db7cc646a2.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0084.db7cc646a2.webp"
+        }
+      }
+    },
+    {
+      "hash": "dd6a2ffa83",
+      "sequence": 85,
+      "name": "20250325-0085.dd6a2ffa83.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0085.dd6a2ffa83.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0085.dd6a2ffa83.webp"
+        },
+        "1600": {
+          "file": "20250325-0085.dd6a2ffa83.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0085.dd6a2ffa83.webp"
+        },
+        "3840": {
+          "file": "20250325-0085.dd6a2ffa83.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0085.dd6a2ffa83.webp"
+        }
+      }
+    },
+    {
+      "hash": "8a7727028d",
+      "sequence": 86,
+      "name": "20250325-0086.8a7727028d.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0086.8a7727028d.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0086.8a7727028d.webp"
+        },
+        "1600": {
+          "file": "20250325-0086.8a7727028d.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0086.8a7727028d.webp"
+        },
+        "3840": {
+          "file": "20250325-0086.8a7727028d.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0086.8a7727028d.webp"
+        }
+      }
+    },
+    {
+      "hash": "17acfb2bd2",
+      "sequence": 87,
+      "name": "20250325-0087.17acfb2bd2.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0087.17acfb2bd2.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0087.17acfb2bd2.webp"
+        },
+        "1600": {
+          "file": "20250325-0087.17acfb2bd2.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0087.17acfb2bd2.webp"
+        },
+        "3840": {
+          "file": "20250325-0087.17acfb2bd2.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0087.17acfb2bd2.webp"
+        }
+      }
+    },
+    {
+      "hash": "417f7ee4bd",
+      "sequence": 88,
+      "name": "20250325-0088.417f7ee4bd.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0088.417f7ee4bd.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0088.417f7ee4bd.webp"
+        },
+        "1600": {
+          "file": "20250325-0088.417f7ee4bd.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0088.417f7ee4bd.webp"
+        },
+        "3840": {
+          "file": "20250325-0088.417f7ee4bd.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0088.417f7ee4bd.webp"
+        }
+      }
+    },
+    {
+      "hash": "fe24c149cc",
+      "sequence": 89,
+      "name": "20250325-0089.fe24c149cc.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0089.fe24c149cc.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0089.fe24c149cc.webp"
+        },
+        "1600": {
+          "file": "20250325-0089.fe24c149cc.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0089.fe24c149cc.webp"
+        },
+        "3840": {
+          "file": "20250325-0089.fe24c149cc.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0089.fe24c149cc.webp"
+        }
+      }
+    },
+    {
+      "hash": "0fea9ac7d6",
+      "sequence": 90,
+      "name": "20250325-0090.0fea9ac7d6.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0090.0fea9ac7d6.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0090.0fea9ac7d6.webp"
+        },
+        "1600": {
+          "file": "20250325-0090.0fea9ac7d6.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0090.0fea9ac7d6.webp"
+        },
+        "3840": {
+          "file": "20250325-0090.0fea9ac7d6.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0090.0fea9ac7d6.webp"
+        }
+      }
+    },
+    {
+      "hash": "2cf10f1e3f",
+      "sequence": 91,
+      "name": "20250325-0091.2cf10f1e3f.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0091.2cf10f1e3f.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0091.2cf10f1e3f.webp"
+        },
+        "1600": {
+          "file": "20250325-0091.2cf10f1e3f.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0091.2cf10f1e3f.webp"
+        },
+        "3840": {
+          "file": "20250325-0091.2cf10f1e3f.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0091.2cf10f1e3f.webp"
+        }
+      }
+    },
+    {
+      "hash": "c3568365ab",
+      "sequence": 92,
+      "name": "20250325-0092.c3568365ab.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0092.c3568365ab.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0092.c3568365ab.webp"
+        },
+        "1600": {
+          "file": "20250325-0092.c3568365ab.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0092.c3568365ab.webp"
+        },
+        "3840": {
+          "file": "20250325-0092.c3568365ab.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0092.c3568365ab.webp"
+        }
+      }
+    },
+    {
+      "hash": "0104d3f3ec",
+      "sequence": 93,
+      "name": "20250325-0093.0104d3f3ec.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0093.0104d3f3ec.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0093.0104d3f3ec.webp"
+        },
+        "1600": {
+          "file": "20250325-0093.0104d3f3ec.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0093.0104d3f3ec.webp"
+        },
+        "3840": {
+          "file": "20250325-0093.0104d3f3ec.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0093.0104d3f3ec.webp"
+        }
+      }
+    },
+    {
+      "hash": "03d859246e",
+      "sequence": 94,
+      "name": "20250325-0094.03d859246e.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0094.03d859246e.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0094.03d859246e.webp"
+        },
+        "1600": {
+          "file": "20250325-0094.03d859246e.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0094.03d859246e.webp"
+        },
+        "3840": {
+          "file": "20250325-0094.03d859246e.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0094.03d859246e.webp"
+        }
+      }
+    },
+    {
+      "hash": "fc1d0988e3",
+      "sequence": 95,
+      "name": "20250325-0095.fc1d0988e3.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0095.fc1d0988e3.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0095.fc1d0988e3.webp"
+        },
+        "1600": {
+          "file": "20250325-0095.fc1d0988e3.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0095.fc1d0988e3.webp"
+        },
+        "3840": {
+          "file": "20250325-0095.fc1d0988e3.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0095.fc1d0988e3.webp"
+        }
+      }
+    },
+    {
+      "hash": "6c7493ff8e",
+      "sequence": 96,
+      "name": "20250325-0096.6c7493ff8e.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0096.6c7493ff8e.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0096.6c7493ff8e.webp"
+        },
+        "1600": {
+          "file": "20250325-0096.6c7493ff8e.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0096.6c7493ff8e.webp"
+        },
+        "3840": {
+          "file": "20250325-0096.6c7493ff8e.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0096.6c7493ff8e.webp"
+        }
+      }
+    },
+    {
+      "hash": "7fd9048a23",
+      "sequence": 97,
+      "name": "20250325-0097.7fd9048a23.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0097.7fd9048a23.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0097.7fd9048a23.webp"
+        },
+        "1600": {
+          "file": "20250325-0097.7fd9048a23.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0097.7fd9048a23.webp"
+        },
+        "3840": {
+          "file": "20250325-0097.7fd9048a23.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0097.7fd9048a23.webp"
+        }
+      }
+    },
+    {
+      "hash": "497bd9f00e",
+      "sequence": 98,
+      "name": "20250325-0098.497bd9f00e.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0098.497bd9f00e.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0098.497bd9f00e.webp"
+        },
+        "1600": {
+          "file": "20250325-0098.497bd9f00e.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0098.497bd9f00e.webp"
+        },
+        "3840": {
+          "file": "20250325-0098.497bd9f00e.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0098.497bd9f00e.webp"
+        }
+      }
+    },
+    {
+      "hash": "8395a6230e",
+      "sequence": 99,
+      "name": "20250325-0099.8395a6230e.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0099.8395a6230e.webp",
+          "width": 213,
+          "height": 320,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0099.8395a6230e.webp"
+        },
+        "1600": {
+          "file": "20250325-0099.8395a6230e.webp",
+          "width": 1067,
+          "height": 1600,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0099.8395a6230e.webp"
+        },
+        "3840": {
+          "file": "20250325-0099.8395a6230e.webp",
+          "width": 2560,
+          "height": 3840,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0099.8395a6230e.webp"
+        }
+      }
+    },
+    {
+      "hash": "ade38c724a",
+      "sequence": 100,
+      "name": "20250325-0100.ade38c724a.webp",
+      "variants": {
+        "320": {
+          "file": "20250325-0100.ade38c724a.webp",
+          "width": 320,
+          "height": 213,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/320/20250325-0100.ade38c724a.webp"
+        },
+        "1600": {
+          "file": "20250325-0100.ade38c724a.webp",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/1600/20250325-0100.ade38c724a.webp"
+        },
+        "3840": {
+          "file": "20250325-0100.ade38c724a.webp",
+          "width": 3840,
+          "height": 2560,
+          "url": "https://media.armum.eu/field-laboratory/photos/dwc/3840/20250325-0100.ade38c724a.webp"
+        }
+      }
+    }
+  ]
+}
