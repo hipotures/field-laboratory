@@ -98,7 +98,7 @@ The default output format is WebP:
 The default per-size WebP quality is:
 
 ```text
---qualities 320:78,1600:82,3840:84
+--qualities 320:84,1600:90,3840:95
 ```
 
 Use `--quality <value>` only when you intentionally want one quality for every
@@ -110,6 +110,9 @@ The default worker count is:
 ```text
 --resize-workers 16
 ```
+
+WebP uses effort `6` by default to reduce visible artifacts in dark, noisy
+photo backgrounds.
 
 Every configured size must have an explicit quality entry. The gallery expects
 the exact `320`, `1600`, and `3840` variants; it does not fall back to older

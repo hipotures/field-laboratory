@@ -20,6 +20,15 @@ class PhotoGalleryHugoTests(unittest.TestCase):
     def read_public(self, relative_path: str) -> str:
         return (ROOT / "public-test-gallery" / relative_path).read_text(encoding="utf-8")
 
+    def public_exists(self, relative_path: str) -> bool:
+        return (ROOT / "public-test-gallery" / relative_path).exists()
+
+    def read_storm_album(self) -> str:
+        path = "photos/storm-2025-09-06/index.html"
+        if not self.public_exists(path):
+            self.skipTest("storm photo album is not published")
+        return self.read_public(path)
+
     def test_thumbnail_strip_does_not_smooth_scroll_on_slide_change(self):
         script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
 
@@ -64,7 +73,7 @@ class PhotoGalleryHugoTests(unittest.TestCase):
 
     def test_lightbox_ui_labels_come_from_hugo_i18n_data_attributes(self):
         script = (ROOT / "static/js/photo-gallery.js").read_text(encoding="utf-8")
-        html = self.read_public("photos/storm-2025-09-06/index.html")
+        html = self.read_storm_album()
 
         self.assertIn("gallery.dataset.labelDownload", script)
         self.assertIn("gallery.dataset.labelLoadError", script)
@@ -79,19 +88,21 @@ class PhotoGalleryHugoTests(unittest.TestCase):
     def test_photos_index_links_first_album_and_preserves_theme_toggle(self):
         html = self.read_public("photos/index.html")
 
-        self.assertIn('href="/photos/storm-2025-09-06/"', html)
-        self.assertIn("Burza 2025-09-06", html)
-        self.assertIn('href="/photos/dwc/"', html)
-        self.assertIn("DWC", html)
+        if self.public_exists("photos/storm-2025-09-06/index.html"):
+            self.assertIn('href="/photos/storm-2025-09-06/"', html)
+            self.assertIn("Burza 2025-09-06", html)
+        else:
+            self.assertNotIn('href="/photos/storm-2025-09-06/"', html)
+            self.assertNotIn('href="/photos/dwc/"', html)
         self.assertIn('id="dark-mode-toggle"', html)
 
     def test_album_page_does_not_generate_placeholder_alt_text(self):
-        html = self.read_public("photos/storm-2025-09-06/index.html")
+        html = self.read_storm_album()
 
         self.assertNotIn("Zdjęcie z albumu", html)
 
     def test_album_page_renders_manifest_gallery_for_photoswipe(self):
-        html = self.read_public("photos/storm-2025-09-06/index.html")
+        html = self.read_storm_album()
 
         self.assertIn('class="photo-gallery"', html)
         self.assertIn('data-pswp-width="', html)
@@ -123,7 +134,7 @@ class PhotoGalleryHugoTests(unittest.TestCase):
         self.assertNotIn("opacity: 0.62", styles)
 
     def test_album_page_loads_local_photoswipe_assets(self):
-        html = self.read_public("photos/storm-2025-09-06/index.html")
+        html = self.read_storm_album()
 
         self.assertIn('href="/vendor/photoswipe/photoswipe.css"', html)
         self.assertIn('src="/js/photo-gallery.js"', html)

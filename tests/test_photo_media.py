@@ -17,12 +17,13 @@ def test_variants(name: str = "image.webp") -> dict[str, dict[str, object]]:
 class PhotoMediaTests(unittest.TestCase):
     def test_default_variants_and_qualities_are_explicit(self):
         self.assertEqual(photo_media.DEFAULT_SIZES, [320, 1600, 3840])
-        self.assertEqual(photo_media.DEFAULT_QUALITIES, {320: 78, 1600: 82, 3840: 84})
+        self.assertEqual(photo_media.DEFAULT_QUALITIES, {320: 84, 1600: 90, 3840: 95})
+        self.assertEqual(photo_media.DEFAULT_WEBP_EFFORT, 6)
 
     def test_parse_size_qualities_requires_every_requested_size(self):
         self.assertEqual(
-            photo_media.parse_size_qualities("320:78,1600:82,3840:84", [320, 1600, 3840]),
-            {320: 78, 1600: 82, 3840: 84},
+            photo_media.parse_size_qualities("320:84,1600:90,3840:95", [320, 1600, 3840]),
+            {320: 84, 1600: 90, 3840: 95},
         )
 
         with self.assertRaisesRegex(ValueError, "Missing quality"):

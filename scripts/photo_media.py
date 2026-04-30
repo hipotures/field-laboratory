@@ -18,9 +18,9 @@ IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
 DEFAULT_REMOTE_BASE = "deploy@armum.eu:/srv/www/media/field-laboratory/photos"
 DEFAULT_MEDIA_BASE_URL = "https://media.armum.eu/field-laboratory/photos"
 DEFAULT_SIZES = [320, 1600, 3840]
-DEFAULT_QUALITIES = {320: 78, 1600: 82, 3840: 84}
+DEFAULT_QUALITIES = {320: 84, 1600: 90, 3840: 95}
 DEFAULT_RESIZE_WORKERS = 16
-DEFAULT_WEBP_EFFORT = 4
+DEFAULT_WEBP_EFFORT = 6
 
 
 @dataclass(frozen=True)
@@ -661,6 +661,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Do not try to pull an existing media-host manifest before processing sources.",
     )
+    parser.add_argument(
+        "--force-regenerate",
+        action="store_true",
+        help="Regenerate all source images and replace the album manifest even when hashes already exist.",
+    )
     return parser.parse_args()
 
 
@@ -686,12 +691,17 @@ def main() -> int:
             destination=manifest_output,
         )
     existing_manifest = read_manifest(manifest_output)
-    if existing_manifest:
+    if existing_manifest and not args.force_regenerate:
         validate_manifest_variants(existing_manifest, sizes)
-    sources = filter_new_sources(
-        list_sources(args.source),
-        existing_manifest,
-        args.hash_chars,
+    all_sources = list_sources(args.source)
+    sources = (
+        all_sources
+        if args.force_regenerate
+        else filter_new_sources(
+            all_sources,
+            existing_manifest,
+            args.hash_chars,
+        )
     )
     if not sources and not args.write_index:
         print("no new images to process")
@@ -702,7 +712,7 @@ def main() -> int:
     if sources and args.skip_rsync and not args.no_publish:
         raise ValueError("Refusing to publish new image metadata when --skip-rsync was used. Use --no-publish.")
 
-    manifest = existing_manifest
+    manifest = {} if args.force_regenerate else existing_manifest
     plan: AlbumPlan | None = None
     if sources:
         plan = build_album_plan(
@@ -713,7 +723,7 @@ def main() -> int:
             image_format=args.format,
             hash_chars=args.hash_chars,
             album_date_prefix=output_date_prefix,
-            sequence_start=next_sequence(existing_manifest),
+            sequence_start=1 if args.force_regenerate else next_sequence(existing_manifest),
         )
 
         generated = generate_album_variants(
@@ -723,7 +733,7 @@ def main() -> int:
         )
 
         new_manifest = build_manifest(plan, generated, args.media_base_url)
-        manifest = merge_manifest(existing_manifest, new_manifest)
+        manifest = new_manifest if args.force_regenerate else merge_manifest(existing_manifest, new_manifest)
         staging_manifest = plan.album_dir / "manifest.json"
         write_manifest(staging_manifest, public_manifest(manifest))
         print(f"manifest: {staging_manifest}")
