@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
-DEFAULT_REMOTE_BASE = "deploy@armum.eu:/srv/www/media/field-laboratory/photos"
+DEFAULT_REMOTE_BASE = "deploy@armum.eu:/srv/media/field-laboratory/photos"
 DEFAULT_MEDIA_BASE_URL = "https://media.armum.eu/field-laboratory/photos"
 DEFAULT_SIZES = [320, 1600, 3840]
 DEFAULT_QUALITIES = {320: 84, 1600: 90, 3840: 95}
