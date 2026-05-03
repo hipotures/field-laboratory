@@ -1,6 +1,6 @@
 ---
 title: "Stała Millsa: liczba, która koduje liczby pierwsze"
-date: 2026-05-04
+date: 2026-05-04T01:35:00+02:00
 description: "Krótka notka o stałej Millsa: jak jedna liczba rzeczywista może wyznaczać nieskończony ciąg liczb pierwszych i dlaczego nie jest to praktyczny generator."
 tags: ["matematyka", "liczby pierwsze", "stała Millsa", "teoria liczb"]
 categories: ["artykuly"]
@@ -12,17 +12,17 @@ resources:
       kind: image
 ---
 
-Stała Millsa jest jednym z tych wyników teorii liczb, które brzmią prawie jak sztuczka: istnieje taka liczba rzeczywista A, że kolejne wartości
+Stała Millsa to liczba rzeczywista A, dla której kolejne wartości
 
 <div class="math-block">⌊A<sup>3ⁿ</sup>⌋</div>
 
-są liczbami pierwszymi. Nie chodzi jednak o praktyczny algorytm produkowania pierwszych, tylko o eleganckie twierdzenie egzystencjalne: jedna liczba rzeczywista może zakodować nieskończony ciąg liczb pierwszych.
+są liczbami pierwszymi. W tym sensie jedna stała może opisywać nieskończony ciąg liczb pierwszych. Nie jest to jednak praktyczny algorytm: użycie wzoru dla dużych n wymaga znajomości A z bardzo dużą precyzją.
 
 <figure class="infographic-figure">
   <a class="infographic-figure-link" href="images/A.png" target="_blank" rel="noopener">
-    <img src="images/A.png" width="1156" height="1831" alt="Plansza wyjaśniająca konstrukcję stałej Millsa i kolejne liczby pierwsze Millsa.">
+    <img src="images/A.png" width="1156" height="1831" alt="Strona artykułu W. H. Millsa A Prime-Representing Function.">
   </a>
-  <figcaption>Stała Millsa wybiera liczby pierwsze przez potęgowanie jednej liczby rzeczywistej i branie części całkowitej.</figcaption>
+  <figcaption>Jednostronicowy artykuł W. H. Millsa „A Prime-Representing Function”, opublikowany w Bulletin of the American Mathematical Society w 1947 roku.</figcaption>
 </figure>
 
 Najczęściej cytowana wartość tej stałej to:
@@ -70,7 +70,7 @@ Kluczowy fakt jest taki, że między kolejnymi sześcianami odstęp jest duży:
 
 <div class="math-block">(x + 1)³ - x³ = 3x² + 3x + 1</div>
 
-Dla dużego x to bardzo szeroki przedział. Mills użył znanych wyników o przerwach między liczbami pierwszymi, aby zagwarantować, że w takim przedziale znajdzie się liczba pierwsza.
+Dla dużego x jest to szeroki przedział. Mills użył znanych wyników o przerwach między liczbami pierwszymi, aby zagwarantować, że w takim przedziale znajdzie się liczba pierwsza.
 
 Gdyby zamiast wykładników 3ⁿ użyć 2ⁿ, trzeba byłoby gwarantować liczby pierwsze między kolejnymi kwadratami:
 
@@ -84,8 +84,12 @@ Formalnie wzór:
 
 <div class="math-block">⌊A<sup>3ⁿ</sup>⌋</div>
 
-daje liczby pierwsze. Praktycznie nie jest to jednak użyteczny generator. Żeby policzyć duże n, trzeba znać A z ogromną precyzją. A te kolejne cyfry stałej są wyznaczane przez kolejne liczby pierwsze z konstrukcji.
+daje liczby pierwsze. Praktycznie nie jest to jednak użyteczny generator. Żeby policzyć duże n, trzeba znać A z bardzo dużą precyzją. A te kolejne cyfry stałej są wyznaczane przez kolejne liczby pierwsze z konstrukcji.
 
-Innymi słowy: stała Millsa nie daje taniej drogi do nowych liczb pierwszych. Ona raczej pokazuje, że można ukryć nieskończony ciąg liczb pierwszych w jednej liczbie rzeczywistej.
+Innymi słowy: stała Millsa nie daje taniej drogi do nowych liczb pierwszych. Pokazuje raczej, że nieskończony ciąg liczb pierwszych można zakodować w jednej liczbie rzeczywistej.
 
 Najkrócej: sedno stałej Millsa polega na kodowaniu, nie na obliczeniowej praktyczności.
+
+## Przypis
+
+Oryginalna publikacja: W. H. Mills, „A Prime-Representing Function”, *Bulletin of the American Mathematical Society* 53 (1947), 604. Strona AMS: <https://pubs.ams.org/journals/bull/1947-53-06/S0002-9904-1947-08849-2>.
