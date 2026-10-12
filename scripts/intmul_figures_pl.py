@@ -6,7 +6,8 @@ The figure generators are the work of Rohan Arun
 This script does not vendor them: it copies them from a local checkout into a
 temporary directory, replaces the visible English labels with Polish ones,
 switches numbers to a decimal comma, runs the generators and converts the
-results to WebP for the three article bundles. Mathematical content is unchanged.
+results to WebP for the three article bundles, in a light and a dark variant
+(NAME.webp and NAME-dark.webp). Mathematical content is unchanged.
 
 Requires Python with NumPy, Matplotlib and Pillow, plus the pl_PL.UTF-8 locale.
 
@@ -182,10 +183,50 @@ REPLACEMENTS: dict[str, list[tuple[str, str]]] = {
 }
 
 
-def translate(source: Path, work: Path) -> None:
+# Dark-theme variant, applied on top of the Polish labels. The page shows it when the
+# site's dark color scheme is active. Background matches the theme (#212121).
+DARK_BG = "#212121"
+DARK_TABLE_STYLE = f"""
+def _dark_tables(fig):
+    for ax in fig.axes:
+        for table in ax.tables:
+            for (row, _), cell in table.get_celld().items():
+                cell.set_facecolor('#2C343B' if row == 0 else '{DARK_BG}')
+                cell.set_edgecolor('#4A545C')
+                cell.get_text().set_color(INK)
+
+def save(fig,name):
+    _dark_tables(fig)
+"""
+DARK_REPLACEMENTS: dict[str, list[tuple[str, str]]] = {
+    "generate_figures.py": [
+        ("INK, BLUE, TEAL, GOLD, GRAY = '#172B3A', '#245CA6', '#147C80', '#BD691B', '#687987'",
+         "INK, BLUE, TEAL, GOLD, GRAY = '#E0E0E0', '#5B93DB', '#3FAFB3', '#DE9350', '#9AA7B1'"),
+        ("'axes.edgecolor':'#CCD4DB'", "'axes.edgecolor':'#4A545C'"),
+        ("'savefig.facecolor':'white',",
+         f"'savefig.facecolor':'{DARK_BG}','figure.facecolor':'{DARK_BG}','axes.facecolor':'{DARK_BG}',"
+         "'legend.facecolor':'#2A2A2A','legend.edgecolor':'#4A545C','grid.color':'#888888',"),
+        ("def save(fig,name):\n", DARK_TABLE_STYLE.lstrip("\n")),
+    ],
+    "generate_foundations.py": [
+        ("ax.plot(np.cos(theta),np.sin(theta),color='#CCD4DB')", "ax.plot(np.cos(theta),np.sin(theta),color='#4A545C')"),
+    ],
+    "generate_concrete.py": [
+        # Heat maps: a navy-to-blue scale instead of the light "Blues", so light digits stay readable.
+        ("from matplotlib.colors import ListedColormap\n",
+         "from matplotlib.colors import ListedColormap, LinearSegmentedColormap\n"),
+        ("def heat(ax,a,title,cmap='Blues',vmax=None):",
+         "def heat(ax,a,title,cmap=LinearSegmentedColormap.from_list('dark_blues',['#2A3440','#2F5F9E']),vmax=None):"),
+        ("vmax=vmax or max(a.max(),1),alpha=.65)", "vmax=vmax or max(a.max(),1),alpha=.95)"),
+        ("Circle((4.2,yy),.22,facecolor='white',", f"Circle((4.2,yy),.22,facecolor='{DARK_BG}',"),
+    ],
+}
+
+
+def translate(source: Path, work: Path, dark: bool = False) -> None:
     for name, pairs in REPLACEMENTS.items():
         text = (source / name).read_text(encoding="utf-8")
-        for old, new in pairs:
+        for old, new in pairs + (DARK_REPLACEMENTS.get(name, []) if dark else []):
             if old not in text:
                 sys.exit(f"{name}: label not found, generator changed? {old!r}")
             text = text.replace(old, new)
@@ -207,22 +248,25 @@ def main() -> None:
                         help="also copy Polish vector PDFs here (for the LaTeX guide)")
     args = parser.parse_args()
 
-    with tempfile.TemporaryDirectory(prefix="intmul-pl-") as tmp:
-        work = Path(tmp)
-        (work / "figures").mkdir()
-        translate(args.source.resolve(), work)
-        subprocess.run([sys.executable, "generate_concrete.py"], cwd=work, check=True)
+    for theme in ("light", "dark"):
+        with tempfile.TemporaryDirectory(prefix=f"intmul-pl-{theme}-") as tmp:
+            work = Path(tmp)
+            (work / "figures").mkdir()
+            translate(args.source.resolve(), work, dark=theme == "dark")
+            subprocess.run([sys.executable, "generate_concrete.py"], cwd=work, check=True,
+                           stdout=subprocess.DEVNULL)
 
-        for part, names in PARTS.items():
-            images = REPO / SERIES.format(part) / "images"
-            images.mkdir(parents=True, exist_ok=True)
-            for name in names:
-                to_webp(work / "figures" / f"{name}.png", images / f"{name}.webp")
-        if args.pdf_dir:
-            args.pdf_dir.mkdir(parents=True, exist_ok=True)
-            for pdf in sorted((work / "figures").glob("*.pdf")):
-                shutil.copy2(pdf, args.pdf_dir / pdf.name)
-    print(f"Rendered {sum(map(len, PARTS.values()))} Polish figures.")
+            suffix = "-dark" if theme == "dark" else ""
+            for part, names in PARTS.items():
+                images = REPO / SERIES.format(part) / "images"
+                images.mkdir(parents=True, exist_ok=True)
+                for name in names:
+                    to_webp(work / "figures" / f"{name}.png", images / f"{name}{suffix}.webp")
+            if args.pdf_dir and theme == "light":  # the printable guide uses the light set
+                args.pdf_dir.mkdir(parents=True, exist_ok=True)
+                for pdf in sorted((work / "figures").glob("*.pdf")):
+                    shutil.copy2(pdf, args.pdf_dir / pdf.name)
+    print(f"Rendered {sum(map(len, PARTS.values()))} Polish figures in light and dark variants.")
 
 
 if __name__ == "__main__":
