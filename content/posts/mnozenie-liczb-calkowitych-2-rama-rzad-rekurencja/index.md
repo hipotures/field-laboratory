@@ -30,6 +30,7 @@ resources:
 <li class="is-current">Rama, rząd i rekurencja (ta część)</li>
 <li><a href="/posts/mnozenie-liczb-calkowitych-3-od-transformaty-do-wyniku/">Od transformaty do dokładnego wyniku</a></li>
 </ol>
+<p>Cały przewodnik w jednym pliku: <a href="/posts/mnozenie-liczb-calkowitych-1-problem-i-splot/przewodnik-mnozenie-pl.pdf">PDF, 32 strony</a> (bez widżetów interaktywnych).</p>
 </div>
 
 <div class="reader-box">
