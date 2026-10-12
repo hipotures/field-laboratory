@@ -1101,3 +1101,30 @@ body.colorscheme-dark .intmul-node {
 .math-nowrap {
   white-space: nowrap;
 }
+
+// Figures with a dark variant: show the one matching the active color scheme.
+.fig-dark {
+  display: none !important;
+}
+
+body.colorscheme-dark {
+  .fig-light {
+    display: none !important;
+  }
+
+  .fig-dark {
+    display: block !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto {
+    .fig-light {
+      display: none !important;
+    }
+
+    .fig-dark {
+      display: block !important;
+    }
+  }
+}
