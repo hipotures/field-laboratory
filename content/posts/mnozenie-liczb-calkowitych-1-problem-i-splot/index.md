@@ -30,7 +30,7 @@ resources:
 <li><a href="/posts/mnozenie-liczb-calkowitych-2-rama-rzad-rekurencja/">Rama, rząd i rekurencja</a></li>
 <li><a href="/posts/mnozenie-liczb-calkowitych-3-od-transformaty-do-wyniku/">Od transformaty do dokładnego wyniku</a></li>
 </ol>
-<p>Cały przewodnik w jednym pliku: <a href="/posts/mnozenie-liczb-calkowitych-1-problem-i-splot/przewodnik-mnozenie-pl.pdf">PDF, 32 strony</a> (bez widżetów interaktywnych).</p>
+<p>Cały przewodnik w jednym pliku: <a href="/posts/mnozenie-liczb-calkowitych-1-problem-i-splot/przewodnik-mnozenie-pl.pdf">PDF, 33 strony</a> (bez widżetów interaktywnych).</p>
 </div>
 
 <div class="reader-box">
@@ -61,7 +61,7 @@ Krótka oś czasu na podstawie sekcji historycznej oryginalnej pracy. Wszystkie 
 | 2019/2021 | Harvey i van der Hoeven | \(O(n\log n)\) |
 | 2026 | OpenAI (preprint, niezweryfikowany) | \(O(n(\log n)^{1-\kappa})\), \(\kappa=2^{-182}\) |
 
-Tu \(\log^* n\) oznacza, ile razy trzeba logarytmować \(n\), żeby zejść poniżej stałego progu. Ta funkcja rośnie absurdalnie wolno.
+Tu \(\log^* n\) to logarytm iterowany: liczba logarytmowań \(n\) potrzebnych, żeby zejść poniżej stałego progu. Ta funkcja rośnie absurdalnie wolno.
 
 ## Zacznij od problemu, nie od symboli
 
@@ -197,7 +197,7 @@ Dla \(23\cdot14\) współczynnik przy \(x\) wynosi \(3\cdot1+2\cdot4=11\). Na po
 
 **Skąd biorą się transformaty.** Dla odpowiedniej transformaty \(F\) splot można odtworzyć z iloczynów odpowiadających sobie elementów transformat. Obliczenie dwóch wielomianów w wielu pierwiastkach z jedynki, pomnożenie tych wartości i transformacja odwrotna zastępują mnóstwo iloczynów krzyżowych ustrukturyzowanymi dodawaniami i iloczynami punktowymi. Zysk zależy od tego, czy transformaty da się tanio obliczyć i tanio ułożyć ich dane wejściowe. Transformaty w pracy są znormalizowane, więc znane czynniki skali trzeba przywrócić; hasło „transformuj, pomnóż, odwróć” te czynniki ukrywa.
 
-**Dlaczego potrzebne jest dopełnianie zerami.** Splot cykliczny traktuje pozycje modulo długość \(S\). Wkład na pozycji \(S\) zawija się wtedy na pozycję zero. Algebraicznie to wygodne, ale zepsułoby iloczyn liczb całkowitych. Dla stopnia co najwyżej \(2q-2\) wybranie \(S>2q-2\) i wypełnienie nieużywanych miejsc zerami zapobiega niezerowemu zawinięciu. Oryginalne składanie wyniku dowodzi, że wybrany iloczyn wzdłuż osi o długościach pierwszych ma wystarczającą pojemność. Ogranicza też każdy współczynnik, zanim wybierze precyzję do jego przechowania.
+**Dlaczego potrzebne jest dopełnianie zerami.** Splot cykliczny (kołowy) traktuje pozycje modulo długość \(S\). Wkład na pozycji \(S\) zawija się wtedy na pozycję zero. Algebraicznie to wygodne, ale zepsułoby iloczyn liczb całkowitych. Dla stopnia co najwyżej \(2q-2\) wybranie \(S>2q-2\) i wypełnienie nieużywanych miejsc zerami zapobiega niezerowemu zawinięciu. Oryginalne składanie wyniku dowodzi, że wybrany iloczyn wzdłuż osi o długościach pierwszych ma wystarczającą pojemność. Ogranicza też każdy współczynnik, zanim wybierze precyzję do jego przechowania.
 
 <div class="reader-box">
 <p><span class="reader-box-title">Co zabrać dalej</span>

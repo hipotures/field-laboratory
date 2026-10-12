@@ -29,7 +29,7 @@ resources:
 <li><a href="/posts/mnozenie-liczb-calkowitych-2-rama-rzad-rekurencja/">Rama, rząd i rekurencja</a></li>
 <li class="is-current">Od transformaty do dokładnego wyniku (ta część)</li>
 </ol>
-<p>Cały przewodnik w jednym pliku: <a href="/posts/mnozenie-liczb-calkowitych-1-problem-i-splot/przewodnik-mnozenie-pl.pdf">PDF, 32 strony</a> (bez widżetów interaktywnych).</p>
+<p>Cały przewodnik w jednym pliku: <a href="/posts/mnozenie-liczb-calkowitych-1-problem-i-splot/przewodnik-mnozenie-pl.pdf">PDF, 33 strony</a> (bez widżetów interaktywnych).</p>
 </div>
 
 <div class="reader-box">
@@ -66,7 +66,7 @@ Dla potęgi dwójki \(t\) dzielącej \(2r\) element \(\omega_t=y^{2r/t}\) służ
 
 Jeden czynnik \(t\) pochodzi z normalizacji iloczynu w przód, a drugi ze znormalizowanej transformaty przeciwnej. Utrata któregokolwiek zniszczyłaby dokładne odtworzenie. Wersje wielowymiarowe zastępują \(t\) iloczynem długości osi, z uwzględnieniem permutacji zachowanych w źródle.
 
-**Dlaczego mnożenie wielomianów nie czyni dowodu błędnym kołem.** Elementy punktowe są teraz wielomianami, więc ich iloczyny wciąż trzeba obliczyć. Źródło pakuje ograniczone współczynniki ze znakiem w większe liczby całkowite z odstępem wystarczającym do odzyskania każdego współczynnika. Jawnie obsługuje wyodrębnianie wycentrowane, znaki i zawijanie ujemnocykliczne. Do mnożenia tych krótszych liczb wywołuje wcześniej ustalony mnożnik \(O(N\log N)\), a nie ulepszony algorytm, który próbuje uzasadnić. Długość wejścia \(N\) w tych wywołaniach różni się od pierwotnego \(n\), a wszystkie wywołania są ujęte w końcowej tabeli kosztów.
+**Dlaczego mnożenie wielomianów nie czyni dowodu błędnym kołem.** Elementy punktowe są teraz wielomianami, więc ich iloczyny wciąż trzeba obliczyć. Źródło pakuje ograniczone współczynniki ze znakiem w większe liczby całkowite z odstępem wystarczającym do odzyskania każdego współczynnika. Jawnie obsługuje wyodrębnianie wycentrowane, znaki i zawijanie ujemnocykliczne (ang. *negacyclic*). Do mnożenia tych krótszych liczb wywołuje wcześniej ustalony mnożnik \(O(N\log N)\), a nie ulepszony algorytm, który próbuje uzasadnić. Długość wejścia \(N\) w tych wywołaniach różni się od pierwotnego \(n\), a wszystkie wywołania są ujęte w końcowej tabeli kosztów.
 
 <div class="reader-box">
 <p><span class="reader-box-title">Co zabrać dalej</span>
@@ -79,7 +79,7 @@ Zmiana reprezentacji może zastąpić kosztowne skalarne mnożenia przez pierwia
 
 <p class="chapter-kicker"><span class="chapter-tag">Technika</span> Do przeczytania przed przepróbkowaniem gaussowskim.</p>
 
-Naturalny układ splotu i wydajny układ transformaty syntetycznej nie mają tych samych długości osi. Redukcja mnożenia używa osi źródłowych o długościach parami względnie pierwszych; transformaty syntetyczne wolą potęgi dwójki. Przepróbkowanie gaussowskie łączy je starannie kontrolowanymi odwzorowaniami liniowymi. To analityczny most, a nie zwykłe zaokrąglanie indeksu do najbliższego sąsiada.
+Naturalny układ splotu i wydajny układ transformaty syntetycznej nie mają tych samych długości osi. Redukcja mnożenia używa osi źródłowych o długościach parami względnie pierwszych; transformaty syntetyczne wolą potęgi dwójki. Przepróbkowanie gaussowskie (ang. *Gaussian resampling*) łączy je starannie kontrolowanymi odwzorowaniami liniowymi. To analityczny most, a nie zwykłe zaokrąglanie indeksu do najbliższego sąsiada.
 
 W jednym wymiarze źródło podaje tożsamość postaci
 
@@ -102,7 +102,7 @@ Odpowiadające sobie częstotliwości wciąż są poprawnie sparowane. Odbiorca,
 <figcaption><strong>Rys. 19.</strong> Spójność może usunąć zbędne przestawianie. Słupki pokazują tę samą permutację zastosowaną do obu konkretnych czynników i do ich iloczynu po elementach \([6,10,6,4]\). Sam diagram nie dowodzi, że dowolna implementacja transformaty odwrotnej przyjmie tę kolejność. Musi to zapewnić jej interfejs.<br><small>Ilustracja: Rohan Arun (Apache 2.0), etykiety przetłumaczone.</small></figcaption>
 </figure>
 
-**Gdzie pasuje tożsamość chirp.** Tożsamość Bluesteina przepisuje dwuliniowy wykładnik za pomocą \(2jk=j^2+k^2-(j-k)^2\). Kwadratowe czynniki fazowe na wejściach i wyjściach zamieniają transformatę w splot ze znanym sygnałem chirp. Oryginalny dowód trzyma odpowiednią permutację wewnątrz tego rachunku. Kolejne skręcenie fazy godzi splot cykliczny z ujemnocykliczną relacją wielomianową \(y^r=-1\). Każde skręcenie i jego usunięcie ma koszt zarówno algebraiczny, jak i precyzyjny.
+**Gdzie pasuje tożsamość chirp.** Tożsamość Bluesteina (algorytm Bluesteina, ang. *chirp-z*) przepisuje dwuliniowy wykładnik za pomocą \(2jk=j^2+k^2-(j-k)^2\). Kwadratowe czynniki fazowe na wejściach i wyjściach zamieniają transformatę w splot ze znanym sygnałem chirp. Oryginalny dowód trzyma odpowiednią permutację wewnątrz tego rachunku. Kolejne skręcenie fazy godzi splot cykliczny z ujemnocykliczną relacją wielomianową \(y^r=-1\). Każde skręcenie i jego usunięcie ma koszt zarówno algebraiczny, jak i precyzyjny.
 
 **Budżet błędu ma dwa różne rodzaje wzrostu.** W złożeniu dokładnych kontrakcji istniejący błąd nie jest wzmacniany, więc lokalne błędy przybliżeń można dodawać. Cofnięcie znanej dużej normalizacji mnoży jednak błąd bezwzględny. Błędem byłoby więc wnioskować: „wszystkie transformaty są kontrakcjami, więc wynik końcowy jest dokładny”, nie śledząc przeskalowania. Źródło wybiera precyzję roboczą wystarczającą, by przetrwać zarówno skumulowany błąd lokalny, jak i końcowe wzmocnienie.
 
@@ -289,7 +289,7 @@ Przewodnik wyjaśnia architekturę dowodu i jego interfejsy. Szczegółowe argum
 | rola / wiersz | Ustalona pozycja przewodu w układzie / kompletny ciągły blok sufiksu. |
 | rama | Odwracalny operator reprezentacji na tablicy indeksowanej adresami w jednej roli. |
 | deficyt rzędu | Różnica między pełnym liniowym budżetem wywołań \(Wm\) a opłaconym budżetem \(s\). |
-| gaussowska liczba diadyczna | Liczba zespolona z mianownikami będącymi potęgami dwójki w obu składowych. |
+| diadyczna liczba Gaussa | Liczba zespolona z mianownikami będącymi potęgami dwójki w obu składowych. |
 | warunkowy | Wniosek zależy od zachowanych interfejsów, których pełnej niezależnej walidacji nie zapewnia skończone świadectwo. |
 
 **Gdzie znaleźć poszczególne warstwy oryginału.** Nazwy plików poniżej są zachowane w pakiecie źródłowym. Etykiety twierdzeń są stabilniejszymi odnośnikami niż numery stron.
@@ -307,27 +307,39 @@ Przewodnik wyjaśnia architekturę dowodu i jego interfejsy. Szczegółowe argum
 
 ## Od tłumacza: słowniczek polsko-angielski
 
-Polska terminologia w tej dziedzinie nie jest ustalona, więc poniżej są odpowiedniki angielskich terminów użytych w oryginale.
+Część terminów ma ustalone polskie odpowiedniki, ale wiele pochodzi z najnowszej literatury (Harvey i van der Hoeven, praca OpenAI) albo jest specyficzna dla tej jednej konstrukcji i nie ma polskiej nazwy. Kolumna „Status” rozróżnia te przypadki. „Ustalony” oznacza, że termin w tym znaczeniu znalazłem w polskich źródłach wymienionych pod tabelą. „Przyjęty w przekładzie” oznacza, że polskiego odpowiednika nie znalazłem i zaproponowałem własny; przy pierwszym użyciu w tekście podany jest wtedy termin angielski.
 
-| Polski | Angielski (oryginał) |
-|---|---|
-| splot | convolution |
-| przeniesienie | carry |
-| podstawa (systemu liczbowego) | radix |
-| taśma, głowica | tape, head |
-| rola, wiersz | role, row |
-| rejestr pomocniczy, pamięć robocza | scratch register, workspace |
-| rama (reprezentacji) | frame |
-| rząd, deficyt rzędu | rank, rank deficit |
-| ścinanie adresów | address shear |
-| motylek, warstwa motylków | butterfly, butterfly layer |
-| przesunięcie ze znakiem | signed shift |
-| przepróbkowanie gaussowskie | Gaussian resampling |
-| chirp | chirp |
-| margines, wąskie gardło | margin, bottleneck |
-| poglądowy (przykład) | toy (example) |
-| gaussowska liczba diadyczna | Gaussian dyadic |
-| warunkowy (wynik) | conditional |
+| Polski | Angielski (oryginał) | Status |
+|---|---|---|
+| splot; splot cykliczny (kołowy) | convolution; cyclic (circular) convolution | ustalony [1] |
+| szybka transformacja Fouriera | fast Fourier transform | ustalony [2] |
+| motylek, graf motylkowy | butterfly, butterfly graph | ustalony [2, 3] |
+| kolejność z odwróconymi bitami | bit-reversed order | ustalony [3] |
+| pierwiastek z jedynki | root of unity | ustalony [4] |
+| logarytm iterowany \(\log^*\) | iterated logarithm | ustalony [5] |
+| kontrakcja (odwzorowanie zwężające) | contraction | ustalony [6] |
+| element podstawowy | pivot | ustalony [7] |
+| liczby całkowite Gaussa | Gaussian integers | ustalony [8] |
+| przepróbkowanie | resampling | ustalony w przetwarzaniu sygnałów [9] |
+| przeniesienie; podstawa systemu liczbowego | carry; radix | ustalony |
+| rząd macierzy, podprzestrzeń, iloczyn tensorowy | rank, subspace, tensor product | ustalony |
+| maszyna Turinga, taśma, głowica | Turing machine, tape, head | ustalony |
+| przepróbkowanie gaussowskie | Gaussian resampling | przyjęty w przekładzie |
+| splot / zawijanie ujemnocykliczne | negacyclic convolution / wrapping | przyjęty w przekładzie |
+| chirp, algorytm Bluesteina | chirp, Bluestein’s (chirp-z) algorithm | bez polskiego odpowiednika; słowniki podają tylko potoczne „świergot” |
+| diadyczna liczba Gaussa | Gaussian dyadic | przyjęty w przekładzie |
+| ścinanie adresów | address shear | przyjęty w przekładzie; „ścinanie” jest ustalone w mechanice, ale jako przekształcenie liniowe pojawia się po polsku głównie w dokumentacji grafiki |
+| rama (reprezentacji) | frame | przyjęty w przekładzie; termin specyficzny dla tej pracy |
+| rząd resztowy, deficyt rzędu | residual rank, rank deficit | przyjęty w przekładzie |
+| rola, wiersz, porcja adresu | role, row, address chunk | przyjęty w przekładzie (terminy tej konkretnej konstrukcji) |
+| rejestr pomocniczy, pamięć robocza | scratch register, workspace | opisowy |
+| margines, wąskie gardło | margin, bottleneck | opisowy |
+| przykład poglądowy | toy example | opisowy |
+| warunkowy (wynik) | conditional (result) | opisowy |
+
+Źródła terminologii: [1] Wikipedia, [Splot (analiza matematyczna)](https://pl.wikipedia.org/wiki/Splot_%28analiza_matematyczna%29), sekcja „Splot cykliczny (kołowy)”; [2] Wikipedia, [Szybka transformacja Fouriera](https://pl.wikipedia.org/wiki/Szybka_transformacja_Fouriera) („struktury motylkowe”); [3] K. Snopek, [wykład o DFT i FFT](https://www.ire.pw.edu.pl/~ksnopek/ASISP/wyk11.pdf), Politechnika Warszawska („motylek”, „graf motylkowy”, „odwrócona kolejność bitów”); [4] Wikipedia, [Pierwiastek z jedynki](https://pl.wikipedia.org/wiki/Pierwiastek_z_jedynki); [5] Wikipedia, [Logarytm iterowany](https://pl.wikipedia.org/wiki/Logarytm_iterowany); [6] zasada odwzorowań zwężających Banacha, np. [skrypt UG o metrycznej teorii punktów stałych](https://mfi.ug.edu.pl/sites/mfi.ug.edu.pl/files/_nodes/news/112650/files/sem-lic-mat-strobin-wybrane-zagadnienia-metrycznej-teorii-punktow-stalych.pdf); [7] P. F. Góra, [wykład z metod numerycznych](https://th-www.if.uj.edu.pl/zfs/gora/metnum17/wyklad02.pdf), UJ („element podstawowy (ang. pivot)”); [8] Wikipedia, [Liczby całkowite Gaussa](https://pl.wikipedia.org/wiki/Liczby_ca%C5%82kowite_Gaussa); [9] np. polski opis patentowy [PL3053163T3](https://patents.google.com/patent/PL3053163T3/en) („przepróbkowanie sygnału audio”).
+
+Uwaga o „transformacie”: polska Wikipedia rozróżnia *transformację* (przekształcenie) i *transformatę* (jego wynik). W tekście, zgodnie z częstym użyciem w fizyce i przetwarzaniu sygnałów, „transformata” oznacza czasem także samo przekształcenie.
 
 ---
 

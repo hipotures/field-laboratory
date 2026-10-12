@@ -30,7 +30,7 @@ resources:
 <li class="is-current">Rama, rząd i rekurencja (ta część)</li>
 <li><a href="/posts/mnozenie-liczb-calkowitych-3-od-transformaty-do-wyniku/">Od transformaty do dokładnego wyniku</a></li>
 </ol>
-<p>Cały przewodnik w jednym pliku: <a href="/posts/mnozenie-liczb-calkowitych-1-problem-i-splot/przewodnik-mnozenie-pl.pdf">PDF, 32 strony</a> (bez widżetów interaktywnych).</p>
+<p>Cały przewodnik w jednym pliku: <a href="/posts/mnozenie-liczb-calkowitych-1-problem-i-splot/przewodnik-mnozenie-pl.pdf">PDF, 33 strony</a> (bez widżetów interaktywnych).</p>
 </div>
 
 <div class="reader-box">
@@ -61,7 +61,7 @@ Macierze
 
 mają rzędy jeden i dwa. Pierwsza ma cztery niezerowe elementy, ale niższy rząd. Dla pierwszej macierzy wejście \((s,t)\) daje \((s+2t,s+2t)\), zawsze na prostej przekątnej. Druga może dać każdy punkt płaszczyzny. Dlatego liczenie elementów macierzy przeoczyłoby oszczędność, której szuka praca.
 
-**Rama to spójna reguła reprezentacji.** Niech \(D\) obraca każdy wektor o ćwierć obrotu przeciwnie do ruchu wskazówek zegara. Wartość logiczna \((1,0)\) jest przechowywana jako \((0,1)\). Wartość logiczna \((0,1)\) jest przechowywana jako \((-1,0)\). Suma przechowywanych wartości to \((-1,1)\), czyli dokładnie obrót sumy logicznej \((1,1)\). Oba wejścia używały tej samej reguły, więc dodawanie zachowało sens.
+**Rama (ang. *frame*) to spójna reguła reprezentacji.** Niech \(D\) obraca każdy wektor o ćwierć obrotu przeciwnie do ruchu wskazówek zegara. Wartość logiczna \((1,0)\) jest przechowywana jako \((0,1)\). Wartość logiczna \((0,1)\) jest przechowywana jako \((-1,0)\). Suma przechowywanych wartości to \((-1,1)\), czyli dokładnie obrót sumy logicznej \((1,1)\). Oba wejścia używały tej samej reguły, więc dodawanie zachowało sens.
 
 <figure class="infographic-figure">
 <a class="infographic-figure-link" href="images/18-frame-example.webp" target="_blank" rel="noopener"><img src="images/18-frame-example.webp" width="1982" height="633" alt="Trzy panele z wektorami: suma x i y, suma obróconych x i y oraz błędna suma, gdy obrócono tylko x." loading="lazy"></a>
@@ -132,7 +132,7 @@ gdzie \(\mathsf S_\Omega\) to układ skalarny zastosowany punktowo. Jeśli ukła
 
 **Dlaczego geometria ma znaczenie.** Praca przypisuje wierzchołkom podprzestrzenie. Porównywalne sąsiednie podprzestrzenie dają kierunki resztowe, których wymiary liczą mniejsze operacje. Niski rząd oznacza mniej niezależnych kierunków do zrealizowania. Macierz z wieloma niezerowymi elementami może mieć rząd jeden; na przykład \(\left(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\right)\) przenosi tylko jedną niezależną kombinację. Z kolei rzadka macierz jednostkowa ma pełny rząd. Rachunek zależy więc od rzeczywistych operatorów resztowych, ich baz i wkładów końcowych, a nie od liczby widocznych bramek.
 
-Układ bitowy łączy skalary w \(\mathbb F_2\), używając wymiernych etykiet podprzestrzeni dla operatorów adresowych. Układ zespolony łączy gaussowskie skalary diadyczne, używając dwójkowych etykiet podprzestrzeni dla operatorów fazowych. To dwa różne zastosowania ciała; mylenie wartości skalarnych z etykietami adresów zaciemnia konstrukcję.
+Układ bitowy łączy skalary w \(\mathbb F_2\), używając wymiernych etykiet podprzestrzeni dla operatorów adresowych. Układ zespolony łączy diadyczne skalary Gaussa, używając dwójkowych etykiet podprzestrzeni dla operatorów fazowych. To dwa różne zastosowania ciała; mylenie wartości skalarnych z etykietami adresów zaciemnia konstrukcję.
 
 <div class="reader-box">
 <p><span class="reader-box-title">Co zabrać dalej</span>
@@ -226,7 +226,7 @@ Końcowy dowód używa nierówności ostrych, żeby można było wchłonąć nar
 
 Dla \(0<\eta<1\) logarytm w liczniku jest ujemny. Gdy \(\eta\) jest małe, luka wynosi w przybliżeniu \(\eta/\log m\). Przybliżenie pomaga intuicji; źródło używa dokładnych wymiernych deficytów i ostrych nierówności wykładniczych, żeby poświadczyć wymierny wykładnik. Oryginalny wybór to \(\tau=\sigma=1-2^{-50}\), a nie wyraźnie duża oszczędność z wykresu poglądowego.
 
-**Dlaczego ścinanie łatwiej zbudować niż zamianę.** Ścinanie adresów aktualizuje jeden blok kombinacją liniową innego: \((H,D)\mapsto(H+AD,D)\). Praca rozkłada wymierną macierz \(A\) rzędu \(a\) na dwa odwracalne czynniki trójkątne i częściową permutację z \(a\) elementami wiodącymi. Aktualizacje trójkątne tanio podążają za porządkiem taśmy. Każdy element wiodący wymaga jednej mniejszej zamiany. Liczba kosztownych wywołań to więc rząd \(a\). Odpowiednia ustalona nieparzysta liczba pierwsza sprawia, że potrzebne wymierne współczynniki i odwrotności mają sens modulo jej potęgi. Przy przenoszeniu tożsamości wymiernej na adresy modularne nie można ignorować mianowników i odwracalności.
+**Dlaczego ścinanie łatwiej zbudować niż zamianę.** Ścinanie adresów (ang. *address shear*) aktualizuje jeden blok kombinacją liniową innego: \((H,D)\mapsto(H+AD,D)\). Praca rozkłada wymierną macierz \(A\) rzędu \(a\) na dwa odwracalne czynniki trójkątne i częściową permutację z \(a\) elementami podstawowymi (ang. *pivots*). Aktualizacje trójkątne tanio podążają za porządkiem taśmy. Każdy element podstawowy wymaga jednej mniejszej zamiany. Liczba kosztownych wywołań to więc rząd \(a\). Odpowiednia ustalona nieparzysta liczba pierwsza sprawia, że potrzebne wymierne współczynniki i odwrotności mają sens modulo jej potęgi. Przy przenoszeniu tożsamości wymiernej na adresy modularne nie można ignorować mianowników i odwracalności.
 
 **Mało efektowne warunki są niezbędne.** Prawdziwe szerokości pól nie muszą być potęgami \(m\). Liczby wierszy mogą nie dzielić się przez \(W\). Niektóre układy zawierają między aktywnymi polami pola bierne. Kolejna sekcja źródła usuwa te ograniczenia i płaci za dopełnianie i sprzątanie. Sama poglądowa rekurencja nie dowodzi tych zobowiązań implementacyjnych.
 
@@ -272,7 +272,7 @@ Transformata zmienia współrzędne, którymi opisujemy dane. Ustrukturyzowane w
 
 <p class="chapter-kicker"><span class="chapter-tag">Technika</span> Do przeczytania przed jednoczesnymi warstwami motylków.</p>
 
-Dwupunktowa znormalizowana transformata Fouriera przekształca
+Dwupunktowa znormalizowana transformata Fouriera (najmniejszy „motylek” szybkiej transformacji Fouriera) przekształca
 
 \[
  H_0(u,v)=\left(\frac{u+v}{2},\frac{u-v}{2}\right).
@@ -299,7 +299,7 @@ Jeśli każde wejście ma moduł zespolony co najwyżej \(M\), to każde wyjści
 
 Jądro \(C\) dobrze współpracuje z dwójkowymi ramami fazowymi, którymi wycenia się kierunki resztowe. Po ukończeniu jego warstwy tensorowej fazy diagonalne i znany diadyczny czynnik zespolony dają pożądaną warstwę \(H_0\). To klasyczne tożsamości liniowe; użycie macierzy fazowych nie wymaga komputera kwantowego.
 
-**Jedno zaokrąglenie na końcu, a nie po każdej bramce.** Wartości wewnętrzne to dokładne gaussowskie liczby diadyczne: liczby, których część rzeczywista i urojona są liczbami całkowitymi podzielonymi przez potęgi dwójki. Wartości pomocnicze mogą rosnąć, nawet jeśli ukończona warstwa \(H_0\) jest kontrakcją. Dowód potrzebuje więc bitów zapasu na wewnętrzne moduły i mianowniki. Wykonuje całą warstwę dokładnie i obcina dopiero na jej granicy. Sama kontrakcyjność nie uzasadniałaby odrzucania bitów po każdej aktualizacji pomocniczej.
+**Jedno zaokrąglenie na końcu, a nie po każdej bramce.** Wartości wewnętrzne to dokładne diadyczne liczby Gaussa (ang. *Gaussian dyadics*): liczby, których część rzeczywista i urojona są liczbami całkowitymi podzielonymi przez potęgi dwójki. Wartości pomocnicze mogą rosnąć, nawet jeśli ukończona warstwa \(H_0\) jest kontrakcją. Dowód potrzebuje więc bitów zapasu na wewnętrzne moduły i mianowniki. Wykonuje całą warstwę dokładnie i obcina dopiero na jej granicy. Sama kontrakcyjność nie uzasadniałaby odrzucania bitów po każdej aktualizacji pomocniczej.
 
 **Dlaczego wybrane bity tworzą wyjątkowe adresy.** Wydajna aktualizacja upakowanych adresów może zgadzać się z pożądaną zmianą bazy dwójkowej na większości adresów, podczas gdy przeniesienia zaburzają mały, jawnie opisany zbiór. Praca wyodrębnia ten zbiór i naprawia go deterministycznie. Dowód potrzebuje zgodności poza nim, niezmienniczości zbioru wyjątkowego oraz ograniczenia kosztu wyjęcia, posortowania i ponownego wstawienia pełnych rekordów. „Rzadki” nie znaczy losowy ani pomijalny: każde wejście musi być obsłużone poprawnie.
 
