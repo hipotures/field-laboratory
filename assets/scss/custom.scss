@@ -1128,3 +1128,16 @@ body.colorscheme-dark {
     }
   }
 }
+
+// Glossary: short status column, more room for the Polish and English terms.
+.glossary-table {
+  th:first-child,
+  td:first-child {
+    width: 42%;
+  }
+
+  th:last-child,
+  td:last-child {
+    white-space: nowrap;
+  }
+}

@@ -191,6 +191,8 @@ def convert(markdown: str) -> str:
         if pending_heading:
             out.append(rf"\guidechapter{{{inline(pending_heading)}}}{{}}")
             pending_heading = None
+        if re.fullmatch(r'<div class="[\w-]*table">|</div>', block):
+            continue  # styling wrapper around a Markdown table: keep the table
         if block.startswith("<div"):
             while "</div>" not in block and i < len(blocks):  # boxes may span paragraphs
                 block += "\n\n" + blocks[i]

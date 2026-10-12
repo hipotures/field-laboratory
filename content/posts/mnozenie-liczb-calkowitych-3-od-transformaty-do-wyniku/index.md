@@ -311,6 +311,8 @@ Przewodnik wyjaśnia architekturę dowodu i jego interfejsy. Szczegółowe argum
 
 Część terminów ma ustalone polskie odpowiedniki, ale wiele pochodzi z najnowszej literatury (Harvey i van der Hoeven, praca OpenAI) albo jest specyficzna dla tej jednej konstrukcji i nie ma polskiej nazwy. Kolumna „Status” rozróżnia te przypadki. „Ustalony” oznacza, że termin w tym znaczeniu znalazłem w polskich źródłach wymienionych pod tabelą. „Przyjęty w przekładzie” oznacza, że polskiego odpowiednika nie znalazłem i zaproponowałem własny; przy pierwszym użyciu w tekście podany jest wtedy termin angielski.
 
+<div class="glossary-table">
+
 | Polski | Angielski (oryginał) | Status |
 |---|---|---|
 | splot; splot cykliczny (kołowy) | convolution; cyclic (circular) convolution | ustalony [1] |
@@ -322,22 +324,26 @@ Część terminów ma ustalone polskie odpowiedniki, ale wiele pochodzi z najnow
 | kontrakcja (odwzorowanie zwężające) | contraction | ustalony [6] |
 | element podstawowy | pivot | ustalony [7] |
 | liczby całkowite Gaussa | Gaussian integers | ustalony [8] |
-| przepróbkowanie | resampling | ustalony w przetwarzaniu sygnałów [9] |
+| przepróbkowanie | resampling | ustalony [9] |
 | przeniesienie; podstawa systemu liczbowego | carry; radix | ustalony |
 | rząd macierzy, podprzestrzeń, iloczyn tensorowy | rank, subspace, tensor product | ustalony |
 | maszyna Turinga, taśma, głowica | Turing machine, tape, head | ustalony |
 | przepróbkowanie gaussowskie | Gaussian resampling | przyjęty w przekładzie |
 | splot / zawijanie ujemnocykliczne | negacyclic convolution / wrapping | przyjęty w przekładzie |
-| chirp, algorytm Bluesteina | chirp, Bluestein’s (chirp-z) algorithm | bez polskiego odpowiednika; słowniki podają tylko potoczne „świergot” |
+| chirp, algorytm Bluesteina | chirp, Bluestein’s (chirp-z) algorithm | brak polskiego odpowiednika¹ |
 | diadyczna liczba Gaussa | Gaussian dyadic | przyjęty w przekładzie |
-| ścinanie adresów | address shear | przyjęty w przekładzie; „ścinanie” jest ustalone w mechanice, ale jako przekształcenie liniowe pojawia się po polsku głównie w dokumentacji grafiki |
-| rama (reprezentacji) | frame | przyjęty w przekładzie; termin specyficzny dla tej pracy |
+| ścinanie adresów | address shear | przyjęty w przekładzie² |
+| rama (reprezentacji) | frame | przyjęty w przekładzie³ |
 | rząd resztowy, deficyt rzędu | residual rank, rank deficit | przyjęty w przekładzie |
-| rola, wiersz, porcja adresu | role, row, address chunk | przyjęty w przekładzie (terminy tej konkretnej konstrukcji) |
+| rola, wiersz, porcja adresu | role, row, address chunk | przyjęty w przekładzie³ |
 | rejestr pomocniczy, pamięć robocza | scratch register, workspace | opisowy |
 | margines, wąskie gardło | margin, bottleneck | opisowy |
 | przykład poglądowy | toy example | opisowy |
 | warunkowy (wynik) | conditional (result) | opisowy |
+
+</div>
+
+¹ Słowniki podają tylko potoczne „świergot” lub „ćwierkanie”. ² „Ścinanie” jest ustalone w mechanice; jako przekształcenie liniowe pojawia się po polsku głównie w dokumentacji programów graficznych. ³ Terminy specyficzne dla tej jednej konstrukcji.
 
 Źródła terminologii: [1] Wikipedia, [Splot (analiza matematyczna)](https://pl.wikipedia.org/wiki/Splot_%28analiza_matematyczna%29), sekcja „Splot cykliczny (kołowy)”; [2] Wikipedia, [Szybka transformacja Fouriera](https://pl.wikipedia.org/wiki/Szybka_transformacja_Fouriera) („struktury motylkowe”); [3] K. Snopek, [wykład o DFT i FFT](https://www.ire.pw.edu.pl/~ksnopek/ASISP/wyk11.pdf), Politechnika Warszawska („motylek”, „graf motylkowy”, „odwrócona kolejność bitów”); [4] Wikipedia, [Pierwiastek z jedynki](https://pl.wikipedia.org/wiki/Pierwiastek_z_jedynki); [5] Wikipedia, [Logarytm iterowany](https://pl.wikipedia.org/wiki/Logarytm_iterowany); [6] zasada odwzorowań zwężających Banacha, np. [skrypt UG o metrycznej teorii punktów stałych](https://mfi.ug.edu.pl/sites/mfi.ug.edu.pl/files/_nodes/news/112650/files/sem-lic-mat-strobin-wybrane-zagadnienia-metrycznej-teorii-punktow-stalych.pdf); [7] P. F. Góra, [wykład z metod numerycznych](https://th-www.if.uj.edu.pl/zfs/gora/metnum17/wyklad02.pdf), UJ („element podstawowy (ang. pivot)”); [8] Wikipedia, [Liczby całkowite Gaussa](https://pl.wikipedia.org/wiki/Liczby_ca%C5%82kowite_Gaussa); [9] np. polski opis patentowy [PL3053163T3](https://patents.google.com/patent/PL3053163T3/en) („przepróbkowanie sygnału audio”).
 
