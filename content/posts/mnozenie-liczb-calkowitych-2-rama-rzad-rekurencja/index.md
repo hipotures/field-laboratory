@@ -1,5 +1,7 @@
 ---
-title: "Mnożenie liczb całkowitych poniżej n log n, cz. 2: rama, rząd i rekurencja"
+title: "Mnożenie liczb całkowitych poniżej n log n. Część 2: rama, rząd i rekurencja"
+headline: "Mnożenie liczb całkowitych poniżej n log n"
+subtitle: "Część 2: rama, rząd i rekurencja"
 date: 2026-10-12T11:00:00+02:00
 draft: true
 description: "Polski przekład ilustrowanego przewodnika Rohana Aruna po pracy OpenAI o mnożeniu liczb całkowitych. Część 2: wektory i rząd, wspólne ramy, pożyczony rejestr, rekurencja, wzorce częstotliwości i motylki."

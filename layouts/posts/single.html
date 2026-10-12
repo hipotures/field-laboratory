@@ -8,7 +8,11 @@
         <div class="post-title">
           <h1 class="title">
             <a class="title-link" href="{{ .RelPermalink | safeURL }}">
-              {{ .Title }}
+              {{- with .Params.subtitle -}}
+                {{ $.Params.headline | default $.Title }}<br>{{ . }}
+              {{- else -}}
+                {{ .Title }}
+              {{- end -}}
             </a>
           </h1>
         </div>

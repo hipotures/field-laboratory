@@ -1,5 +1,7 @@
 ---
-title: "Mnożenie liczb całkowitych poniżej n log n, cz. 3: od transformaty do dokładnego wyniku"
+title: "Mnożenie liczb całkowitych poniżej n log n. Część 3: od transformaty do dokładnego wyniku"
+headline: "Mnożenie liczb całkowitych poniżej n log n"
+subtitle: "Część 3: od transformaty do dokładnego wyniku"
 date: 2026-10-12T12:00:00+02:00
 draft: true
 description: "Polski przekład ilustrowanego przewodnika Rohana Aruna po pracy OpenAI o mnożeniu liczb całkowitych. Część 3: przesunięcia ze znakiem, przepróbkowanie, budżet błędu, wąskie gardło, siedem marginesów i słowniczek."
