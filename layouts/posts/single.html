@@ -41,7 +41,12 @@
         {{ if .Params.featuredImage }}
           <img src="{{ .Params.featuredImage | relURL }}" alt="Featured image"/>
         {{ end }}
-        {{ .Content }}
+        {{- if .Params.math }}
+          {{- /* Keep inline math together with trailing punctuation so a line never starts with ",". */}}
+          {{ replaceRE `(\\\((?:[^\\]|\\[^)])*\\\))([,.;:!?)]+)` `<span class="math-nowrap">$1$2</span>` .Content | safeHTML }}
+        {{- else }}
+          {{ .Content }}
+        {{- end }}
       </div>
 
       <footer>
