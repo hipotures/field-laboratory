@@ -1151,3 +1151,15 @@ body.colorscheme-dark {
     margin: 0.2rem 0;
   }
 }
+
+// Source map: questions get the room, file names are short.
+.source-map-table {
+  th:first-child,
+  td:first-child {
+    width: 62%;
+  }
+
+  code {
+    white-space: nowrap;
+  }
+}

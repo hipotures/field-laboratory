@@ -296,6 +296,8 @@ Przewodnik wyjaśnia architekturę dowodu i jego interfejsy. Szczegółowe argum
 
 **Gdzie znaleźć poszczególne warstwy oryginału.** Nazwy plików poniżej są zachowane w pakiecie źródłowym. Etykiety twierdzeń są stabilniejszymi odnośnikami niż numery stron.
 
+<div class="source-map-table">
+
 | Pytanie | Plik oryginału |
 |---|---|
 | Jaka maszyna jest liczona? | [`02-streams.tex`](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Integer-multiplication-below-n-log-n-September-23-2026/build/sections/02-streams.tex) |
@@ -305,7 +307,9 @@ Przewodnik wyjaśnia architekturę dowodu i jego interfejsy. Szczegółowe argum
 | Jak wykonuje się transformaty i iloczyny w pierścieniu? | [`06-transforms.tex`](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Integer-multiplication-below-n-log-n-September-23-2026/build/sections/06-transforms.tex) |
 | Jak pasują rozmiary siatek i permutacje? | [`07-resampling.tex`](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Integer-multiplication-below-n-log-n-September-23-2026/build/sections/07-resampling.tex) |
 | Gdzie łączy się dokładność i wszystkie koszty? | [`08-assembly.tex`](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Integer-multiplication-below-n-log-n-September-23-2026/build/sections/08-assembly.tex) |
-| Jakie są dalsze konsekwencje? | [`09-exact-arithmetic.tex`](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Integer-multiplication-below-n-log-n-September-23-2026/build/sections/09-exact-arithmetic.tex), [`10-transposition.tex`](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Integer-multiplication-below-n-log-n-September-23-2026/build/sections/10-transposition.tex) |
+| Jakie są dalsze konsekwencje? | [`09-exact-arithmetic.tex`](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Integer-multiplication-below-n-log-n-September-23-2026/build/sections/09-exact-arithmetic.tex)<br>[`10-transposition.tex`](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Integer-multiplication-below-n-log-n-September-23-2026/build/sections/10-transposition.tex) |
+
+</div>
 
 ## Od tłumacza: słowniczek polsko-angielski
 

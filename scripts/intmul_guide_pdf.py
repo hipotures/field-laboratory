@@ -105,7 +105,7 @@ def escape_text(text: str) -> str:
 
 def inline(text: str) -> str:
     """Convert inline Markdown or HTML to LaTeX, leaving \\( ... \\) math untouched."""
-    text = html.unescape(re.sub(r"<br\s*/?>", r" \\\\ ", text))
+    text = html.unescape(re.sub(r"<br\s*/?>", r" \\newline ", text))  # safe inside table cells too
     text = re.sub(r"<a [^>]*href=\"([^\"]+)\"[^>]*>(.*?)</a>", r"[\2](\1)", text)
     text = re.sub(r"<code>(.*?)</code>", r"`\1`", text)
     text = re.sub(r"<sup>(.*?)</sup>", "\x04\\1\x05", text)
@@ -154,7 +154,12 @@ def table(rows: list[str]) -> str:
     cells = [[c.strip() for c in row.strip().strip("|").split("|")] for row in rows]
     head, body = cells[0], cells[2:]
     # The glossary has a short status column; give the terms more room.
-    widths = [0.33, 0.30, 0.29] if head[-1] == "Status" else [0.9 / len(head)] * len(head)
+    if head[-1] == "Status":
+        widths = [0.33, 0.30, 0.29]
+    elif head[0] == "Pytanie":  # source map: questions get the room, file names are short
+        widths = [0.58, 0.36]
+    else:
+        widths = [0.9 / len(head)] * len(head)
     spec = "".join(rf">{{\raggedright\arraybackslash}}p{{{width:.2f}\linewidth}}" for width in widths)
     lines = [rf"\begin{{longtable}}{{@{{}}{spec}@{{}}}}", r"\toprule",
              " & ".join(rf"\textbf{{{inline(c)}}}" for c in head) + r" \\", r"\midrule\endhead"]
@@ -204,7 +209,7 @@ def convert(markdown: str) -> str:
                 notes = re.findall(r"<p>(.*?)</p>", block, re.S)
                 out.append(r"{\small\noindent " + r"\\".join(inline(n) for n in notes) + r"\par}\medskip")
                 continue
-            if "Co zabrać dalej" in block:
+            if 'reader-box-title">Co zabrać dalej<' in block:
                 text = re.sub(r"^.*?</span>\s*", "", block, flags=re.S)
                 out.append(r"\takeaway{" + inline(text.replace("</div>", "").strip()) + "}")
             continue  # credit, series, translator, status boxes and widgets are web-only
