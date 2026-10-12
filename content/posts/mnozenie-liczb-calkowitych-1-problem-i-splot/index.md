@@ -42,9 +42,9 @@ We wrześniu 2026 roku OpenAI opublikowało preprint, w którym twierdzi, że dw
 </div>
 
 <div class="reader-box is-status">
-<p><span class="reader-box-title">Status wyniku (stan na 12 października 2026)</span>
+<p><span class="reader-box-title">Status wyniku</span>
 Streszczenie pracy w przekładzie: <em>„Podajemy deterministyczny algorytm, który mnoży dwie liczby n-bitowe w pesymistycznym czasie \(O(n(\lg n)^{1-\kappa})\), gdzie \(\kappa=2^{-182}\), na jednej ustalonej maszynie Turinga o skończonym alfabecie i ustalonej skończonej liczbie jednowymiarowych taśm. Algorytm jest dokładny dla każdej długości wejścia i obala hipotezę Schönhagego i Strassena o optymalności n log n w tym modelu.”</em></p>
-<p>Praca formułuje to jako twierdzenie, ale nie przeszła jeszcze niezależnej recenzji. Przewodnik ją objaśnia, ale nie weryfikuje. Społeczność skupiona wokół repozytorium <a href="https://github.com/CrocSwap/integer-mult-bounds">CrocSwap/integer-mult-bounds</a> zgłasza lepsze, ale <em>warunkowe</em> wartości wykładnika: obecnie \(\kappa\approx0{,}00152\), przy założeniach, których pełny dowód nie istnieje. Ta seria, tak jak przewodnik, opisuje zamrożoną wersję pracy z \(\kappa=2^{-182}\).</p>
+<p>Praca formułuje to jako twierdzenie, ale nie przeszła jeszcze niezależnej recenzji. Przewodnik ją objaśnia, ale nie weryfikuje. Społeczność skupiona wokół repozytorium <a href="https://github.com/CrocSwap/integer-mult-bounds">CrocSwap/integer-mult-bounds</a> zgłasza lepsze, ale <em>warunkowe</em> wartości wykładnika. Według stanu na 12 października 2026 r. jest to \(\kappa\approx0{,}00152\), przy założeniach, których pełny dowód nie istnieje. Ta seria, tak jak przewodnik, opisuje zamrożoną wersję pracy z \(\kappa=2^{-182}\).</p>
 <p><em>Ujawnienie:</em> hipotures (projekt RaD) jest wymieniony w pliku <a href="https://github.com/CrocSwap/integer-mult-bounds/blob/main/CONTRIBUTORS.md">CONTRIBUTORS.md</a> tego repozytorium jako współtwórca prac społeczności nad poprawą κ (PR #20 i #41). Nie jest współautorem pracy OpenAI ani wydania ilustrowanego.</p>
 </div>
 
