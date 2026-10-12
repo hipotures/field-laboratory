@@ -23,7 +23,7 @@ https://media.armum.eu/field-laboratory/photos/
 The matching server path is:
 
 ```text
-/srv/www/media/field-laboratory/photos/
+/srv/media/field-laboratory/photos/
 ```
 
 ## Script
@@ -65,7 +65,7 @@ content/photos/<album>/index.md
 The default remote target is:
 
 ```text
-deploy@armum.eu:/srv/www/media/field-laboratory/photos/<album>/
+deploy@armum.eu:/srv/media/field-laboratory/photos/<album>/
 ```
 
 The script appends files. It does not pass `--delete` to `rsync`. Old files can

@@ -134,7 +134,7 @@ content/photos/gallery-slug/
 ```
 
 Generated photo binaries are not stored in Git. The photo media pipeline creates
-600px and 1600px WebP variants locally, syncs them to `media.armum.eu`, and
+320px, 1600px and 3840px WebP variants locally, syncs them to `media.armum.eu`, and
 records dimensions and URLs in a manifest. See `docs/photo-media-pipeline.md`.
 
 The gallery page can use `layout: gallery` and a local layout that reads album
