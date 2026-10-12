@@ -5,7 +5,7 @@ subtitle: "Część 3: od transformaty do dokładnego wyniku"
 date: 2026-10-12T12:00:00+02:00
 draft: true
 description: "Polski przekład ilustrowanego przewodnika Rohana Aruna po pracy OpenAI o mnożeniu liczb całkowitych. Część 3: przesunięcia ze znakiem, przepróbkowanie, budżet błędu, wąskie gardło, siedem marginesów i słowniczek."
-tags: ["matematyka", "algorytmy", "złożoność obliczeniowa", "mnożenie", "transformata Fouriera", "przekład"]
+tags: ["matematyka", "algorytmy", "złożoność obliczeniowa", "transformata Fouriera", "przekład"]
 categories: ["artykuly"]
 series: ["Mnożenie liczb całkowitych poniżej n log n"]
 authors: ["Rohan Arun"]

@@ -5,7 +5,7 @@ subtitle: "Część 2: rama, rząd i rekurencja"
 date: 2026-10-12T11:00:00+02:00
 draft: true
 description: "Polski przekład ilustrowanego przewodnika Rohana Aruna po pracy OpenAI o mnożeniu liczb całkowitych. Część 2: wektory i rząd, wspólne ramy, pożyczony rejestr, rekurencja, wzorce częstotliwości i motylki."
-tags: ["matematyka", "algorytmy", "złożoność obliczeniowa", "mnożenie", "transformata Fouriera", "przekład"]
+tags: ["matematyka", "algorytmy", "złożoność obliczeniowa", "transformata Fouriera", "przekład"]
 categories: ["artykuly"]
 series: ["Mnożenie liczb całkowitych poniżej n log n"]
 authors: ["Rohan Arun"]

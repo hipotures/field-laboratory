@@ -5,7 +5,7 @@ subtitle: "Część 1: problem i splot"
 date: 2026-10-12T10:00:00+02:00
 draft: true
 description: "Polski przekład ilustrowanego przewodnika Rohana Aruna po pracy OpenAI o mnożeniu liczb całkowitych szybciej niż n log n. Część 1: bity, logarytmy, splot, taśmy i koszt przesuwania danych."
-tags: ["matematyka", "algorytmy", "złożoność obliczeniowa", "mnożenie", "transformata Fouriera", "przekład"]
+tags: ["matematyka", "algorytmy", "złożoność obliczeniowa", "transformata Fouriera", "przekład"]
 categories: ["artykuly"]
 series: ["Mnożenie liczb całkowitych poniżej n log n"]
 authors: ["Rohan Arun"]
