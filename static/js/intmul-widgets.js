@@ -244,8 +244,9 @@
         const mask = 1 << bit;
         for (let i = 0; i < n; i++) {
           const partner = i ^ mask;
-          add("line", { x1: x(bit), y1: y(i), x2: x(bit + 1), y2: y(i), class: "intmul-wire" });
-          add("line", { x1: x(bit), y1: y(i), x2: x(bit + 1), y2: y(partner), class: (i & mask) ? "intmul-wire is-minus" : "intmul-wire is-plus" });
+          // The output at the higher address is (u - v)/2: only its straight edge carries a minus.
+          add("line", { x1: x(bit) + 34, y1: y(i), x2: x(bit + 1) - 34, y2: y(i), class: (i & mask) ? "intmul-wire is-minus" : "intmul-wire is-plus" });
+          add("line", { x1: x(bit) + 34, y1: y(i), x2: x(bit + 1) - 34, y2: y(partner), class: "intmul-wire is-plus" });
         }
         add("text", { x: (x(bit) + x(bit + 1)) / 2, y: height - 4, class: "intmul-svg-caption" }, `warstwa ${bit + 1}`);
       }
@@ -261,7 +262,7 @@
       out.replaceChildren(
         el("p", { text: `Wynik: [${layers[bits].map((v) => fmt(v)).join("; ")}]` }),
         el("p", { text: `Największy moduł: wejście ${fmt(maxIn)}, wyjście ${fmt(maxOut)}. Normalizowana warstwa nigdy nie zwiększa maksimum.` }),
-        el("p", { class: "intmul-note", text: "Krawędzie ciągłe niosą sumę (u + v)/2, przerywane różnicę (u − v)/2. Odwrotność: u = a + d, v = a − d." }));
+        el("p", { class: "intmul-note", text: "Krawędzie ciągłe wnoszą wartość ze znakiem plus, przerywane ze znakiem minus; każdy wynik dzieli się jeszcze przez 2. Odwrotność jednego motylka: u = a + d, v = a − d." }));
     }
     input.addEventListener("input", render);
     render();

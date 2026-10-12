@@ -985,7 +985,7 @@ body.colorscheme-dark .reader-box {
 }
 
 .intmul-node {
-  fill: var(--im-soft);
+  fill: #fafafa;
   stroke: var(--im-blue);
   stroke-width: 1.2;
   paint-order: stroke;
@@ -1033,6 +1033,16 @@ body.colorscheme-dark .reader-box {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.2rem 0;
+}
+
+body.colorscheme-dark .intmul-node {
+  fill: #212121;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto .intmul-node {
+    fill: #212121;
+  }
 }
 
 @media only screen and (max-width: 768px) {
