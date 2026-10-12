@@ -2,3 +2,6 @@
 {{ if eq .Section "photos" }}
 <script type="module" src="/js/photo-gallery.js"></script>
 {{ end }}
+{{ range .Params.scripts }}
+<script defer src="{{ . | relURL }}"></script>
+{{ end }}
