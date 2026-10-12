@@ -1,0 +1,6 @@
+{{- /* Keep LaTeX for KaTeX auto-render, but escape it so "<" cannot open a tag. */ -}}
+{{- if eq .Type "block" -}}
+\[{{ .Inner }}\]
+{{- else -}}
+\({{ .Inner }}\)
+{{- end -}}
