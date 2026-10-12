@@ -1082,3 +1082,18 @@ body.colorscheme-dark .intmul-node {
 .timeline-table td:first-child {
   white-space: nowrap;
 }
+
+.intmul-pow sup {
+  font-size: 0.75em;
+  line-height: 0;
+
+  // Deeper levels of a power tower shrink more slowly so they stay legible.
+  .intmul-pow sup {
+    font-size: 0.85em;
+  }
+}
+
+.intmul-dl dd {
+  font-size: 1.1em;
+  line-height: 2.2;
+}

@@ -6,6 +6,7 @@
   const PALETTE = ["blue", "teal", "gold", "plum", "green", "rust"];
   const SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹";
   const sup = (n) => String(n).replace(/\d/g, (d) => SUP[d]);
+  const sub = (n) => String(n).replace(/\d/g, (d) => "₀₁₂₃₄₅₆₇₈₉"[d]);
   const place = (digit, pos) => (pos === 0 ? String(digit) : `${digit}·10${sup(pos)}`);
   const fmt = (x, digits = 4) =>
     Number(x).toLocaleString("pl-PL", { maximumFractionDigits: digits });
@@ -127,8 +128,9 @@
 
   // 2. How large n must be before (log n)^-kappa gives a visible saving.
   function scale(root) {
-    header(root, "Jak duże musi być n?",
-      "Pomijając stałe, nowa granica dzieli się przez n·log n jak (log₂ n)^(−κ). Wybierz κ i oszczędność, którą chcesz zobaczyć.");
+    root.append(el("p", { class: "intmul-title", text: "Jak duże musi być n?" }),
+      el("p", { class: "intmul-note" }, "Pomijając stałe, nowa granica dzieli się przez n·log n jak (log₂ n)",
+        el("sup", { text: "−κ" }), ". Wybierz κ i oszczędność, którą chcesz zobaczyć."));
     const presets = [
       { label: "poglądowe κ = 1/4", exp: 2 },
       { label: "społeczność: κ ≈ 0,00152", exp: -Math.log2(0.001517760977820331) },
@@ -146,17 +148,19 @@
     root.append(buttons, el("div", { class: "intmul-controls" }, kappa.field,
       el("label", { class: "intmul-field" }, el("span", { text: "Oszczędność względem n·log n" }), saving)), out);
 
+    // Power towers as real superscripts: power(2, power(2, 37)) renders 2^(2^37).
+    const power = (base, exponent) => el("span", { class: "intmul-pow" }, String(base), el("sup", {}, exponent));
+    const sci = (x) => {
+      if (x < 1e6) return fmt(x, 2);
+      const e = Math.floor(Math.log10(x));
+      return [`${fmt(x / 10 ** e, 2)}·`, power(10, String(e))];
+    };
     // Numbers of the form 2^x, shown via powers of ten when x is large.
     const pow2 = (x) => {
       if (x < 40) return fmt(2 ** x, 0);
       const exp10 = x * Math.LOG10E * Math.LN2;
-      if (exp10 < 1e6) return `≈ 10^${fmt(Math.floor(exp10), 0)}`;
-      return `2^(${sci(x)})`;
-    };
-    const sci = (x) => {
-      if (x < 1e6) return fmt(x, 2);
-      const e = Math.floor(Math.log10(x));
-      return `${fmt(x / 10 ** e, 2)}·10^${e}`;
+      if (exp10 < 1e6) return ["≈ ", power(10, fmt(Math.floor(exp10), 0))];
+      return power(2, sci(x));
     };
 
     function render() {
@@ -168,18 +172,18 @@
       const E = Math.log2(1 / (1 - s)) / k;
       const log2n = E < 1024 ? 2 ** E : Infinity;
       const rows = [
-        ["κ", k > 1e-4 ? fmt(k, 6) : `2^(−${fmt(minusLog2Kappa, 2)})`],
+        ["κ", k > 1e-4 ? fmt(k, 6) : power(2, `−${fmt(minusLog2Kappa, 2)}`)],
         ["potrzebne log₂ n", pow2(E)],
-        ["długość wejścia n (w bitach)", log2n <= 50 ? `2${sup(Math.round(log2n))} ≈ ${fmt(2 ** log2n, 0)}`
-          : E < 40 ? `2^(${fmt(log2n, 0)})` : `2^(2^(${sci(E)}))`],
+        ["długość wejścia n (w bitach)", log2n <= 50 ? [power(2, String(Math.round(log2n))), ` ≈ ${fmt(2 ** log2n, 0)}`]
+          : E < 40 ? power(2, fmt(log2n, 0)) : power(2, power(2, sci(E)))],
       ];
       let verdict;
-      if (log2n <= 50) verdict = "To mieści się w pamięci dużego komputera (2⁵⁰ bitów to ok. 128 TiB).";
-      else if (log2n <= 266) verdict = "Taka liczba bitów nie zmieści się w żadnym komputerze: 2²⁶⁶ to mniej więcej liczba atomów w obserwowalnym Wszechświecie.";
-      else verdict = "Wejście miałoby więcej bitów, niż jest atomów w obserwowalnym Wszechświecie (ok. 2²⁶⁶). Zysk jest czysto asymptotyczny.";
+      if (log2n <= 50) verdict = ["To mieści się w pamięci dużego komputera (", power(2, "50"), " bitów to ok. 128 TiB)."];
+      else if (log2n <= 266) verdict = ["Taka liczba bitów nie zmieści się w żadnym komputerze: ", power(2, "266"), " to mniej więcej liczba atomów w obserwowalnym Wszechświecie."];
+      else verdict = ["Wejście miałoby więcej bitów, niż jest atomów w obserwowalnym Wszechświecie (ok. ", power(2, "266"), "). Zysk jest czysto asymptotyczny."];
       out.replaceChildren(
-        el("dl", { class: "intmul-dl" }, ...rows.flatMap(([t, d]) => [el("dt", { text: t }), el("dd", { text: d })])),
-        el("p", { text: verdict }),
+        el("dl", { class: "intmul-dl" }, ...rows.flatMap(([t, d]) => [el("dt", { text: t }), el("dd", {}, d)])),
+        el("p", {}, verdict),
         el("p", { class: "intmul-note", text: "To tylko arytmetyka idealizowanego stosunku. Nieznane stałe i próg działania algorytmu przesuwają tę granicę jeszcze dalej." }));
     }
     kappa.input.addEventListener("input", render);
@@ -367,7 +371,7 @@
 
       let verdict;
       if (ratio < 1) verdict = "s/W < 1: koszt maleje z głębokością. W prawdziwej konstrukcji tak dobre parametry się nie zdarzają.";
-      else if (ratio < mv) verdict = `Oszczędność: wykładnik q = log_${mv}(${fmt(ratio, 3)}) ≈ ${fmt(q, 3)} < 1. Koszt rośnie wolniej niż szerokość.`;
+      else if (ratio < mv) verdict = `Oszczędność: wykładnik q = log${sub(mv)}(${fmt(ratio, 3)}) ≈ ${fmt(q, 3)} < 1. Koszt rośnie wolniej niż szerokość.`;
       else if (ratio === mv) verdict = "s/W = m: brak ostrej oszczędności, rekurencja kosztuje tyle co naiwne podwajanie.";
       else verdict = `s/W > m: rekurencja jest droższa niż metoda naiwna (q ≈ ${fmt(q, 3)} > 1).`;
       const eta = (Wv * mv - sv) / (Wv * mv);
