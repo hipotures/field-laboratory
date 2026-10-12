@@ -6,7 +6,7 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">
+          <h1 class="title{{ with .Params.subtitle }} title-two-line{{ end }}">
             <a class="title-link" href="{{ .RelPermalink | safeURL }}">
               {{- with .Params.subtitle -}}
                 {{ $.Params.headline | default $.Title }}<br>{{ . }}
