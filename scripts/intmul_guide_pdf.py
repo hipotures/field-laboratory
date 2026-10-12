@@ -108,6 +108,7 @@ def inline(text: str) -> str:
     text = html.unescape(re.sub(r"<br\s*/?>", r" \\\\ ", text))
     text = re.sub(r"<a [^>]*href=\"([^\"]+)\"[^>]*>(.*?)</a>", r"[\2](\1)", text)
     text = re.sub(r"<code>(.*?)</code>", r"`\1`", text)
+    text = re.sub(r"<sup>(.*?)</sup>", "\x04\\1\x05", text)
     text = re.sub(r"<(strong|b)>(.*?)</\1>", r"**\2**", text)
     text = re.sub(r"<(em|i)>(.*?)</\1>", r"*\2*", text)
     text = re.sub(r"<[^>]+>", "", text)
@@ -128,6 +129,7 @@ def inline(text: str) -> str:
     text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", keep_link, text)
     text = convert_marks(text)
     text = re.sub(r"\x01(\d+)\x01", lambda m: links[int(m.group(1))], text)
+    text = re.sub("\x04(.*?)\x05", r"\\textsuperscript{\1}", text)
     return re.sub(r"\x03(\d+)\x03", lambda m: maths[int(m.group(1))], text)
 
 
@@ -151,8 +153,9 @@ def convert_marks(text: str) -> str:
 def table(rows: list[str]) -> str:
     cells = [[c.strip() for c in row.strip().strip("|").split("|")] for row in rows]
     head, body = cells[0], cells[2:]
-    width = 0.9 / len(head)
-    spec = "".join(rf"p{{{width:.2f}\linewidth}}" for _ in head)
+    # The glossary has a short status column; give the terms more room.
+    widths = [0.33, 0.30, 0.29] if head[-1] == "Status" else [0.9 / len(head)] * len(head)
+    spec = "".join(rf">{{\raggedright\arraybackslash}}p{{{width:.2f}\linewidth}}" for width in widths)
     lines = [rf"\begin{{longtable}}{{@{{}}{spec}@{{}}}}", r"\toprule",
              " & ".join(rf"\textbf{{{inline(c)}}}" for c in head) + r" \\", r"\midrule\endhead"]
     lines += [" & ".join(inline(c) for c in row) + r" \\" for row in body]
@@ -197,6 +200,10 @@ def convert(markdown: str) -> str:
             while "</div>" not in block and i < len(blocks):  # boxes may span paragraphs
                 block += "\n\n" + blocks[i]
                 i += 1
+            if 'class="table-notes"' in block:
+                notes = re.findall(r"<p>(.*?)</p>", block, re.S)
+                out.append(r"{\small\noindent " + r"\\".join(inline(n) for n in notes) + r"\par}\medskip")
+                continue
             if "Co zabrać dalej" in block:
                 text = re.sub(r"^.*?</span>\s*", "", block, flags=re.S)
                 out.append(r"\takeaway{" + inline(text.replace("</div>", "").strip()) + "}")
@@ -216,6 +223,11 @@ def convert(markdown: str) -> str:
             continue
         if block.startswith("|"):
             out.append(table(block.splitlines()))
+            continue
+        if block.startswith("- "):
+            items = re.split(r"\n(?=- )", block)
+            out.append("\\begin{itemize}\n" + "\n".join(
+                r"\item " + inline(item[2:]) for item in items) + "\n\\end{itemize}")
             continue
         if re.match(r"\d+\. ", block):
             items = re.split(r"\n(?=\d+\. )", block)

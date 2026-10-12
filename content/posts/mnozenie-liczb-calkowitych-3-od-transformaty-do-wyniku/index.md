@@ -309,33 +309,33 @@ Przewodnik wyjaśnia architekturę dowodu i jego interfejsy. Szczegółowe argum
 
 ## Od tłumacza: słowniczek polsko-angielski
 
-Część terminów ma ustalone polskie odpowiedniki, ale wiele pochodzi z najnowszej literatury (Harvey i van der Hoeven, praca OpenAI) albo jest specyficzna dla tej jednej konstrukcji i nie ma polskiej nazwy. Kolumna „Status” rozróżnia te przypadki. „Ustalony” oznacza, że termin w tym znaczeniu znalazłem w polskich źródłach wymienionych pod tabelą. „Przyjęty w przekładzie” oznacza, że polskiego odpowiednika nie znalazłem i zaproponowałem własny; przy pierwszym użyciu w tekście podany jest wtedy termin angielski.
+Część terminów ma ustalone polskie odpowiedniki, ale wiele pochodzi z najnowszej literatury (Harvey i van der Hoeven, praca OpenAI) albo jest specyficzna dla tej jednej konstrukcji i nie ma polskiej nazwy. Kolumna „Status” rozróżnia te przypadki. „Ustalony” oznacza, że termin w tym znaczeniu znalazłem w polskich źródłach wymienionych pod tabelą (ogólnie znanych terminów, takich jak splot czy maszyna Turinga, nie dokumentuję osobno). „Przyjęty w przekładzie” oznacza, że polskiego odpowiednika nie znalazłem i zaproponowałem własny; przy pierwszym użyciu w tekście podany jest wtedy termin angielski.
 
 <div class="glossary-table">
 
 | Polski | Angielski (oryginał) | Status |
 |---|---|---|
-| splot; splot cykliczny (kołowy) | convolution; cyclic (circular) convolution | ustalony [1] |
-| szybka transformacja Fouriera | fast Fourier transform | ustalony [2] |
-| motylek, graf motylkowy | butterfly, butterfly graph | ustalony [2, 3] |
-| kolejność z odwróconymi bitami | bit-reversed order | ustalony [3] |
-| pierwiastek z jedynki | root of unity | ustalony [4] |
-| logarytm iterowany \(\log^*\) | iterated logarithm | ustalony [5] |
-| kontrakcja (odwzorowanie zwężające) | contraction | ustalony [6] |
-| element podstawowy | pivot | ustalony [7] |
-| liczby całkowite Gaussa | Gaussian integers | ustalony [8] |
-| przepróbkowanie | resampling | ustalony [9] |
+| splot; splot cykliczny (kołowy) | convolution; cyclic (circular) convolution | ustalony |
+| szybka transformacja Fouriera | fast Fourier transform | ustalony |
+| motylek, graf motylkowy | butterfly, butterfly graph | ustalony |
+| kolejność z odwróconymi bitami | bit-reversed order | ustalony |
+| pierwiastek z jedynki | root of unity | ustalony |
+| logarytm iterowany \(\log^*\) | iterated logarithm | ustalony |
+| kontrakcja (odwzorowanie zwężające) | contraction | ustalony |
+| element podstawowy | pivot | ustalony |
+| liczby całkowite Gaussa | Gaussian integers | ustalony |
+| przepróbkowanie | resampling | ustalony |
 | przeniesienie; podstawa systemu liczbowego | carry; radix | ustalony |
 | rząd macierzy, podprzestrzeń, iloczyn tensorowy | rank, subspace, tensor product | ustalony |
 | maszyna Turinga, taśma, głowica | Turing machine, tape, head | ustalony |
 | przepróbkowanie gaussowskie | Gaussian resampling | przyjęty w przekładzie |
 | splot / zawijanie ujemnocykliczne | negacyclic convolution / wrapping | przyjęty w przekładzie |
-| chirp, algorytm Bluesteina | chirp, Bluestein’s (chirp-z) algorithm | brak polskiego odpowiednika¹ |
+| chirp, algorytm Bluesteina | chirp, Bluestein’s (chirp-z) algorithm | brak polskiego odpowiednika<sup>a</sup> |
 | diadyczna liczba Gaussa | Gaussian dyadic | przyjęty w przekładzie |
-| ścinanie adresów | address shear | przyjęty w przekładzie² |
-| rama (reprezentacji) | frame | przyjęty w przekładzie³ |
+| ścinanie adresów | address shear | przyjęty w przekładzie<sup>b</sup> |
+| rama (reprezentacji) | frame | przyjęty w przekładzie<sup>c</sup> |
 | rząd resztowy, deficyt rzędu | residual rank, rank deficit | przyjęty w przekładzie |
-| rola, wiersz, porcja adresu | role, row, address chunk | przyjęty w przekładzie³ |
+| rola, wiersz, porcja adresu | role, row, address chunk | przyjęty w przekładzie<sup>c</sup> |
 | rejestr pomocniczy, pamięć robocza | scratch register, workspace | opisowy |
 | margines, wąskie gardło | margin, bottleneck | opisowy |
 | przykład poglądowy | toy example | opisowy |
@@ -343,9 +343,23 @@ Część terminów ma ustalone polskie odpowiedniki, ale wiele pochodzi z najnow
 
 </div>
 
-¹ Słowniki podają tylko potoczne „świergot” lub „ćwierkanie”. ² „Ścinanie” jest ustalone w mechanice; jako przekształcenie liniowe pojawia się po polsku głównie w dokumentacji programów graficznych. ³ Terminy specyficzne dla tej jednej konstrukcji.
+<div class="table-notes">
+<p><sup>a</sup> Słowniki podają tylko potoczne „świergot” lub „ćwierkanie”.</p>
+<p><sup>b</sup> „Ścinanie” jest ustalone w mechanice; jako przekształcenie liniowe pojawia się po polsku głównie w dokumentacji programów graficznych.</p>
+<p><sup>c</sup> Terminy specyficzne dla tej jednej konstrukcji.</p>
+</div>
 
-Źródła terminologii: [1] Wikipedia, [Splot (analiza matematyczna)](https://pl.wikipedia.org/wiki/Splot_%28analiza_matematyczna%29), sekcja „Splot cykliczny (kołowy)”; [2] Wikipedia, [Szybka transformacja Fouriera](https://pl.wikipedia.org/wiki/Szybka_transformacja_Fouriera) („struktury motylkowe”); [3] K. Snopek, [wykład o DFT i FFT](https://www.ire.pw.edu.pl/~ksnopek/ASISP/wyk11.pdf), Politechnika Warszawska („motylek”, „graf motylkowy”, „odwrócona kolejność bitów”); [4] Wikipedia, [Pierwiastek z jedynki](https://pl.wikipedia.org/wiki/Pierwiastek_z_jedynki); [5] Wikipedia, [Logarytm iterowany](https://pl.wikipedia.org/wiki/Logarytm_iterowany); [6] zasada odwzorowań zwężających Banacha, np. [skrypt UG o metrycznej teorii punktów stałych](https://mfi.ug.edu.pl/sites/mfi.ug.edu.pl/files/_nodes/news/112650/files/sem-lic-mat-strobin-wybrane-zagadnienia-metrycznej-teorii-punktow-stalych.pdf); [7] P. F. Góra, [wykład z metod numerycznych](https://th-www.if.uj.edu.pl/zfs/gora/metnum17/wyklad02.pdf), UJ („element podstawowy (ang. pivot)”); [8] Wikipedia, [Liczby całkowite Gaussa](https://pl.wikipedia.org/wiki/Liczby_ca%C5%82kowite_Gaussa); [9] np. polski opis patentowy [PL3053163T3](https://patents.google.com/patent/PL3053163T3/en) („przepróbkowanie sygnału audio”).
+**Źródła terminologii**
+
+- splot cykliczny (kołowy): Wikipedia, [Splot (analiza matematyczna)](https://pl.wikipedia.org/wiki/Splot_%28analiza_matematyczna%29), sekcja „Splot cykliczny (kołowy)”
+- szybka transformacja Fouriera, struktury motylkowe: Wikipedia, [Szybka transformacja Fouriera](https://pl.wikipedia.org/wiki/Szybka_transformacja_Fouriera)
+- motylek, graf motylkowy, kolejność z odwróconymi bitami: K. Snopek, [wykład o DFT i FFT](https://www.ire.pw.edu.pl/~ksnopek/ASISP/wyk11.pdf), Politechnika Warszawska
+- pierwiastek z jedynki: Wikipedia, [Pierwiastek z jedynki](https://pl.wikipedia.org/wiki/Pierwiastek_z_jedynki)
+- logarytm iterowany: Wikipedia, [Logarytm iterowany](https://pl.wikipedia.org/wiki/Logarytm_iterowany)
+- kontrakcja (odwzorowanie zwężające): zasada odwzorowań zwężających Banacha, np. [skrypt UG o metrycznej teorii punktów stałych](https://mfi.ug.edu.pl/sites/mfi.ug.edu.pl/files/_nodes/news/112650/files/sem-lic-mat-strobin-wybrane-zagadnienia-metrycznej-teorii-punktow-stalych.pdf)
+- element podstawowy (pivot): P. F. Góra, [wykład z metod numerycznych](https://th-www.if.uj.edu.pl/zfs/gora/metnum17/wyklad02.pdf), Uniwersytet Jagielloński
+- liczby całkowite Gaussa: Wikipedia, [Liczby całkowite Gaussa](https://pl.wikipedia.org/wiki/Liczby_ca%C5%82kowite_Gaussa)
+- przepróbkowanie: polski opis patentowy [PL3053163T3](https://patents.google.com/patent/PL3053163T3/en) („przepróbkowanie sygnału audio”)
 
 Uwaga o „transformacie”: polska Wikipedia rozróżnia *transformację* (przekształcenie) i *transformatę* (jego wynik). W tekście, zgodnie z częstym użyciem w fizyce i przetwarzaniu sygnałów, „transformata” oznacza czasem także samo przekształcenie.
 
