@@ -9,7 +9,7 @@
           <h1 class="title{{ with .Params.subtitle }} title-two-line{{ end }}">
             <a class="title-link" href="{{ .RelPermalink | safeURL }}">
               {{- with .Params.subtitle -}}
-                {{ $.Params.headline | default $.Title }}<br>{{ . }}
+                {{ $.Params.headline | default $.Title }}<span class="title-sub">{{ . }}</span>
               {{- else -}}
                 {{ .Title }}
               {{- end -}}
