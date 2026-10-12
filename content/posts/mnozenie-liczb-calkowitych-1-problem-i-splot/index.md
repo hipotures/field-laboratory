@@ -52,6 +52,8 @@ Streszczenie pracy w przekładzie: <em>„Podajemy deterministyczny algorytm, kt
 
 Krótka oś czasu na podstawie sekcji historycznej oryginalnej pracy. Wszystkie ograniczenia dotyczą liczby operacji bitowych przy mnożeniu dwóch liczb *n*-bitowych.
 
+<div class="timeline-table">
+
 | Rok | Kto | Ograniczenie |
 |---|---|---|
 | szkoła | mnożenie pisemne | \(O(n^2)\) |
@@ -62,6 +64,8 @@ Krótka oś czasu na podstawie sekcji historycznej oryginalnej pracy. Wszystkie 
 | 2016–2019 | Harvey, van der Hoeven, Lecerf | \(O(n\log n\,8^{\log^* n})\), potem \(4^{\log^* n}\) |
 | 2019/2021 | Harvey i van der Hoeven | \(O(n\log n)\) |
 | 2026 | OpenAI (preprint, niezweryfikowany) | \(O(n(\log n)^{1-\kappa})\), \(\kappa=2^{-182}\) |
+
+</div>
 
 Tu \(\log^* n\) to logarytm iterowany: liczba logarytmowań \(n\) potrzebnych, żeby zejść poniżej stałego progu. Ta funkcja rośnie absurdalnie wolno.
 

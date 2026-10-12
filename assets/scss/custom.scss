@@ -1078,3 +1078,7 @@ body.colorscheme-dark .intmul-node {
     opacity: 0.75;
   }
 }
+
+.timeline-table td:first-child {
+  white-space: nowrap;
+}
