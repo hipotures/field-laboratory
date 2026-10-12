@@ -57,6 +57,10 @@ REPLACEMENTS: dict[str, list[tuple[str, str]]] = {
         ("f'{max(0,v):.2f}'", "f'{max(0,v):.2f}'.replace('.',',')"),
     ],
     "generate_foundations.py": [
+        # Fig. 24: move the labels off the axes so the lines do not cut through "i" and "−i".
+        ("ax.text(1.16*x,1.16*y,label,ha='center',va='center',fontsize=14)",
+         "ax.text(*{'1':(1.08,.13),'i':(.1,1.13),'−1':(-1.08,.13),'−i':(.1,-1.15)}[label],label,"
+         "ha='right' if label=='−1' else 'left',va='center',fontsize=14)"),
         ("r'Input-length scale $b=\\log_2n$'", "r'Skala długości wejścia $b=\\log_2n$'"),
         ("r'$\\log_2$ of the formula value'", "r'$\\log_2$ wartości wzoru'"),
         ("'Compare shapes, not measured seconds'", "'Porównuj kształty, a nie zmierzone sekundy'"),
